@@ -2,16 +2,22 @@ from bson import json_util, ObjectId
 from flask import Flask, jsonify, request, make_response
 from pymongo import MongoClient
 import json
+from connectionString import connection_string
 
 app = Flask(__name__)
 
 # CONNECTING TO THE DATABASE
-client = MongoClient("mongodb+srv://adman:qweasd123@projectdb.ud8fb4w.mongodb.net/?retryWrites=true&w=majority")
+client = MongoClient(connection_string)
 db = client["ProjTest"]
 collection = db["MT940Parsed"]
 
 alternative = {'description': 'salary',
                'amount': 5000}
+
+
+@app.route('/api/test', methods=["GET"])
+def test():
+    return "Hi"
 
 
 @app.route('/api/upload', methods=["GET", "POST"])
