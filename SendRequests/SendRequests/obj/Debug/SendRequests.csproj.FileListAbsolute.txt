@@ -1,0 +1,8 @@
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\bin\Debug\SendRequests.exe.config
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\bin\Debug\SendRequests.exe
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\bin\Debug\SendRequests.pdb
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\obj\Debug\SendRequests.csproj.AssemblyReference.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\obj\Debug\SendRequests.csproj.SuggestedBindingRedirects.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\obj\Debug\SendRequests.csproj.CoreCompileInputs.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\obj\Debug\SendRequests.exe
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\SendRequests\SendRequests\obj\Debug\SendRequests.pdb
