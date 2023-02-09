@@ -1,4 +1,7 @@
 # Sports Accounting
+Repository for the assignment from company Quintor. The team is to do the finance application for Sports Clubs.
+Its role is to manage bank transfers for the members and facilities.
+This project would be made with help of the databases and APIs, thus making data processing easier.
 
 |      Members       |
 |:------------------:|
@@ -7,10 +10,6 @@
 |  Miroslav Penchev  |
 |   Kareem Glasgow   |
 |    Rob Veldman     |
-
-Repository for the assignment from company Quintor. The team is to do the finance application for Sports Clubs. 
-Its role is to manage bank transfers for the members and facilities.
-This project would be made with help of the databases and APIs, thus making data processing easier.
 
 ## Coding Conventions
 This part will clarify the structure and naming norms that code needs to match
