@@ -35,7 +35,7 @@ def get_collection():
     return make_response(json.loads(json_util.dumps(collection.find())))
 
 
-# GETS THE DOCUMENT WITH THE GIVEN ID
+# GETS THE FINAL BALANCE OF THE DOCUMENT WITH THE GIVEN ID
 @app.route('/api/getBalance/<transaction_id>', methods=["GET"])
 def get_transactions(transaction_id):
     balance = collection.find({"_id": ObjectId(transaction_id)},
@@ -46,11 +46,12 @@ def get_transactions(transaction_id):
 
 # GETS THE DOCUMENT WITH THE GIVEN ID AND THE GIVEN ELEMENT AND POSITION IF THE ELEMENT IS "TRANSACTIONS" ELEMENT CAN
 # BE ANY MAIN ELEMENT IN THE DOCUMENT, LIKE "TRANSACTIONS", "FORWARD_AVAILABLE_BALANCE", "SEQUENCE_NUMBER", ETC.
+# EXAMPLE:http://127.0.0.1:122/api/getSomething?transaction_id=63e3aadd91fbc6374c13ef54&element=forward_available_balance
 @app.route('/api/searchForSomething', methods=["GET"])
 def search():
     transaction_id = request.args.get('transaction_id')
     element_to_get = request.args.get('element')
-    if element_to_get == "transactions":
+    if element_to_get == "transactions" and request.args.get('position') is not None:
         position = int(request.args.get('position'))
         balance = collection.find({"_id": ObjectId(transaction_id)},
                                   {element_to_get: {"$slice": [position, 1]}, "_id": 0})
