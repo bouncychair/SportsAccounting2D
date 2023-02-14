@@ -50,7 +50,7 @@ def get_balance(transaction_id):
 
 # GETS THE DOCUMENT WITH THE GIVEN ID AND THE GIVEN ELEMENT AND POSITION IF THE ELEMENT IS "TRANSACTIONS" ELEMENT CAN
 # BE ANY MAIN ELEMENT IN THE DOCUMENT, LIKE "TRANSACTIONS", "FORWARD_AVAILABLE_BALANCE", "SEQUENCE_NUMBER", ETC.
-# EXAMPLE:http://127.0.0.1:122/api/searchKeyword?transaction_id=63e3aadd91fbc6374c13ef54&element=forward_available_balance
+# EXAMPLE:http://127.0.0.1:122/api/getSomething?transaction_id=63e3aadd91fbc6374c13ef54&element=forward_available_balance
 @app.route('/api/searchKeyword', methods=["GET"])
 def search():
     transaction_id = request.args.get('transaction_id')
