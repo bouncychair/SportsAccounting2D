@@ -1,0 +1,10 @@
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\BaseApplication.exe.config
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\BaseApplication.exe
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\BaseApplication.pdb
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.AssemblyReference.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.SuggestedBindingRedirects.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.Properties.Resources.resources
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.GenerateResource.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.CoreCompileInputs.cache
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.exe
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.pdb
