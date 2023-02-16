@@ -8,3 +8,4 @@ C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\o
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.CoreCompileInputs.cache
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.exe
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.pdb
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.Form1.resources
