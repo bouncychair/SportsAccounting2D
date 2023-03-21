@@ -74,30 +74,41 @@ namespace BaseApplication
                 if (registeredUser.Equals(user))
                 {
                     registerFeedbackBox.Text = "Account already exists";
+                    return;
                 }
             }
             this.users.Add(user);
             //add user to database
             registerFeedbackBox.Text = "Account registered";
+            usernameBox.Text = "";
+            firstNameBox.Text = "";
+            lastNameBox.Text = "";
+            emailBox.Text = "";
+            passwordBox.Text = "";
+            usernameBox.Text = "";
         }
         private void Login(String username, String password)
         {
+            loginFeedbackBox.Text = "";
             foreach (var user in users)
             {
                 if (username.Equals(user.getUsername()))
                 {
-                    registerFeedbackBox.Text += "Found same user";
+                    loginFeedbackBox.Text += "Found same user\n";
                     if (user.verifyPassword(password))
                     {
-                        registerFeedbackBox.Text += user.getFirstName() + " " + user.getLastName() + " has logged in."
-                        return;
+                        loginFeedbackBox.Text += user.getFirstName() + " " + user.getLastName() + " has logged in.\n";
                     }
-                    else { registerFeedbackBox.Text += "Password is wrong, not logged in" }
+                    else { loginFeedbackBox.Text += "Password is wrong, not logged in\n"; }
 
                 }
-                registerFeedbackBox.Text += "No username found";
-                return;
+                else
+                {
+                    loginFeedbackBox.Text += "No username found\n";
+                }
             }
+            loginUsernameBox.Text = "";
+            loginPasswordBox.Text = "";
         }
         private async void searchBtn_Click(object sender, EventArgs e)
         {
@@ -119,6 +130,11 @@ namespace BaseApplication
         {
             this.RegisterAccount(new User(usernameBox.Text, firstNameBox.Text, lastNameBox.Text, emailBox.Text,
                 passwordBox.Text, userTypeBox.Text));
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            this.Login(loginUsernameBox.Text, loginPasswordBox.Text);
         }
     }
 }
