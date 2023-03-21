@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ConsoleApp2;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -65,7 +66,39 @@ namespace BaseApplication
                 richTextBox1.Text = responseAsString;
             }
         }
+        private List<User> users = new List<User>();
+        private void RegisterAccount(User user)
+        {
+            foreach (var registeredUser in this.users)
+            {
+                if (registeredUser.Equals(user))
+                {
+                    registerFeedbackBox.Text = "Account already exists";
+                }
+            }
+            this.users.Add(user);
+            //add user to database
+            registerFeedbackBox.Text = "Account registered";
+        }
+        private void Login(String username, String password)
+        {
+            foreach (var user in users)
+            {
+                if (username.Equals(user.getUsername()))
+                {
+                    registerFeedbackBox.Text += "Found same user";
+                    if (user.verifyPassword(password))
+                    {
+                        registerFeedbackBox.Text += user.getFirstName() + " " + user.getLastName() + " has logged in."
+                        return;
+                    }
+                    else { registerFeedbackBox.Text += "Password is wrong, not logged in" }
 
+                }
+                registerFeedbackBox.Text += "No username found";
+                return;
+            }
+        }
         private async void searchBtn_Click(object sender, EventArgs e)
         {
             string request = comboBox1.SelectedItem.ToString();
@@ -80,6 +113,12 @@ namespace BaseApplication
         private async void showBalance_Click(object sender, EventArgs e)
         {
             await GetRequest("balance");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.RegisterAccount(new User(usernameBox.Text, firstNameBox.Text, lastNameBox.Text, emailBox.Text,
+                passwordBox.Text, userTypeBox.Text));
         }
     }
 }
