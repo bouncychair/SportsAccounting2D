@@ -1,11 +1,9 @@
 ﻿using ConsoleApp2;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -43,30 +41,27 @@ namespace BaseApplication
 
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
-            {
-                string file = openFileDialog1.FileName;
-                richTextBox1.Text = file;
-                PostRequest(file);
-            }
-
-        }
-
-        void PostRequest(string fileToUpload)
+        void UploadToAPI(string fileToUpload)
         {
             string url = "http://127.0.0.1:122/api/uploadFile";
-            using (var client = new WebClient())
-            {
-                byte[] result = client.UploadFile(url, fileToUpload);
-                string responseAsString = Encoding.Default.GetString(result);
-                richTextBox1.Text = responseAsString;
-            }
+            using var client = new WebClient();
+            byte[] result = client.UploadFile(url, fileToUpload);
+            string responseAsString = Encoding.Default.GetString(result);
+            richTextBox1.Text = responseAsString;
         }
-        private List<User> users = new List<User>();
+
+        void UploadToMongoDB(string fileToUpload)
+        {
+            string connectionString = "mongodb+srv://bigUser:bigPassword@project.0tii4ke.mongodb.net/?retryWrites=true&w=majority";
+            MongoClient dbClient = new(connectionString);
+            var database = dbClient.GetDatabase("ProjTest");
+            var collection = database.GetCollection<BsonDocument>("MT940Raw");
+
+            string content = File.ReadAllText(fileToUpload);
+            var document = new BsonDocument { { "file", content } };
+            collection.InsertOneAsync(document);
+        }
+        private List<User> users = new();
         private void RegisterAccount(User user)
         {
             foreach (var registeredUser in this.users)
@@ -135,6 +130,18 @@ namespace BaseApplication
         private void button3_Click(object sender, EventArgs e)
         {
             this.Login(loginUsernameBox.Text, loginPasswordBox.Text);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                UploadToAPI(file);
+                UploadToMongoDB(file);
+            }
         }
     }
 }
