@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.navigation = new System.Windows.Forms.TabControl();
+            this.mainPage = new System.Windows.Forms.TabPage();
             this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.keyword = new System.Windows.Forms.Label();
@@ -37,7 +37,7 @@
             this.showBalance = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.showTransac = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.registerPage = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -52,46 +52,52 @@
             this.lastNameBox = new System.Windows.Forms.TextBox();
             this.firstNameBox = new System.Windows.Forms.TextBox();
             this.usernameBox = new System.Windows.Forms.TextBox();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.loginPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.loginFeedbackBox = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.loginPasswordBox = new System.Windows.Forms.TextBox();
             this.loginUsernameBox = new System.Windows.Forms.TextBox();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.editTransaction = new System.Windows.Forms.TabPage();
+            this.showTransaction = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.submitBtn = new System.Windows.Forms.Button();
+            this.navigation.SuspendLayout();
+            this.mainPage.SuspendLayout();
+            this.registerPage.SuspendLayout();
+            this.loginPage.SuspendLayout();
+            this.editTransaction.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // navigation
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(1, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(801, 447);
-            this.tabControl1.TabIndex = 0;
+            this.navigation.Controls.Add(this.mainPage);
+            this.navigation.Controls.Add(this.registerPage);
+            this.navigation.Controls.Add(this.loginPage);
+            this.navigation.Controls.Add(this.editTransaction);
+            this.navigation.Location = new System.Drawing.Point(1, 0);
+            this.navigation.Name = "navigation";
+            this.navigation.SelectedIndex = 0;
+            this.navigation.Size = new System.Drawing.Size(801, 447);
+            this.navigation.TabIndex = 0;
             // 
-            // tabPage1
+            // mainPage
             // 
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.keyword);
-            this.tabPage1.Controls.Add(this.searchBtn);
-            this.tabPage1.Controls.Add(this.showBalance);
-            this.tabPage1.Controls.Add(this.richTextBox1);
-            this.tabPage1.Controls.Add(this.showTransac);
-            this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(793, 418);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Base";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.mainPage.Controls.Add(this.button1);
+            this.mainPage.Controls.Add(this.comboBox1);
+            this.mainPage.Controls.Add(this.keyword);
+            this.mainPage.Controls.Add(this.searchBtn);
+            this.mainPage.Controls.Add(this.showBalance);
+            this.mainPage.Controls.Add(this.richTextBox1);
+            this.mainPage.Controls.Add(this.showTransac);
+            this.mainPage.Location = new System.Drawing.Point(4, 25);
+            this.mainPage.Name = "mainPage";
+            this.mainPage.Padding = new System.Windows.Forms.Padding(3);
+            this.mainPage.Size = new System.Drawing.Size(793, 418);
+            this.mainPage.TabIndex = 0;
+            this.mainPage.Text = "Base";
+            this.mainPage.UseVisualStyleBackColor = true;
             // 
             // button1
             // 
@@ -160,29 +166,29 @@
             this.showTransac.Text = "Show Transactions";
             this.showTransac.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // registerPage
             // 
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.label1);
-            this.tabPage2.Controls.Add(this.registerFeedbackBox);
-            this.tabPage2.Controls.Add(this.button2);
-            this.tabPage2.Controls.Add(this.userTypeBox);
-            this.tabPage2.Controls.Add(this.passwordBox);
-            this.tabPage2.Controls.Add(this.emailBox);
-            this.tabPage2.Controls.Add(this.lastNameBox);
-            this.tabPage2.Controls.Add(this.firstNameBox);
-            this.tabPage2.Controls.Add(this.usernameBox);
-            this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(793, 418);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Register";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.registerPage.Controls.Add(this.label6);
+            this.registerPage.Controls.Add(this.label5);
+            this.registerPage.Controls.Add(this.label4);
+            this.registerPage.Controls.Add(this.label3);
+            this.registerPage.Controls.Add(this.label2);
+            this.registerPage.Controls.Add(this.label1);
+            this.registerPage.Controls.Add(this.registerFeedbackBox);
+            this.registerPage.Controls.Add(this.button2);
+            this.registerPage.Controls.Add(this.userTypeBox);
+            this.registerPage.Controls.Add(this.passwordBox);
+            this.registerPage.Controls.Add(this.emailBox);
+            this.registerPage.Controls.Add(this.lastNameBox);
+            this.registerPage.Controls.Add(this.firstNameBox);
+            this.registerPage.Controls.Add(this.usernameBox);
+            this.registerPage.Location = new System.Drawing.Point(4, 25);
+            this.registerPage.Name = "registerPage";
+            this.registerPage.Padding = new System.Windows.Forms.Padding(3);
+            this.registerPage.Size = new System.Drawing.Size(793, 418);
+            this.registerPage.TabIndex = 1;
+            this.registerPage.Text = "Register";
+            this.registerPage.UseVisualStyleBackColor = true;
             // 
             // label6
             // 
@@ -299,20 +305,20 @@
             this.usernameBox.Size = new System.Drawing.Size(100, 22);
             this.usernameBox.TabIndex = 0;
             // 
-            // tabPage3
+            // loginPage
             // 
-            this.tabPage3.Controls.Add(this.label8);
-            this.tabPage3.Controls.Add(this.label7);
-            this.tabPage3.Controls.Add(this.loginFeedbackBox);
-            this.tabPage3.Controls.Add(this.button3);
-            this.tabPage3.Controls.Add(this.loginPasswordBox);
-            this.tabPage3.Controls.Add(this.loginUsernameBox);
-            this.tabPage3.Location = new System.Drawing.Point(4, 25);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(793, 418);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Login";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.loginPage.Controls.Add(this.label8);
+            this.loginPage.Controls.Add(this.label7);
+            this.loginPage.Controls.Add(this.loginFeedbackBox);
+            this.loginPage.Controls.Add(this.button3);
+            this.loginPage.Controls.Add(this.loginPasswordBox);
+            this.loginPage.Controls.Add(this.loginUsernameBox);
+            this.loginPage.Location = new System.Drawing.Point(4, 25);
+            this.loginPage.Name = "loginPage";
+            this.loginPage.Size = new System.Drawing.Size(793, 418);
+            this.loginPage.TabIndex = 2;
+            this.loginPage.Text = "Login";
+            this.loginPage.UseVisualStyleBackColor = true;
             // 
             // label8
             // 
@@ -365,29 +371,70 @@
             this.loginUsernameBox.Size = new System.Drawing.Size(100, 22);
             this.loginUsernameBox.TabIndex = 0;
             // 
+            // editTransaction
+            // 
+            this.editTransaction.Controls.Add(this.submitBtn);
+            this.editTransaction.Controls.Add(this.showTransaction);
+            this.editTransaction.Controls.Add(this.richTextBox2);
+            this.editTransaction.Location = new System.Drawing.Point(4, 25);
+            this.editTransaction.Name = "editTransaction";
+            this.editTransaction.Size = new System.Drawing.Size(793, 418);
+            this.editTransaction.TabIndex = 3;
+            this.editTransaction.Text = "Edit Transaction";
+            this.editTransaction.UseVisualStyleBackColor = true;
+            // 
+            // showTransaction
+            // 
+            this.showTransaction.Location = new System.Drawing.Point(555, 347);
+            this.showTransaction.Name = "showTransaction";
+            this.showTransaction.Size = new System.Drawing.Size(114, 40);
+            this.showTransaction.TabIndex = 1;
+            this.showTransaction.Text = "Transactions";
+            this.showTransaction.UseVisualStyleBackColor = true;
+            this.showTransaction.Click += new System.EventHandler(this.showTransaction_Click);
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(514, 20);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(209, 321);
+            this.richTextBox2.TabIndex = 0;
+            this.richTextBox2.Text = "";
+            // 
+            // submitBtn
+            // 
+            this.submitBtn.Location = new System.Drawing.Point(158, 353);
+            this.submitBtn.Name = "submitBtn";
+            this.submitBtn.Size = new System.Drawing.Size(87, 34);
+            this.submitBtn.TabIndex = 2;
+            this.submitBtn.Text = "Submit";
+            this.submitBtn.UseVisualStyleBackColor = true;
+            this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.navigation);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage3.PerformLayout();
+            this.navigation.ResumeLayout(false);
+            this.mainPage.ResumeLayout(false);
+            this.mainPage.PerformLayout();
+            this.registerPage.ResumeLayout(false);
+            this.registerPage.PerformLayout();
+            this.loginPage.ResumeLayout(false);
+            this.loginPage.PerformLayout();
+            this.editTransaction.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabControl navigation;
+        private System.Windows.Forms.TabPage mainPage;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label keyword;
@@ -395,8 +442,8 @@
         private System.Windows.Forms.Button showBalance;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button showTransac;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage registerPage;
+        private System.Windows.Forms.TabPage loginPage;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
@@ -417,6 +464,10 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox loginPasswordBox;
         private System.Windows.Forms.TextBox loginUsernameBox;
+        private System.Windows.Forms.TabPage editTransaction;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Button showTransaction;
+        private System.Windows.Forms.Button submitBtn;
     }
 }
 

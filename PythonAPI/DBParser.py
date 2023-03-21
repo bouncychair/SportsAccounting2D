@@ -97,5 +97,24 @@ def insert_transaction_info(file):
         mydb.commit()
 
 
+@app.route('/api/getTransactions', methods=["GET"])
+def retrieve_transactions():
+    mycursor.execute("SELECT `bankReference` FROM transaction")
+    myresult = mycursor.fetchall()
+    return myresult
+
+
+@app.route('/api/updateCategory', methods=["POST"])
+def update_transaction_category():
+    bank_reference = request.form['bankReference']
+    category = request.form['category']
+
+    update_category = "UPDATE transaction SET categoryName = %s WHERE bankReference = %s"
+    val = (category, bank_reference)
+    mycursor.execute(update_category, val)
+    mydb.commit()
+
+    return "Category updated"
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=122)
