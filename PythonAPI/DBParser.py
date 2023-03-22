@@ -1,6 +1,7 @@
 import mt940
-from flask import Flask, jsonify, request, make_response
-from recieveRequest import parse_mt940_file
+from flask import Flask, request
+from pymongo import MongoClient
+from connectionString import connection_string
 import json
 import mysql.connector
 
@@ -12,6 +13,10 @@ mydb = mysql.connector.connect(
     database="sportsaccounting",
     use_pure=True
 )
+
+client = MongoClient(connection_string)
+db = client["ProjTest"]
+collection = db["MT940Parsed"]
 
 mycursor = mydb.cursor()
 app = Flask(__name__)
@@ -26,14 +31,57 @@ def test():
 def save_file_to_database():
     file = request.files['file']
     file = parse_mt940_file(file)
-    available_balance_id = insert_detailed_info(file, 'available_balance')
-    final_closing_balance_id = insert_detailed_info(file, 'final_closing_balance')
-    final_opening_balance_id = insert_detailed_info(file, 'final_opening_balance')
-    forward_available_balance_id = insert_detailed_info(file, 'forward_available_balance')
-    insert_file_info(file, available_balance_id, final_closing_balance_id, final_opening_balance_id,
-                     forward_available_balance_id)
+    if is_duplicate(file):
+        return "Duplicate file"
+
+    balances = list(key for key in file if "balance" in key)
+    insert_file_info(file, collect_detailed_ids(file, balances))
     insert_transaction_info(file)
-    return "File added to db SUCCESSFULLY"
+    collection.insert_one(file)
+    return "File uploaded"
+
+
+@app.route('/api/getTransactions', methods=["GET"])
+def retrieve_transactions():
+    mycursor.execute("SELECT `bankReference` FROM transaction")
+    myresult = mycursor.fetchall()
+    return myresult
+
+
+@app.route('/api/updateCategory', methods=["POST"])
+def update_transaction_category():
+    bank_reference = request.form['bankReference']
+    category = request.form['category']
+
+    update_category = "UPDATE transaction SET categoryName = %s WHERE bankReference = %s"
+    val = (category, bank_reference)
+    mycursor.execute(update_category, val)
+    mydb.commit()
+
+    return "Category updated"
+
+
+def is_duplicate(file):
+    transaction_reference = file['transaction_reference']
+    mycursor.execute("SELECT * FROM file WHERE transactionReference = %s LIMIT 1", (transaction_reference,))
+    myresult = mycursor.fetchall()
+    if len(myresult) > 0:
+        return True
+    return False
+
+
+def collect_detailed_ids(file, balances):
+    ids = [None] * 4
+    for balance in balances:
+        if balance == "available_balance":
+            ids[0] = insert_detailed_info(file, balance)
+        elif balance == "final_closing_balance":
+            ids[1] = insert_detailed_info(file, balance)
+        elif balance == "final_opening_balance":
+            ids[2] = insert_detailed_info(file, balance)
+        elif balance == "forward_available_balance":
+            ids[3] = insert_detailed_info(file, balance)
+    return ids
 
 
 def insert_detailed_info(file, type):
@@ -56,12 +104,16 @@ def insert_detailed_info(file, type):
     return mycursor.lastrowid
 
 
-def insert_file_info(file, available_balance_id, final_closing_balance_id, final_opening_balance_id,
-                     forward_available_balance_id):
+def insert_file_info(file, ids):
     account_identification = file['account_identification']
     sequence_number = file['sequence_number']
     statement_number = file['statement_number']
     transaction_reference = file['transaction_reference']
+
+    available_balance_id = ids[0]
+    final_closing_balance_id = ids[1]
+    final_opening_balance_id = ids[2]
+    forward_available_balance_id = ids[3]
 
     insert_to_file = "INSERT INTO file (accountIdentification, sequenceNumber, statementNumber, " \
                      "transactionReference, availableBalanceId, finalClosingBalanceId, " \
@@ -97,24 +149,15 @@ def insert_transaction_info(file):
         mydb.commit()
 
 
-@app.route('/api/getTransactions', methods=["GET"])
-def retrieve_transactions():
-    mycursor.execute("SELECT `bankReference` FROM transaction")
-    myresult = mycursor.fetchall()
-    return myresult
+def parse_mt940_file(file_path):
+    # PARSES THE MT940 FILE AND RETURNS A COLLECTION
+    transaction = mt940.parse(file_path)
+    # CONVERTS THE COLLECTION TO JSON STRING
+    transaction = json.dumps(transaction, indent=4, sort_keys=True, cls=mt940.JSONEncoder)
+    # CONVERTS THE JSON STRING TO A DICTIONARY
+    transaction = json.loads(transaction)
+    return transaction
 
-
-@app.route('/api/updateCategory', methods=["POST"])
-def update_transaction_category():
-    bank_reference = request.form['bankReference']
-    category = request.form['category']
-
-    update_category = "UPDATE transaction SET categoryName = %s WHERE bankReference = %s"
-    val = (category, bank_reference)
-    mycursor.execute(update_category, val)
-    mydb.commit()
-
-    return "Category updated"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=122)

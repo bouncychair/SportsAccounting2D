@@ -30,7 +30,6 @@
         {
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
-            this.button1 = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.keyword = new System.Windows.Forms.Label();
             this.searchBtn = new System.Windows.Forms.Button();
@@ -60,9 +59,10 @@
             this.loginPasswordBox = new System.Windows.Forms.TextBox();
             this.loginUsernameBox = new System.Windows.Forms.TextBox();
             this.editTransaction = new System.Windows.Forms.TabPage();
-            this.showTransaction = new System.Windows.Forms.Button();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.categoryLbl = new System.Windows.Forms.Label();
+            this.bankRefLbl = new System.Windows.Forms.Label();
             this.submitBtn = new System.Windows.Forms.Button();
+            this.addFileBtn = new System.Windows.Forms.Button();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
@@ -84,7 +84,7 @@
             // 
             // mainPage
             // 
-            this.mainPage.Controls.Add(this.button1);
+            this.mainPage.Controls.Add(this.addFileBtn);
             this.mainPage.Controls.Add(this.comboBox1);
             this.mainPage.Controls.Add(this.keyword);
             this.mainPage.Controls.Add(this.searchBtn);
@@ -98,16 +98,6 @@
             this.mainPage.TabIndex = 0;
             this.mainPage.Text = "Base";
             this.mainPage.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(146, 341);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 43);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "Add File";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // comboBox1
             // 
@@ -373,9 +363,9 @@
             // 
             // editTransaction
             // 
+            this.editTransaction.Controls.Add(this.categoryLbl);
+            this.editTransaction.Controls.Add(this.bankRefLbl);
             this.editTransaction.Controls.Add(this.submitBtn);
-            this.editTransaction.Controls.Add(this.showTransaction);
-            this.editTransaction.Controls.Add(this.richTextBox2);
             this.editTransaction.Location = new System.Drawing.Point(4, 25);
             this.editTransaction.Name = "editTransaction";
             this.editTransaction.Size = new System.Drawing.Size(793, 418);
@@ -383,33 +373,43 @@
             this.editTransaction.Text = "Edit Transaction";
             this.editTransaction.UseVisualStyleBackColor = true;
             // 
-            // showTransaction
+            // categoryLbl
             // 
-            this.showTransaction.Location = new System.Drawing.Point(555, 347);
-            this.showTransaction.Name = "showTransaction";
-            this.showTransaction.Size = new System.Drawing.Size(114, 40);
-            this.showTransaction.TabIndex = 1;
-            this.showTransaction.Text = "Transactions";
-            this.showTransaction.UseVisualStyleBackColor = true;
-            this.showTransaction.Click += new System.EventHandler(this.showTransaction_Click);
+            this.categoryLbl.AutoSize = true;
+            this.categoryLbl.Location = new System.Drawing.Point(276, 23);
+            this.categoryLbl.Name = "categoryLbl";
+            this.categoryLbl.Size = new System.Drawing.Size(62, 16);
+            this.categoryLbl.TabIndex = 4;
+            this.categoryLbl.Text = "Category";
             // 
-            // richTextBox2
+            // bankRefLbl
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(514, 20);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(209, 321);
-            this.richTextBox2.TabIndex = 0;
-            this.richTextBox2.Text = "";
+            this.bankRefLbl.AutoSize = true;
+            this.bankRefLbl.Location = new System.Drawing.Point(42, 23);
+            this.bankRefLbl.Name = "bankRefLbl";
+            this.bankRefLbl.Size = new System.Drawing.Size(104, 16);
+            this.bankRefLbl.TabIndex = 3;
+            this.bankRefLbl.Text = "Bank Reference";
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(158, 353);
+            this.submitBtn.Location = new System.Drawing.Point(158, 331);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(87, 34);
             this.submitBtn.TabIndex = 2;
             this.submitBtn.Text = "Submit";
             this.submitBtn.UseVisualStyleBackColor = true;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
+            // 
+            // addFileBtn
+            // 
+            this.addFileBtn.Location = new System.Drawing.Point(118, 349);
+            this.addFileBtn.Name = "addFileBtn";
+            this.addFileBtn.Size = new System.Drawing.Size(95, 36);
+            this.addFileBtn.TabIndex = 14;
+            this.addFileBtn.Text = "Add file";
+            this.addFileBtn.UseVisualStyleBackColor = true;
+            this.addFileBtn.Click += new System.EventHandler(this.addFileBtn_Click);
             // 
             // Form1
             // 
@@ -427,6 +427,7 @@
             this.loginPage.ResumeLayout(false);
             this.loginPage.PerformLayout();
             this.editTransaction.ResumeLayout(false);
+            this.editTransaction.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -435,7 +436,6 @@
 
         private System.Windows.Forms.TabControl navigation;
         private System.Windows.Forms.TabPage mainPage;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label keyword;
         private System.Windows.Forms.Button searchBtn;
@@ -465,9 +465,10 @@
         private System.Windows.Forms.TextBox loginPasswordBox;
         private System.Windows.Forms.TextBox loginUsernameBox;
         private System.Windows.Forms.TabPage editTransaction;
-        private System.Windows.Forms.RichTextBox richTextBox2;
-        private System.Windows.Forms.Button showTransaction;
         private System.Windows.Forms.Button submitBtn;
+        private System.Windows.Forms.Label categoryLbl;
+        private System.Windows.Forms.Label bankRefLbl;
+        private System.Windows.Forms.Button addFileBtn;
     }
 }
 

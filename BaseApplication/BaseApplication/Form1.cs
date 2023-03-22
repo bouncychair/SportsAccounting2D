@@ -18,12 +18,13 @@ namespace BaseApplication
     {
         public Form1()
         {
-            InitializeComponent();
-            assignCategoryHelper.Clear();
+            InitializeComponent();            
+            navigation.TabPages.Remove(editTransaction);
+
         }
 
         List<Dictionary<TextBox, TextBox>> assignCategoryHelper = new();
-
+        private List<User> users = new();
 
         async Task GetRequest(string request)
         {
@@ -48,22 +49,20 @@ namespace BaseApplication
 
         }
 
-        void UploadToAPI(string fileToUpload)
+        string UploadToAPI(string fileToUpload)
         {
             string url = "http://127.0.0.1:122/api/uploadFile";
             using var client = new WebClient();
             byte[] result = client.UploadFile(url, fileToUpload);
-            string responseAsString = Encoding.Default.GetString(result);
-            richTextBox1.Text = responseAsString;
+            return Encoding.Default.GetString(result);
+            
         }
 
         void updateCategories(NameValueCollection categories)
         {
             string url = "http://127.0.0.1:122/api/updateCategory";
             using var client = new WebClient();
-            byte[] result = client.UploadValues(url, categories);
-            string responseAsString = Encoding.Default.GetString(result);
-            richTextBox2.Text = responseAsString;
+            client.UploadValues(url, categories);
         }
         void UploadToMongoDB(string fileToUpload)
         {
@@ -76,7 +75,6 @@ namespace BaseApplication
             var document = new BsonDocument { { "file", content } };
             collection.InsertOneAsync(document);
         }
-        private List<User> users = new();
         private void RegisterAccount(User user)
         {
             foreach (var registeredUser in this.users)
@@ -147,26 +145,15 @@ namespace BaseApplication
             this.Login(loginUsernameBox.Text, loginPasswordBox.Text);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog1 = new();
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
-            {
-                string file = openFileDialog1.FileName;
-                UploadToAPI(file);
-                UploadToMongoDB(file);
-            }
-        }
-
         private async Task GetTransactionAsync()
         {
+            assignCategoryHelper.Clear();
+
             int bRefX = 30;
             int categoryX = 180;
             int pointY = 40;
 
             string url = "http://127.0.0.1:122/api/getTransactions";
-            navigation.SelectedIndex = 4;
             using var client = new HttpClient();
 
             string transactions = await client.GetStringAsync(url);
@@ -195,11 +182,6 @@ namespace BaseApplication
 
         }
 
-        private async void showTransaction_Click(object sender, EventArgs e)
-        {
-            await GetTransactionAsync();
-        }
-
         private void submitBtn_Click(object sender, EventArgs e)
         {
             foreach (Dictionary<TextBox, TextBox> dict in assignCategoryHelper)
@@ -213,6 +195,50 @@ namespace BaseApplication
                     updatedCategories.Add("category", category);
                     updateCategories(updatedCategories);
                 }
+            }
+            EditTabs(false);
+            navigation.SelectTab(mainPage);
+            navigation.TabPages.Remove(editTransaction);
+        }
+
+        private async void addFileBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                string response = UploadToAPI(file);
+                if (response.Equals("File uploaded"))
+                {
+                    MessageBox.Show("File uploaded. Please give each transaction a category");
+                    UploadToMongoDB(file);
+                    navigation.TabPages.Add(editTransaction);
+                    navigation.SelectTab(editTransaction);
+                    EditTabs(true);
+                    await GetTransactionAsync();
+                }
+                else if(response.Equals("Duplicate file"))
+                {
+                    MessageBox.Show("Duplicate file");
+                }
+                
+            }
+        }
+
+        private void EditTabs(bool hide)
+        {
+            if (hide)
+            {
+                navigation.TabPages.Remove(mainPage);
+                navigation.TabPages.Remove(registerPage);
+                navigation.TabPages.Remove(loginPage);
+            }
+            else
+            {
+                navigation.TabPages.Add(mainPage);
+                navigation.TabPages.Add(registerPage);
+                navigation.TabPages.Add(loginPage);
             }
         }
     }
