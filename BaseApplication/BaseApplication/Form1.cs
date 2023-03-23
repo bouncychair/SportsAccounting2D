@@ -1,6 +1,8 @@
 ﻿using ConsoleApp2;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -11,6 +13,8 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using JsonConvert = Newtonsoft.Json.JsonConvert;
 
 namespace BaseApplication
 {
@@ -25,6 +29,7 @@ namespace BaseApplication
 
         List<Dictionary<TextBox, TextBox>> assignCategoryHelper = new();
         private List<User> users = new();
+        JObject modulesInformation = new();
 
         async Task GetRequest(string request)
         {
@@ -155,7 +160,7 @@ namespace BaseApplication
 
             string url = "http://127.0.0.1:122/api/getTransactions";
             using var client = new HttpClient();
-
+            
             string transactions = await client.GetStringAsync(url);
             string[] transactionList = transactions.Substring(1, transactions.Length - 3).Split(',');
 
@@ -212,7 +217,7 @@ namespace BaseApplication
                 if (response.Equals("File uploaded"))
                 {
                     MessageBox.Show("File uploaded. Please give each transaction a category");
-                    UploadToMongoDB(file);
+                    //UploadToMongoDB(file);
                     navigation.TabPages.Add(editTransaction);
                     navigation.SelectTab(editTransaction);
                     EditTabs(true);
@@ -240,6 +245,41 @@ namespace BaseApplication
                 navigation.TabPages.Add(registerPage);
                 navigation.TabPages.Add(loginPage);
             }
+        }
+
+        private async void updateBatBtn_Click(object sender, EventArgs e)
+        {
+            
+            string url = "http://127.0.0.1:122/api/ModuleInfo/bar_information";
+            using var client = new HttpClient();
+
+            string content = await client.GetStringAsync(url);
+            dynamic jsonObj = JsonConvert.DeserializeObject(content);
+            barCostTxt.Text = jsonObj.bar_information.expense;
+            barIncomeTxt.Text = jsonObj.bar_information.income;
+            barTurnoverTxt.Text = jsonObj.bar_information.turnover;
+        }
+
+        private async void updateRental_Click(object sender, EventArgs e)
+        {
+            
+            string url = "http://127.0.0.1:122/api/ModuleInfo/rental_information";
+            using var client = new HttpClient();
+
+            string content = await client.GetStringAsync(url);
+            dynamic jsonObj = JsonConvert.DeserializeObject(content);
+            rentalCostTxt.Text = jsonObj.rental_information.expense;
+            rentalIncomeTxt.Text = jsonObj.rental_information.income;
+            rentalTurnoverTxt.Text = jsonObj.rental_information.turnover;
+        }
+
+        private async void generateSummaryBtn_Click(object sender, EventArgs e)
+        {
+            string url = "http://127.0.0.1:122/api/ModulesSummary";
+            using var client = new HttpClient();
+
+            string content = await client.GetStringAsync(url);
+            File.WriteAllText(@"C:\MainStuff\summary.json", content);
         }
     }
 }

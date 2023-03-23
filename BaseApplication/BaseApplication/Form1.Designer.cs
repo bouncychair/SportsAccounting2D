@@ -30,6 +30,7 @@
         {
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
+            this.addFileBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.keyword = new System.Windows.Forms.Label();
             this.searchBtn = new System.Windows.Forms.Button();
@@ -62,12 +63,27 @@
             this.categoryLbl = new System.Windows.Forms.Label();
             this.bankRefLbl = new System.Windows.Forms.Label();
             this.submitBtn = new System.Windows.Forms.Button();
-            this.addFileBtn = new System.Windows.Forms.Button();
+            this.modules = new System.Windows.Forms.TabPage();
+            this.generateSummaryBtn = new System.Windows.Forms.Button();
+            this.turnoverLbl = new System.Windows.Forms.Label();
+            this.incomeLbl = new System.Windows.Forms.Label();
+            this.costsLbl = new System.Windows.Forms.Label();
+            this.updateRental = new System.Windows.Forms.Button();
+            this.updateBatBtn = new System.Windows.Forms.Button();
+            this.rentalinfoLbl = new System.Windows.Forms.Label();
+            this.rentalTurnoverTxt = new System.Windows.Forms.TextBox();
+            this.rentalIncomeTxt = new System.Windows.Forms.TextBox();
+            this.rentalCostTxt = new System.Windows.Forms.TextBox();
+            this.barTurnoverTxt = new System.Windows.Forms.TextBox();
+            this.barIncomeTxt = new System.Windows.Forms.TextBox();
+            this.barCostTxt = new System.Windows.Forms.TextBox();
+            this.barinfoLbl = new System.Windows.Forms.Label();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
             this.loginPage.SuspendLayout();
             this.editTransaction.SuspendLayout();
+            this.modules.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigation
@@ -76,6 +92,7 @@
             this.navigation.Controls.Add(this.registerPage);
             this.navigation.Controls.Add(this.loginPage);
             this.navigation.Controls.Add(this.editTransaction);
+            this.navigation.Controls.Add(this.modules);
             this.navigation.Location = new System.Drawing.Point(1, 0);
             this.navigation.Name = "navigation";
             this.navigation.SelectedIndex = 0;
@@ -98,6 +115,16 @@
             this.mainPage.TabIndex = 0;
             this.mainPage.Text = "Base";
             this.mainPage.UseVisualStyleBackColor = true;
+            // 
+            // addFileBtn
+            // 
+            this.addFileBtn.Location = new System.Drawing.Point(118, 349);
+            this.addFileBtn.Name = "addFileBtn";
+            this.addFileBtn.Size = new System.Drawing.Size(95, 36);
+            this.addFileBtn.TabIndex = 14;
+            this.addFileBtn.Text = "Add file";
+            this.addFileBtn.UseVisualStyleBackColor = true;
+            this.addFileBtn.Click += new System.EventHandler(this.addFileBtn_Click);
             // 
             // comboBox1
             // 
@@ -401,15 +428,146 @@
             this.submitBtn.UseVisualStyleBackColor = true;
             this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
-            // addFileBtn
+            // modules
             // 
-            this.addFileBtn.Location = new System.Drawing.Point(118, 349);
-            this.addFileBtn.Name = "addFileBtn";
-            this.addFileBtn.Size = new System.Drawing.Size(95, 36);
-            this.addFileBtn.TabIndex = 14;
-            this.addFileBtn.Text = "Add file";
-            this.addFileBtn.UseVisualStyleBackColor = true;
-            this.addFileBtn.Click += new System.EventHandler(this.addFileBtn_Click);
+            this.modules.Controls.Add(this.generateSummaryBtn);
+            this.modules.Controls.Add(this.turnoverLbl);
+            this.modules.Controls.Add(this.incomeLbl);
+            this.modules.Controls.Add(this.costsLbl);
+            this.modules.Controls.Add(this.updateRental);
+            this.modules.Controls.Add(this.updateBatBtn);
+            this.modules.Controls.Add(this.rentalinfoLbl);
+            this.modules.Controls.Add(this.rentalTurnoverTxt);
+            this.modules.Controls.Add(this.rentalIncomeTxt);
+            this.modules.Controls.Add(this.rentalCostTxt);
+            this.modules.Controls.Add(this.barTurnoverTxt);
+            this.modules.Controls.Add(this.barIncomeTxt);
+            this.modules.Controls.Add(this.barCostTxt);
+            this.modules.Controls.Add(this.barinfoLbl);
+            this.modules.Location = new System.Drawing.Point(4, 25);
+            this.modules.Name = "modules";
+            this.modules.Padding = new System.Windows.Forms.Padding(3);
+            this.modules.Size = new System.Drawing.Size(793, 418);
+            this.modules.TabIndex = 4;
+            this.modules.Text = "Modules";
+            this.modules.UseVisualStyleBackColor = true;
+            // 
+            // generateSummaryBtn
+            // 
+            this.generateSummaryBtn.Location = new System.Drawing.Point(312, 293);
+            this.generateSummaryBtn.Name = "generateSummaryBtn";
+            this.generateSummaryBtn.Size = new System.Drawing.Size(121, 52);
+            this.generateSummaryBtn.TabIndex = 14;
+            this.generateSummaryBtn.Text = "Generate Summary";
+            this.generateSummaryBtn.UseVisualStyleBackColor = true;
+            this.generateSummaryBtn.Click += new System.EventHandler(this.generateSummaryBtn_Click);
+            // 
+            // turnoverLbl
+            // 
+            this.turnoverLbl.AutoSize = true;
+            this.turnoverLbl.Location = new System.Drawing.Point(465, 75);
+            this.turnoverLbl.Name = "turnoverLbl";
+            this.turnoverLbl.Size = new System.Drawing.Size(64, 16);
+            this.turnoverLbl.TabIndex = 12;
+            this.turnoverLbl.Text = "Turnover:";
+            // 
+            // incomeLbl
+            // 
+            this.incomeLbl.AutoSize = true;
+            this.incomeLbl.Location = new System.Drawing.Point(347, 75);
+            this.incomeLbl.Name = "incomeLbl";
+            this.incomeLbl.Size = new System.Drawing.Size(54, 16);
+            this.incomeLbl.TabIndex = 11;
+            this.incomeLbl.Text = "Income:";
+            // 
+            // costsLbl
+            // 
+            this.costsLbl.AutoSize = true;
+            this.costsLbl.Location = new System.Drawing.Point(229, 75);
+            this.costsLbl.Name = "costsLbl";
+            this.costsLbl.Size = new System.Drawing.Size(44, 16);
+            this.costsLbl.TabIndex = 10;
+            this.costsLbl.Text = "Costs:";
+            // 
+            // updateRental
+            // 
+            this.updateRental.Location = new System.Drawing.Point(588, 166);
+            this.updateRental.Name = "updateRental";
+            this.updateRental.Size = new System.Drawing.Size(116, 27);
+            this.updateRental.TabIndex = 9;
+            this.updateRental.Text = "Update Rental";
+            this.updateRental.UseVisualStyleBackColor = true;
+            this.updateRental.Click += new System.EventHandler(this.updateRental_Click);
+            // 
+            // updateBatBtn
+            // 
+            this.updateBatBtn.Location = new System.Drawing.Point(588, 110);
+            this.updateBatBtn.Name = "updateBatBtn";
+            this.updateBatBtn.Size = new System.Drawing.Size(116, 27);
+            this.updateBatBtn.TabIndex = 8;
+            this.updateBatBtn.Text = "Update Bar";
+            this.updateBatBtn.UseVisualStyleBackColor = true;
+            this.updateBatBtn.Click += new System.EventHandler(this.updateBatBtn_Click);
+            // 
+            // rentalinfoLbl
+            // 
+            this.rentalinfoLbl.AutoSize = true;
+            this.rentalinfoLbl.Location = new System.Drawing.Point(66, 177);
+            this.rentalinfoLbl.Name = "rentalinfoLbl";
+            this.rentalinfoLbl.Size = new System.Drawing.Size(117, 16);
+            this.rentalinfoLbl.TabIndex = 7;
+            this.rentalinfoLbl.Text = "Rental Information:";
+            // 
+            // rentalTurnoverTxt
+            // 
+            this.rentalTurnoverTxt.Location = new System.Drawing.Point(445, 170);
+            this.rentalTurnoverTxt.Name = "rentalTurnoverTxt";
+            this.rentalTurnoverTxt.Size = new System.Drawing.Size(100, 22);
+            this.rentalTurnoverTxt.TabIndex = 6;
+            // 
+            // rentalIncomeTxt
+            // 
+            this.rentalIncomeTxt.Location = new System.Drawing.Point(322, 170);
+            this.rentalIncomeTxt.Name = "rentalIncomeTxt";
+            this.rentalIncomeTxt.Size = new System.Drawing.Size(100, 22);
+            this.rentalIncomeTxt.TabIndex = 5;
+            // 
+            // rentalCostTxt
+            // 
+            this.rentalCostTxt.Location = new System.Drawing.Point(201, 171);
+            this.rentalCostTxt.Name = "rentalCostTxt";
+            this.rentalCostTxt.Size = new System.Drawing.Size(100, 22);
+            this.rentalCostTxt.TabIndex = 4;
+            // 
+            // barTurnoverTxt
+            // 
+            this.barTurnoverTxt.Location = new System.Drawing.Point(445, 112);
+            this.barTurnoverTxt.Name = "barTurnoverTxt";
+            this.barTurnoverTxt.Size = new System.Drawing.Size(100, 22);
+            this.barTurnoverTxt.TabIndex = 3;
+            // 
+            // barIncomeTxt
+            // 
+            this.barIncomeTxt.Location = new System.Drawing.Point(322, 112);
+            this.barIncomeTxt.Name = "barIncomeTxt";
+            this.barIncomeTxt.Size = new System.Drawing.Size(100, 22);
+            this.barIncomeTxt.TabIndex = 2;
+            // 
+            // barCostTxt
+            // 
+            this.barCostTxt.Location = new System.Drawing.Point(201, 112);
+            this.barCostTxt.Name = "barCostTxt";
+            this.barCostTxt.Size = new System.Drawing.Size(100, 22);
+            this.barCostTxt.TabIndex = 1;
+            // 
+            // barinfoLbl
+            // 
+            this.barinfoLbl.AutoSize = true;
+            this.barinfoLbl.Location = new System.Drawing.Point(67, 115);
+            this.barinfoLbl.Name = "barinfoLbl";
+            this.barinfoLbl.Size = new System.Drawing.Size(99, 16);
+            this.barinfoLbl.TabIndex = 0;
+            this.barinfoLbl.Text = "Bar Information:";
             // 
             // Form1
             // 
@@ -428,6 +586,8 @@
             this.loginPage.PerformLayout();
             this.editTransaction.ResumeLayout(false);
             this.editTransaction.PerformLayout();
+            this.modules.ResumeLayout(false);
+            this.modules.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -469,6 +629,21 @@
         private System.Windows.Forms.Label categoryLbl;
         private System.Windows.Forms.Label bankRefLbl;
         private System.Windows.Forms.Button addFileBtn;
+        private System.Windows.Forms.TabPage modules;
+        private System.Windows.Forms.Label turnoverLbl;
+        private System.Windows.Forms.Label incomeLbl;
+        private System.Windows.Forms.Label costsLbl;
+        private System.Windows.Forms.Button updateRental;
+        private System.Windows.Forms.Button updateBatBtn;
+        private System.Windows.Forms.Label rentalinfoLbl;
+        private System.Windows.Forms.TextBox rentalTurnoverTxt;
+        private System.Windows.Forms.TextBox rentalIncomeTxt;
+        private System.Windows.Forms.TextBox rentalCostTxt;
+        private System.Windows.Forms.TextBox barTurnoverTxt;
+        private System.Windows.Forms.TextBox barIncomeTxt;
+        private System.Windows.Forms.TextBox barCostTxt;
+        private System.Windows.Forms.Label barinfoLbl;
+        private System.Windows.Forms.Button generateSummaryBtn;
     }
 }
 

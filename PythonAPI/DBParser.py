@@ -5,6 +5,7 @@ from connectionString import connection_string
 import json
 import mysql.connector
 
+# MySql connection
 mydb = mysql.connector.connect(
     host='localhost',
     port=3306,
@@ -14,11 +15,12 @@ mydb = mysql.connector.connect(
     use_pure=True
 )
 
+# MongoDB connection
 client = MongoClient(connection_string)
 db = client["ProjTest"]
 collection = db["MT940Parsed"]
-
 mycursor = mydb.cursor()
+
 app = Flask(__name__)
 
 
@@ -57,8 +59,33 @@ def update_transaction_category():
     val = (category, bank_reference)
     mycursor.execute(update_category, val)
     mydb.commit()
-
     return "Category updated"
+
+
+@app.route('/api/ModuleInfo/<module>', methods=["GET"])
+def get_modules_info(module):
+    mydict = dict()
+    mydict[module] = dict()
+    mycursor.execute("SELECT * FROM %s" % module)
+    myresult = mycursor.fetchall()
+    for x in myresult:
+        mydict[module]['expense'] = x[0]
+        mydict[module]['income'] = x[1]
+        mydict[module]['turnover'] = x[2]
+    return json.dumps(mydict)
+
+
+@app.route('/api/ModulesSummary', methods=["GET"])
+def make_modules_summary():
+    bar_information = json.loads(get_modules_info('bar_information'))
+    rental_information = json.loads(get_modules_info('rental_information'))
+
+    modules_information = {}
+    modules_information.update(bar_information)
+    modules_information.update(rental_information)
+    summary = {"modules_information": modules_information}
+
+    return json.dumps(summary)
 
 
 def is_duplicate(file):
@@ -98,7 +125,6 @@ def insert_detailed_info(file, type):
 
     insert_to_detailed_info = "INSERT INTO detailedinfo (amount, currency,date,status,type) VALUES (%s, %s, %s, %s,%s)"
     val = (balance_amount, balance_currency, balance_date, balance_status, type)
-
     mycursor.execute(insert_to_detailed_info, val)
     mydb.commit()
     return mycursor.lastrowid
@@ -120,7 +146,6 @@ def insert_file_info(file, ids):
                      "finalOpeningBalanceId, forwardAvailableBalanceId) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     val = (account_identification, sequence_number, statement_number, transaction_reference, available_balance_id,
            final_closing_balance_id, final_opening_balance_id, forward_available_balance_id)
-
     mycursor.execute(insert_to_file, val)
     mydb.commit()
     return mycursor.lastrowid

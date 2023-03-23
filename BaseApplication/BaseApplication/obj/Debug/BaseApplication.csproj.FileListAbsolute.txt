@@ -120,3 +120,5 @@ C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\b
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\System.ValueTuple.xml
 C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\obj\Debug\BaseApplication.csproj.CopyComplete
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\Newtonsoft.Json.dll
+C:\MainStuff\Uni\Project6.1\SportsAccounting2D\BaseApplication\BaseApplication\bin\Debug\Newtonsoft.Json.xml
