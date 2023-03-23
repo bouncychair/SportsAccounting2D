@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from connectionString import connection_string
 import json
 import mysql.connector
+import dicttoxml2
 
 # MySql connection
 mydb = mysql.connector.connect(
@@ -50,6 +51,26 @@ def retrieve_transactions():
     return myresult
 
 
+@app.route('/api/updateTransactionDescription', methods=["GET"])
+def update_transaction_description():
+    custom_details = request.args.get('customDetails')
+    bank_reference = request.args.get('bankReference')
+    update_desc = "UPDATE transaction_details d JOIN transaction t ON d.id = t.transactionDetailsId SET " \
+                  "d.customDetails = %s WHERE t.bankReference = %s"
+    val = (custom_details, bank_reference)
+    mycursor.execute(update_desc, val)
+    mydb.commit()
+    return "Description updated"
+
+
+@app.route('/api/getTransactionDescription/<bank_ref>', methods=["GET"])
+def get_transaction_description(bank_ref):
+    mycursor.execute("SELECT d.customDetails FROM transaction_details d JOIN transaction t ON d.id = "
+                     "t.transactionDetailsId WHERE t.bankReference = %s" % bank_ref)
+    myresult = mycursor.fetchall()
+    return myresult
+
+
 @app.route('/api/updateCategory', methods=["POST"])
 def update_transaction_category():
     bank_reference = request.form['bankReference']
@@ -84,8 +105,11 @@ def make_modules_summary():
     modules_information.update(bar_information)
     modules_information.update(rental_information)
     summary = {"modules_information": modules_information}
-
-    return json.dumps(summary)
+    json_summary = json.dumps(summary, indent=4)
+    xml_summary = dicttoxml2.dicttoxml(summary)  # convert to xml maybe?
+    with open("C:/MainStuff/modules_summary.json", "w") as outfile:
+        outfile.write(json_summary)
+    return json_summary
 
 
 def is_duplicate(file):
@@ -130,6 +154,15 @@ def insert_detailed_info(file, type):
     return mycursor.lastrowid
 
 
+def insert_transaction_details(transaction_details, extra_details):
+    insert_to_transaction_details = "INSERT INTO transaction_details (transactionDetails, extraDetails, " \
+                                    "customDetails) VALUES (%s, %s, %s)"
+    val = (transaction_details, extra_details, "")
+    mycursor.execute(insert_to_transaction_details, val)
+    mydb.commit()
+    return mycursor.lastrowid
+
+
 def insert_file_info(file, ids):
     account_identification = file['account_identification']
     sequence_number = file['sequence_number']
@@ -157,19 +190,20 @@ def insert_transaction_info(file):
         detailed_info_id = insert_detailed_info(transaction, 'transaction')
         bank_reference = transaction['bank_reference']
         entry_date = transaction['entry_date']
-        extra_details = transaction['extra_details']
         funds_code = transaction['funds_code']
         guessed_entry_date = transaction['guessed_entry_date']
         transaction_id = transaction['id']
-        transaction_details = transaction['transaction_details']
         transaction_reference = file['transaction_reference']
-        category = 'other'
 
+        transaction_details = transaction['transaction_details']
+        extra_details = transaction['extra_details']
+        category = 'other'
+        transaction_details_id = insert_transaction_details(transaction_details, extra_details)
         insert_to_transaction = "INSERT INTO transaction (bankReference, transactionReference, categoryName, " \
-                                "balanceId, entryDate, guessedEntryDate, id, transactionDetails, " \
-                                "extraDetails, fundsCode) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                                "balanceId, entryDate, guessedEntryDate, id, fundsCode, " \
+                                "transactionDetailsId) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
         val = (bank_reference, transaction_reference, category, detailed_info_id, entry_date, guessed_entry_date,
-               transaction_id, transaction_details, extra_details, funds_code)
+               transaction_id, funds_code, transaction_details_id)
         mycursor.execute(insert_to_transaction, val)
         mydb.commit()
 

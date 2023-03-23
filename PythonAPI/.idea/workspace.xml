@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8bf00196-e52c-4fe4-81f7-01f9b914d32d" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/FileContentIndex/e9d2c567-292c-45c7-a9cb-b8550dfe5469.vsidx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBParser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/PythonAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonAPI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recieveRequest.py" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2NQqLIMIv4m13kAVTQMLdf0iCW2" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "go.import.settings.migrated": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8bf00196-e52c-4fe4-81f7-01f9b914d32d" name="Changes" comment="" />
+      <created>1679606599803</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1679606599803</updated>
+      <workItem from="1679606601044" duration="562000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VgoProject">
+    <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/PythonAPI$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1679607133191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

@@ -11,6 +11,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -24,6 +25,8 @@ namespace BaseApplication
         {
             InitializeComponent();            
             navigation.TabPages.Remove(editTransaction);
+            navigation.TabPages.Remove(editDescription);
+            navigation.TabPages.Remove(modules);
 
         }
 
@@ -150,6 +153,18 @@ namespace BaseApplication
             this.Login(loginUsernameBox.Text, loginPasswordBox.Text);
         }
 
+
+        private async Task<string[]> GetTransactions()
+        {
+            string url = "http://127.0.0.1:122/api/getTransactions";
+            using var client = new HttpClient();
+
+            string transactions = await client.GetStringAsync(url);
+            string[] transactionList = transactions.Substring(1, transactions.Length - 3).Split(',');
+
+            return transactionList;
+        }
+        
         private async Task GetTransactionAsync()
         {
             assignCategoryHelper.Clear();
@@ -158,11 +173,7 @@ namespace BaseApplication
             int categoryX = 180;
             int pointY = 40;
 
-            string url = "http://127.0.0.1:122/api/getTransactions";
-            using var client = new HttpClient();
-            
-            string transactions = await client.GetStringAsync(url);
-            string[] transactionList = transactions.Substring(1, transactions.Length - 3).Split(',');
+            string[] transactionList = await GetTransactions();
 
             foreach (string bankReference in transactionList)
             {
@@ -249,7 +260,6 @@ namespace BaseApplication
 
         private async void updateBatBtn_Click(object sender, EventArgs e)
         {
-            
             string url = "http://127.0.0.1:122/api/ModuleInfo/bar_information";
             using var client = new HttpClient();
 
@@ -262,7 +272,6 @@ namespace BaseApplication
 
         private async void updateRental_Click(object sender, EventArgs e)
         {
-            
             string url = "http://127.0.0.1:122/api/ModuleInfo/rental_information";
             using var client = new HttpClient();
 
@@ -278,8 +287,60 @@ namespace BaseApplication
             string url = "http://127.0.0.1:122/api/ModulesSummary";
             using var client = new HttpClient();
 
-            string content = await client.GetStringAsync(url);
-            File.WriteAllText(@"C:\MainStuff\summary.json", content);
+            await client.GetStringAsync(url);
+        }
+
+        private void modulesInfoBtn_Click(object sender, EventArgs e)
+        {
+            navigation.TabPages.Add(modules);
+            navigation.SelectTab(modules);
+        }
+
+        private async void goToEditDescBtn_Click(object sender, EventArgs e)
+        {
+            if (!navigation.TabPages.Contains(editDescription))
+            {
+                navigation.TabPages.Add(editDescription);
+                string[] transactionList = await GetTransactions();
+
+                foreach (string bankReference in transactionList)
+                {
+                    string bankReferenceTrim = bankReference.Trim(new Char[] { '[', ']', '"' });
+
+                    bRefCBox.Items.Add(bankReferenceTrim);
+                }
+            }
+            navigation.SelectTab(editDescription); 
+        }
+
+        private async void bRefCBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string bRef = bRefCBox.SelectedItem.ToString();
+            bRefCBox.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            string url = "http://127.0.0.1:122/api/getTransactionDescription/"+ bRef;
+            using var client = new HttpClient();
+
+            string description = await client.GetStringAsync(url);
+            string pattern = "[\"\\[\\]]|\n";
+            string replacement = "";
+            string descriptionTrim = Regex.Replace(description, pattern, replacement);
+            richTextBox2.Text = descriptionTrim;
+        }
+
+        private async void updateDescBtn_Click(object sender, EventArgs e)
+        {
+            string description = richTextBox2.Text;
+            string bRef = bRefCBox.SelectedItem.ToString();
+
+            string url = $"http://127.0.0.1:122/api/updateTransactionDescription?customDetails={description}&bankReference={bRef}";
+            using var client = new HttpClient();
+
+            string response = await client.GetStringAsync(url);
+            MessageBox.Show(response);
+
+            navigation.TabPages.Remove(editDescription);
+            navigation.SelectTab(mainPage);
         }
     }
 }

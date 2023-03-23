@@ -30,6 +30,8 @@
         {
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
+            this.modulesInfoBtn = new System.Windows.Forms.Button();
+            this.goToEditDescBtn = new System.Windows.Forms.Button();
             this.addFileBtn = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.keyword = new System.Windows.Forms.Label();
@@ -78,12 +80,19 @@
             this.barIncomeTxt = new System.Windows.Forms.TextBox();
             this.barCostTxt = new System.Windows.Forms.TextBox();
             this.barinfoLbl = new System.Windows.Forms.Label();
+            this.editDescription = new System.Windows.Forms.TabPage();
+            this.updateDescBtn = new System.Windows.Forms.Button();
+            this.descLbl = new System.Windows.Forms.Label();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.bankRefEditLbl = new System.Windows.Forms.Label();
+            this.bRefCBox = new System.Windows.Forms.ComboBox();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
             this.loginPage.SuspendLayout();
             this.editTransaction.SuspendLayout();
             this.modules.SuspendLayout();
+            this.editDescription.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigation
@@ -93,6 +102,7 @@
             this.navigation.Controls.Add(this.loginPage);
             this.navigation.Controls.Add(this.editTransaction);
             this.navigation.Controls.Add(this.modules);
+            this.navigation.Controls.Add(this.editDescription);
             this.navigation.Location = new System.Drawing.Point(1, 0);
             this.navigation.Name = "navigation";
             this.navigation.SelectedIndex = 0;
@@ -101,6 +111,8 @@
             // 
             // mainPage
             // 
+            this.mainPage.Controls.Add(this.modulesInfoBtn);
+            this.mainPage.Controls.Add(this.goToEditDescBtn);
             this.mainPage.Controls.Add(this.addFileBtn);
             this.mainPage.Controls.Add(this.comboBox1);
             this.mainPage.Controls.Add(this.keyword);
@@ -115,6 +127,26 @@
             this.mainPage.TabIndex = 0;
             this.mainPage.Text = "Base";
             this.mainPage.UseVisualStyleBackColor = true;
+            // 
+            // modulesInfoBtn
+            // 
+            this.modulesInfoBtn.Location = new System.Drawing.Point(13, 280);
+            this.modulesInfoBtn.Name = "modulesInfoBtn";
+            this.modulesInfoBtn.Size = new System.Drawing.Size(156, 32);
+            this.modulesInfoBtn.TabIndex = 16;
+            this.modulesInfoBtn.Text = "Modules Info";
+            this.modulesInfoBtn.UseVisualStyleBackColor = true;
+            this.modulesInfoBtn.Click += new System.EventHandler(this.modulesInfoBtn_Click);
+            // 
+            // goToEditDescBtn
+            // 
+            this.goToEditDescBtn.Location = new System.Drawing.Point(201, 280);
+            this.goToEditDescBtn.Name = "goToEditDescBtn";
+            this.goToEditDescBtn.Size = new System.Drawing.Size(156, 32);
+            this.goToEditDescBtn.TabIndex = 15;
+            this.goToEditDescBtn.Text = "Edit/Add Description";
+            this.goToEditDescBtn.UseVisualStyleBackColor = true;
+            this.goToEditDescBtn.Click += new System.EventHandler(this.goToEditDescBtn_Click);
             // 
             // addFileBtn
             // 
@@ -150,7 +182,7 @@
             // 
             // searchBtn
             // 
-            this.searchBtn.Location = new System.Drawing.Point(238, 145);
+            this.searchBtn.Location = new System.Drawing.Point(238, 149);
             this.searchBtn.Name = "searchBtn";
             this.searchBtn.Size = new System.Drawing.Size(75, 23);
             this.searchBtn.TabIndex = 11;
@@ -159,9 +191,9 @@
             // 
             // showBalance
             // 
-            this.showBalance.Location = new System.Drawing.Point(13, 145);
+            this.showBalance.Location = new System.Drawing.Point(13, 140);
             this.showBalance.Name = "showBalance";
-            this.showBalance.Size = new System.Drawing.Size(147, 32);
+            this.showBalance.Size = new System.Drawing.Size(156, 32);
             this.showBalance.TabIndex = 10;
             this.showBalance.Text = "Show Balance";
             this.showBalance.UseVisualStyleBackColor = true;
@@ -178,7 +210,7 @@
             // 
             this.showTransac.Location = new System.Drawing.Point(13, 66);
             this.showTransac.Name = "showTransac";
-            this.showTransac.Size = new System.Drawing.Size(147, 32);
+            this.showTransac.Size = new System.Drawing.Size(156, 32);
             this.showTransac.TabIndex = 8;
             this.showTransac.Text = "Show Transactions";
             this.showTransac.UseVisualStyleBackColor = true;
@@ -569,6 +601,66 @@
             this.barinfoLbl.TabIndex = 0;
             this.barinfoLbl.Text = "Bar Information:";
             // 
+            // editDescription
+            // 
+            this.editDescription.Controls.Add(this.updateDescBtn);
+            this.editDescription.Controls.Add(this.descLbl);
+            this.editDescription.Controls.Add(this.richTextBox2);
+            this.editDescription.Controls.Add(this.bankRefEditLbl);
+            this.editDescription.Controls.Add(this.bRefCBox);
+            this.editDescription.Location = new System.Drawing.Point(4, 25);
+            this.editDescription.Name = "editDescription";
+            this.editDescription.Padding = new System.Windows.Forms.Padding(3);
+            this.editDescription.Size = new System.Drawing.Size(793, 418);
+            this.editDescription.TabIndex = 5;
+            this.editDescription.Text = "Edit Description";
+            this.editDescription.UseVisualStyleBackColor = true;
+            // 
+            // updateDescBtn
+            // 
+            this.updateDescBtn.Location = new System.Drawing.Point(311, 279);
+            this.updateDescBtn.Name = "updateDescBtn";
+            this.updateDescBtn.Size = new System.Drawing.Size(102, 47);
+            this.updateDescBtn.TabIndex = 7;
+            this.updateDescBtn.Text = "Update Description";
+            this.updateDescBtn.UseVisualStyleBackColor = true;
+            this.updateDescBtn.Click += new System.EventHandler(this.updateDescBtn_Click);
+            // 
+            // descLbl
+            // 
+            this.descLbl.AutoSize = true;
+            this.descLbl.Location = new System.Drawing.Point(291, 25);
+            this.descLbl.Name = "descLbl";
+            this.descLbl.Size = new System.Drawing.Size(149, 16);
+            this.descLbl.TabIndex = 6;
+            this.descLbl.Text = "Transaction Description";
+            // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(277, 44);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(174, 214);
+            this.richTextBox2.TabIndex = 5;
+            this.richTextBox2.Text = "";
+            // 
+            // bankRefEditLbl
+            // 
+            this.bankRefEditLbl.AutoSize = true;
+            this.bankRefEditLbl.Location = new System.Drawing.Point(96, 25);
+            this.bankRefEditLbl.Name = "bankRefEditLbl";
+            this.bankRefEditLbl.Size = new System.Drawing.Size(104, 16);
+            this.bankRefEditLbl.TabIndex = 4;
+            this.bankRefEditLbl.Text = "Bank Reference";
+            // 
+            // bRefCBox
+            // 
+            this.bRefCBox.FormattingEnabled = true;
+            this.bRefCBox.Location = new System.Drawing.Point(70, 44);
+            this.bRefCBox.Name = "bRefCBox";
+            this.bRefCBox.Size = new System.Drawing.Size(166, 24);
+            this.bRefCBox.TabIndex = 0;
+            this.bRefCBox.SelectionChangeCommitted += new System.EventHandler(this.bRefCBox_SelectionChangeCommitted);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -588,6 +680,8 @@
             this.editTransaction.PerformLayout();
             this.modules.ResumeLayout(false);
             this.modules.PerformLayout();
+            this.editDescription.ResumeLayout(false);
+            this.editDescription.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -644,6 +738,14 @@
         private System.Windows.Forms.TextBox barCostTxt;
         private System.Windows.Forms.Label barinfoLbl;
         private System.Windows.Forms.Button generateSummaryBtn;
+        private System.Windows.Forms.TabPage editDescription;
+        private System.Windows.Forms.ComboBox bRefCBox;
+        private System.Windows.Forms.Button goToEditDescBtn;
+        private System.Windows.Forms.Button updateDescBtn;
+        private System.Windows.Forms.Label descLbl;
+        private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.Label bankRefEditLbl;
+        private System.Windows.Forms.Button modulesInfoBtn;
     }
 }
 
