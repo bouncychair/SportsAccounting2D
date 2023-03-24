@@ -5,6 +5,7 @@ from connectionString import connection_string
 import json
 import mysql.connector
 import dicttoxml2
+from xml.dom.minidom import parseString
 
 # MySql connection
 mydb = mysql.connector.connect(
@@ -105,11 +106,52 @@ def make_modules_summary():
     modules_information.update(bar_information)
     modules_information.update(rental_information)
     summary = {"modules_information": modules_information}
+    # convert dict to json
     json_summary = json.dumps(summary, indent=4)
-    xml_summary = dicttoxml2.dicttoxml(summary)  # convert to xml maybe?
+    # convert dict to xml and make it look nice
+    xml_summary = parseString(dicttoxml2.dicttoxml(summary)).toprettyxml(indent="\t", encoding="utf-8")
     with open("C:/MainStuff/modules_summary.json", "w") as outfile:
         outfile.write(json_summary)
+    with open("C:/MainStuff/modules_summary.xml", "wb") as outfile:
+        outfile.write(xml_summary)
     return json_summary
+
+
+@app.route('/api/TransactionsSummary', methods=["GET"])
+def make_transactions_summary():
+    mycursor.execute("SHOW TABLES")
+    tables = mycursor.fetchall()
+    for table in tables:
+        table = table[0]
+        data_query = f"SELECT * FROM {table}"
+        mycursor.execute(data_query)
+        data = mycursor.fetchall()
+        columns_query = f"SHOW COLUMNS FROM {table}"
+        mycursor.execute(columns_query)
+        columns = mycursor.fetchall()
+        data = [dict(zip([column[0] for column in columns], row)) for row in data]
+        data = {table: data}
+        json_data = json.dumps(data, indent=4)
+        with open(f"C:/MainStuff/DatabaseTables/{table}.json", "w") as outfile:
+            outfile.write(json_data)
+    return "Summary created"
+    # mycursor.execute("SHOW TABLES")
+    # tables = mycursor.fetchall()
+    # database = {}
+    # for table in tables:
+    #     table = table[0]
+    #     data_query = f"SELECT * FROM {table}"
+    #     mycursor.execute(data_query)
+    #     data = mycursor.fetchall()
+    #     columns_query = f"SHOW COLUMNS FROM {table}"
+    #     mycursor.execute(columns_query)
+    #     columns = mycursor.fetchall()
+    #     data = [dict(zip([column[0] for column in columns], row)) for row in data]
+    #     data = {table: data}
+    #     database.update(data)
+    # database = json.dumps(database, indent=4)
+    # with open(f"C:/MainStuff/DatabaseTables/database.json", "w") as outfile:
+    #     outfile.write(database)
 
 
 def is_duplicate(file):

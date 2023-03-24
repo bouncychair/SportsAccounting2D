@@ -5,24 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bf00196-e52c-4fe4-81f7-01f9b914d32d" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/FileContentIndex/e9d2c567-292c-45c7-a9cb-b8550dfe5469.vsidx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DBParser.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonAPI.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recieveRequest.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBCommunication.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBCommunication.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,21 +33,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.go.formatter.settings.were.checked": "true",
-    "RunOnceActivity.go.migrated.go.modules.settings": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "go.import.settings.migrated": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -70,17 +56,30 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1679606599803</updated>
-      <workItem from="1679606601044" duration="562000" />
+      <workItem from="1679606601044" duration="3588000" />
+      <workItem from="1679663527192" duration="2604000" />
     </task>
+    <task id="LOCAL-00001" summary="user can now add custom description and export modules summary as json">
+      <created>1679607445325</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1679607445325</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="user can now add custom description and export modules summary as json" />
+    <option name="LAST_COMMIT_MESSAGE" value="user can now add custom description and export modules summary as json" />
+  </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonAPI$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1679607133191" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/PythonAPI$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1679674105923" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
