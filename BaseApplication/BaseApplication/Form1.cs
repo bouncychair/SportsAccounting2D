@@ -27,6 +27,7 @@ namespace BaseApplication
             navigation.TabPages.Remove(editTransaction);
             navigation.TabPages.Remove(editDescription);
             navigation.TabPages.Remove(modules);
+            navigation.TabPages.Remove(searchKeyword);
 
         }
 
@@ -66,7 +67,7 @@ namespace BaseApplication
             
         }
 
-        void updateCategories(NameValueCollection categories)
+        void UpdateCategories(NameValueCollection categories)
         {
             string url = "http://127.0.0.1:122/api/updateCategory";
             using var client = new WebClient();
@@ -160,9 +161,8 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             string transactions = await client.GetStringAsync(url);
-            string[] transactionList = transactions.Substring(1, transactions.Length - 3).Split(',');
 
-            return transactionList;
+            return SplitResponse(transactions);
         }
         
         private async Task GetTransactionAsync()
@@ -177,10 +177,9 @@ namespace BaseApplication
 
             foreach (string bankReference in transactionList)
             {
-                string bankReferenceTrim = bankReference.Trim(new Char[] { '[', ']', '"' });
                 TextBox bRef = new()
                 {
-                    Text = bankReferenceTrim,
+                    Text = TrimString(bankReference),
                     Location = new Point(bRefX, pointY)
                 };
                 editTransaction.Controls.Add(bRef);
@@ -209,7 +208,7 @@ namespace BaseApplication
                     string category = pair.Value.Text;
                     updatedCategories.Add("bankReference", bankReference);
                     updatedCategories.Add("category", category);
-                    updateCategories(updatedCategories);
+                    UpdateCategories(updatedCategories);
                 }
             }
             EditTabs(false);
@@ -305,27 +304,25 @@ namespace BaseApplication
 
                 foreach (string bankReference in transactionList)
                 {
-                    string bankReferenceTrim = bankReference.Trim(new Char[] { '[', ']', '"' });
 
-                    bRefCBox.Items.Add(bankReferenceTrim);
+                    bRefCBox.Items.Add(TrimString(bankReference));
                 }
             }
-            navigation.SelectTab(editDescription); 
+            navigation.SelectTab(editDescription);
+            bRefCBox.SelectedIndex = 0;
+            bRefCBox.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private async void bRefCBox_SelectionChangeCommitted(object sender, EventArgs e)
         {
             string bRef = bRefCBox.SelectedItem.ToString();
-            bRefCBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            
 
             string url = "http://127.0.0.1:122/api/getTransactionDescription/"+ bRef;
             using var client = new HttpClient();
 
             string description = await client.GetStringAsync(url);
-            string pattern = "[\"\\[\\]]|\n";
-            string replacement = "";
-            string descriptionTrim = Regex.Replace(description, pattern, replacement);
-            richTextBox2.Text = descriptionTrim;
+            richTextBox2.Text = TrimString(description);
         }
 
         private async void updateDescBtn_Click(object sender, EventArgs e)
@@ -341,6 +338,68 @@ namespace BaseApplication
 
             navigation.TabPages.Remove(editDescription);
             navigation.SelectTab(mainPage);
+        }
+
+        private async void searchKeywordBtn_Click(object sender, EventArgs e)
+        {
+            string table = searchTableCBox.SelectedItem.ToString();
+            string column = searchColumnCBox.SelectedItem.ToString();
+            string keyword = keywordSeach.Text;
+
+            string url = $"http://127.0.0.1:122/api/searchKeyword?table={table}&column={column}&keyword={keyword}";
+            using var client = new HttpClient();
+            string response = await client.GetStringAsync(url);
+            richTextBox3.Text = response;
+        }
+
+        private async void searchTableCBox_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string table = searchTableCBox.SelectedItem.ToString();
+            
+            string url = $"http://127.0.0.1:122/api/Columns/{table}";
+            using var client = new HttpClient();
+            string response = await client.GetStringAsync(url);
+            string[] columns = SplitResponse(response);
+            searchColumnCBox.Items.Clear();
+            foreach (string column in columns)
+            {   
+                searchColumnCBox.Items.Add(TrimString(column));
+            }
+            searchColumnCBox.SelectedIndex = 0;
+
+        }
+
+        private string TrimString(string str)
+        {
+            string pattern = "[\"\\[\\]]|\n";
+            string replacement = "";
+            string strTrim = Regex.Replace(str, pattern, replacement);
+            return strTrim;
+        }
+        private string[] SplitResponse(string response)
+        {
+            return response.Split(',');
+        }
+
+        private async void searchKWordBtn_Click(object sender, EventArgs e)
+        {
+            if (!navigation.TabPages.Contains(searchKeyword))
+            {
+                string url = $"http://127.0.0.1:122/api/Tables";
+                using var client = new HttpClient();
+                string response = await client.GetStringAsync(url);
+                string[] tables = SplitResponse(response);
+
+                foreach (string table in tables)
+                {
+                    searchTableCBox.Items.Add(TrimString(table));
+                }
+            }
+            navigation.TabPages.Add(searchKeyword);
+            navigation.SelectTab(searchKeyword);
+            searchTableCBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            searchColumnCBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            searchTableCBox.SelectedIndex = 0;
         }
     }
 }

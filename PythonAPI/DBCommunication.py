@@ -97,6 +97,30 @@ def get_modules_info(module):
     return json.dumps(mydict)
 
 
+@app.route('/api/Tables', methods=["GET"])
+def get_tables():
+    mycursor.execute("SHOW TABLES")
+    tables = mycursor.fetchall()
+    return tables
+
+
+@app.route('/api/Columns/<table>', methods=["GET"])
+def get_columns(table):
+    mycursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '%s'" % table)
+    columns = mycursor.fetchall()
+    return columns
+
+
+@app.route('/api/searchKeyword', methods=["GET"])
+def search_keyword():
+    table = request.args.get('table')
+    column = request.args.get('column')
+    keyword = request.args.get('keyword')
+    mycursor.execute("SELECT * FROM %s WHERE %s LIKE '%%%s%%'" % (table, column, keyword))
+    myresult = mycursor.fetchall()
+    return myresult
+
+
 @app.route('/api/ModulesSummary', methods=["GET"])
 def make_modules_summary():
     bar_information = json.loads(get_modules_info('bar_information'))

@@ -86,6 +86,16 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.bankRefEditLbl = new System.Windows.Forms.Label();
             this.bRefCBox = new System.Windows.Forms.ComboBox();
+            this.searchKeyword = new System.Windows.Forms.TabPage();
+            this.searchTableCBox = new System.Windows.Forms.ComboBox();
+            this.searchColumnCBox = new System.Windows.Forms.ComboBox();
+            this.keywordSeach = new System.Windows.Forms.TextBox();
+            this.seachTableLbl = new System.Windows.Forms.Label();
+            this.searchColumnLbl = new System.Windows.Forms.Label();
+            this.searchKeywordLbl = new System.Windows.Forms.Label();
+            this.searchKeywordBtn = new System.Windows.Forms.Button();
+            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
+            this.searchKWordBtn = new System.Windows.Forms.Button();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
@@ -93,6 +103,7 @@
             this.editTransaction.SuspendLayout();
             this.modules.SuspendLayout();
             this.editDescription.SuspendLayout();
+            this.searchKeyword.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigation
@@ -103,6 +114,7 @@
             this.navigation.Controls.Add(this.editTransaction);
             this.navigation.Controls.Add(this.modules);
             this.navigation.Controls.Add(this.editDescription);
+            this.navigation.Controls.Add(this.searchKeyword);
             this.navigation.Location = new System.Drawing.Point(1, 0);
             this.navigation.Name = "navigation";
             this.navigation.SelectedIndex = 0;
@@ -111,6 +123,7 @@
             // 
             // mainPage
             // 
+            this.mainPage.Controls.Add(this.searchKWordBtn);
             this.mainPage.Controls.Add(this.modulesInfoBtn);
             this.mainPage.Controls.Add(this.goToEditDescBtn);
             this.mainPage.Controls.Add(this.addFileBtn);
@@ -150,9 +163,9 @@
             // 
             // addFileBtn
             // 
-            this.addFileBtn.Location = new System.Drawing.Point(118, 349);
+            this.addFileBtn.Location = new System.Drawing.Point(13, 345);
             this.addFileBtn.Name = "addFileBtn";
-            this.addFileBtn.Size = new System.Drawing.Size(95, 36);
+            this.addFileBtn.Size = new System.Drawing.Size(156, 32);
             this.addFileBtn.TabIndex = 14;
             this.addFileBtn.Text = "Add file";
             this.addFileBtn.UseVisualStyleBackColor = true;
@@ -661,6 +674,103 @@
             this.bRefCBox.TabIndex = 0;
             this.bRefCBox.SelectionChangeCommitted += new System.EventHandler(this.bRefCBox_SelectionChangeCommitted);
             // 
+            // searchKeyword
+            // 
+            this.searchKeyword.Controls.Add(this.richTextBox3);
+            this.searchKeyword.Controls.Add(this.searchKeywordBtn);
+            this.searchKeyword.Controls.Add(this.searchKeywordLbl);
+            this.searchKeyword.Controls.Add(this.searchColumnLbl);
+            this.searchKeyword.Controls.Add(this.seachTableLbl);
+            this.searchKeyword.Controls.Add(this.keywordSeach);
+            this.searchKeyword.Controls.Add(this.searchColumnCBox);
+            this.searchKeyword.Controls.Add(this.searchTableCBox);
+            this.searchKeyword.Location = new System.Drawing.Point(4, 25);
+            this.searchKeyword.Name = "searchKeyword";
+            this.searchKeyword.Padding = new System.Windows.Forms.Padding(3);
+            this.searchKeyword.Size = new System.Drawing.Size(793, 418);
+            this.searchKeyword.TabIndex = 6;
+            this.searchKeyword.Text = "Search Keyword";
+            this.searchKeyword.UseVisualStyleBackColor = true;
+            // 
+            // searchTableCBox
+            // 
+            this.searchTableCBox.FormattingEnabled = true;
+            this.searchTableCBox.Location = new System.Drawing.Point(72, 105);
+            this.searchTableCBox.Name = "searchTableCBox";
+            this.searchTableCBox.Size = new System.Drawing.Size(135, 24);
+            this.searchTableCBox.TabIndex = 0;
+            this.searchTableCBox.SelectionChangeCommitted += new System.EventHandler(this.searchTableCBox_SelectionChangeCommitted);
+            // 
+            // searchColumnCBox
+            // 
+            this.searchColumnCBox.FormattingEnabled = true;
+            this.searchColumnCBox.Location = new System.Drawing.Point(243, 105);
+            this.searchColumnCBox.Name = "searchColumnCBox";
+            this.searchColumnCBox.Size = new System.Drawing.Size(183, 24);
+            this.searchColumnCBox.TabIndex = 1;
+            // 
+            // keywordSeach
+            // 
+            this.keywordSeach.Location = new System.Drawing.Point(474, 105);
+            this.keywordSeach.Name = "keywordSeach";
+            this.keywordSeach.Size = new System.Drawing.Size(135, 22);
+            this.keywordSeach.TabIndex = 2;
+            // 
+            // seachTableLbl
+            // 
+            this.seachTableLbl.AutoSize = true;
+            this.seachTableLbl.Location = new System.Drawing.Point(88, 86);
+            this.seachTableLbl.Name = "seachTableLbl";
+            this.seachTableLbl.Size = new System.Drawing.Size(101, 16);
+            this.seachTableLbl.TabIndex = 3;
+            this.seachTableLbl.Text = "Table to search";
+            // 
+            // searchColumnLbl
+            // 
+            this.searchColumnLbl.AutoSize = true;
+            this.searchColumnLbl.Location = new System.Drawing.Point(277, 84);
+            this.searchColumnLbl.Name = "searchColumnLbl";
+            this.searchColumnLbl.Size = new System.Drawing.Size(110, 16);
+            this.searchColumnLbl.TabIndex = 4;
+            this.searchColumnLbl.Text = "Column to search";
+            // 
+            // searchKeywordLbl
+            // 
+            this.searchKeywordLbl.AutoSize = true;
+            this.searchKeywordLbl.Location = new System.Drawing.Point(474, 84);
+            this.searchKeywordLbl.Name = "searchKeywordLbl";
+            this.searchKeywordLbl.Size = new System.Drawing.Size(135, 16);
+            this.searchKeywordLbl.TabIndex = 5;
+            this.searchKeywordLbl.Text = "Keyword to search for";
+            // 
+            // searchKeywordBtn
+            // 
+            this.searchKeywordBtn.Location = new System.Drawing.Point(661, 103);
+            this.searchKeywordBtn.Name = "searchKeywordBtn";
+            this.searchKeywordBtn.Size = new System.Drawing.Size(75, 23);
+            this.searchKeywordBtn.TabIndex = 6;
+            this.searchKeywordBtn.Text = "Search";
+            this.searchKeywordBtn.UseVisualStyleBackColor = true;
+            this.searchKeywordBtn.Click += new System.EventHandler(this.searchKeywordBtn_Click);
+            // 
+            // richTextBox3
+            // 
+            this.richTextBox3.Location = new System.Drawing.Point(105, 269);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(613, 96);
+            this.richTextBox3.TabIndex = 7;
+            this.richTextBox3.Text = "";
+            // 
+            // searchKWordBtn
+            // 
+            this.searchKWordBtn.Location = new System.Drawing.Point(201, 345);
+            this.searchKWordBtn.Name = "searchKWordBtn";
+            this.searchKWordBtn.Size = new System.Drawing.Size(156, 32);
+            this.searchKWordBtn.TabIndex = 17;
+            this.searchKWordBtn.Text = "Search keyword";
+            this.searchKWordBtn.UseVisualStyleBackColor = true;
+            this.searchKWordBtn.Click += new System.EventHandler(this.searchKWordBtn_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -682,6 +792,8 @@
             this.modules.PerformLayout();
             this.editDescription.ResumeLayout(false);
             this.editDescription.PerformLayout();
+            this.searchKeyword.ResumeLayout(false);
+            this.searchKeyword.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -746,6 +858,16 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Label bankRefEditLbl;
         private System.Windows.Forms.Button modulesInfoBtn;
+        private System.Windows.Forms.TabPage searchKeyword;
+        private System.Windows.Forms.RichTextBox richTextBox3;
+        private System.Windows.Forms.Button searchKeywordBtn;
+        private System.Windows.Forms.Label searchKeywordLbl;
+        private System.Windows.Forms.Label searchColumnLbl;
+        private System.Windows.Forms.Label seachTableLbl;
+        private System.Windows.Forms.TextBox keywordSeach;
+        private System.Windows.Forms.ComboBox searchColumnCBox;
+        private System.Windows.Forms.ComboBox searchTableCBox;
+        private System.Windows.Forms.Button searchKWordBtn;
     }
 }
 
