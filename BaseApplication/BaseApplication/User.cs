@@ -10,7 +10,7 @@ namespace ConsoleApp2
         private String _lastName;
         private String _email;
         private String _password;
-        private DateTime _joinDate;
+        private String _joinDate;
         private String _userType;
 
 
@@ -21,7 +21,7 @@ namespace ConsoleApp2
             this.setLastName(lastName);
             this.setEmail(email);
             this.setPassword(password);
-            this._joinDate = DateTime.Now;
+            this._joinDate = DateTime.Now.ToString();
             this._userType = userType;
         }
 
@@ -89,7 +89,7 @@ namespace ConsoleApp2
                 throw new ArgumentOutOfRangeException("The email does not meet the database requirements");
             }
         }
-        public DateTime getJoinDate()
+        public String getJoinDate()
         {
             return this._joinDate;
         }

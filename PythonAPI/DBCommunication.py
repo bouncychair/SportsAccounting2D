@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import mt940
 from flask import Flask, request
 from pymongo import MongoClient
@@ -102,6 +104,40 @@ def get_tables():
     mycursor.execute("SHOW TABLES")
     tables = mycursor.fetchall()
     return tables
+
+
+@app.route('/api/ConnectToApp', methods=["POST"])
+def connect_to_app():
+    action_type = request.form['type']
+    username = request.form['username']
+    password = request.form['password']
+    if action_type == "register":
+        if check_if_exist(username) is not False:
+            return "Username is taken"
+        first_name = request.form['firstName']
+        last_name = request.form['lastName']
+        date_of_join = datetime.now().strftime("%Y-%m-%d")
+        email = request.form['email']
+        role = request.form['role']
+        sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        val = (username, first_name, last_name, password, email, date_of_join, role)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return "User added"
+    elif action_type == "login":
+        username = request.form['username']
+        if check_if_exist(username) == password:
+            return "Success"
+        return "Wrong password"
+
+
+def check_if_exist(username):
+    mycursor.execute("SELECT * FROM user WHERE username = '%s'" % username)
+    myresult = mycursor.fetchall()
+    if len(myresult) == 0:
+        return False
+    else:
+        return myresult[0][3]
 
 
 @app.route('/api/Columns/<table>', methods=["GET"])

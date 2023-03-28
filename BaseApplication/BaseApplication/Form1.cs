@@ -6,6 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
@@ -76,12 +77,14 @@ namespace BaseApplication
             client.UploadValues(url, categories);
         }
 
-        void AddUser(NameValueCollection userInfo, string type)
+        void ConnectToApp(NameValueCollection userInfo, string type)
         {
-            string url = "http://127.0.0.1:122/api/addUser";
+            string url = "http://127.0.0.1:122/api/ConnectToApp";
             using var client = new WebClient();
             userInfo.Add("type", type);
-            client.UploadValues(url, userInfo);
+            var response = client.UploadValues(url, userInfo);
+            MessageBox.Show(Encoding.ASCII.GetString(response));
+            
         }
         void UploadToMongoDB(string fileToUpload)
         {
@@ -100,9 +103,9 @@ namespace BaseApplication
             NameValueCollection userInfo = new()
             {
                 {"username", loginUsernameBox.Text},
-                {"password", loginPasswordBox.Text}
+                {"password", new PasswordHasher<object?>().HashPassword(null, loginPasswordBox.Text)}
             };
-            AddUser(userInfo, "login");
+            ConnectToApp(userInfo, "login");
             foreach (var user in users)
             {
                 if (username.Equals(user.getUsername()))
@@ -141,18 +144,18 @@ namespace BaseApplication
         {
             registerFeedbackBox.Text = "";
             //username
-            if(string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length <= 50)
+            if(!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length <= 50)
             {
                 //firstName
-                if(string.IsNullOrEmpty(firstNameBox.Text) && firstNameBox.Text.Length <= 20)
+                if(!string.IsNullOrEmpty(firstNameBox.Text) && firstNameBox.Text.Length <= 20)
                 {
                     //lastName
-                    if(string.IsNullOrEmpty(lastNameBox.Text) && lastNameBox.Text.Length <= 20)
+                    if(!string.IsNullOrEmpty(lastNameBox.Text) && lastNameBox.Text.Length <= 20)
                     {
                         //email
-                        if(string.IsNullOrEmpty(emailBox.Text) && emailBox.Text.Length <= 320 && emailBox.Text.Contains("@"))
+                        if(!string.IsNullOrEmpty(emailBox.Text) && emailBox.Text.Length <= 320 && emailBox.Text.Contains("@"))
                         {
-                            if(string.IsNullOrEmpty(passwordBox.Text) && passwordBox.Text.Length <= 255 && passwordBox.Text.Length >= 7)
+                            if(!string.IsNullOrEmpty(passwordBox.Text) && passwordBox.Text.Length <= 255 && passwordBox.Text.Length >= 7)
                             {
                                 return true;
                             }
@@ -180,17 +183,10 @@ namespace BaseApplication
                     { "lastName", lastNameBox.Text },
                     { "email", emailBox.Text },
                     { "password", hashedPassword },
-                    { "dateOfJoin", dateOfJoin }
+                    { "dateOfJoin", dateOfJoin },
+                    { "role", userTypeBox.Text}
                 };
-                AddUser(userInfo, "register");
-                registerFeedbackBox.Text = "Account registered";
-                usernameBox.Text = "";
-                firstNameBox.Text = "";
-                lastNameBox.Text = "";
-                emailBox.Text = "";
-                passwordBox.Text = "";
-                usernameBox.Text = "";
-
+                ConnectToApp(userInfo, "register");
             }
             else
             {
