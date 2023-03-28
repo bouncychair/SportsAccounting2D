@@ -1,4 +1,5 @@
 ﻿using ConsoleApp2;
+using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json;
@@ -10,6 +11,7 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -73,6 +75,14 @@ namespace BaseApplication
             using var client = new WebClient();
             client.UploadValues(url, categories);
         }
+
+        void AddUser(NameValueCollection userInfo, string type)
+        {
+            string url = "http://127.0.0.1:122/api/addUser";
+            using var client = new WebClient();
+            userInfo.Add("type", type);
+            client.UploadValues(url, userInfo);
+        }
         void UploadToMongoDB(string fileToUpload)
         {
             string connectionString = "mongodb+srv://bigUser:bigPassword@project.0tii4ke.mongodb.net/?retryWrites=true&w=majority";
@@ -87,6 +97,12 @@ namespace BaseApplication
         private void Login(String username, String password)
         {
             loginFeedbackBox.Text = "";
+            NameValueCollection userInfo = new()
+            {
+                {"username", loginUsernameBox.Text},
+                {"password", loginPasswordBox.Text}
+            };
+            AddUser(userInfo, "login");
             foreach (var user in users)
             {
                 if (username.Equals(user.getUsername()))
@@ -94,7 +110,6 @@ namespace BaseApplication
                     loginFeedbackBox.Text += "Found same user\n";
                     if (user.verifyPassword(password))
                     {
-                        loginFeedbackBox.Text += user.getFirstName() + " " + user.getLastName() + " has logged in.\n";
                     }
                     else { loginFeedbackBox.Text += "Password is wrong, not logged in\n"; }
 
@@ -156,43 +171,31 @@ namespace BaseApplication
         {
             if (ValidateRegister())
             {
+                var hashedPassword = new PasswordHasher<object?>().HashPassword(null, passwordBox.Text);
                 var dateOfJoin = DateTime.Now.ToShortDateString();
-                NameValueCollection userInfo = new NameValueCollection();
-                userInfo.Add("username", usernameBox.Text);
-                userInfo.Add("firstName", firstNameBox.Text);
-                userInfo.Add("lastName", lastNameBox.Text);
-                userInfo.Add("email", emailBox.Text);
-                userInfo.Add("password", passwordBox.Text);
-                userInfo.Add("dateOfJoin", dateOfJoin);
-                UpdateCategories(userInfo);
+                NameValueCollection userInfo = new()
+                {
+                    { "username", usernameBox.Text },
+                    { "firstName", firstNameBox.Text },
+                    { "lastName", lastNameBox.Text },
+                    { "email", emailBox.Text },
+                    { "password", hashedPassword },
+                    { "dateOfJoin", dateOfJoin }
+                };
+                AddUser(userInfo, "register");
+                registerFeedbackBox.Text = "Account registered";
+                usernameBox.Text = "";
+                firstNameBox.Text = "";
+                lastNameBox.Text = "";
+                emailBox.Text = "";
+                passwordBox.Text = "";
+                usernameBox.Text = "";
 
             }
             else
             {
                 registerFeedbackBox.Text += "Register failed.\n";
             }
-            foreach (Dictionary<TextBox, TextBox> dict in assignCategoryHelper)
-            {
-                foreach (KeyValuePair<TextBox, TextBox> pair in dict)
-                {
-                    NameValueCollection updatedCategories = new();
-                    string bankReference = pair.Key.Text;
-                    string category = pair.Value.Text;
-                    updatedCategories.Add("bankReference", bankReference);
-                    updatedCategories.Add("category", category);
-                    UpdateCategories(updatedCategories);
-                    registerFeedbackBox.Text = "Account registered";
-                    usernameBox.Text = "";
-                    firstNameBox.Text = "";
-                    lastNameBox.Text = "";
-                    emailBox.Text = "";
-                    passwordBox.Text = "";
-                    usernameBox.Text = "";
-                }
-            }
-            EditTabs(false);
-            navigation.SelectTab(mainPage);
-            navigation.TabPages.Remove(editTransaction);
         }
 
         private void button3_Click(object sender, EventArgs e)
