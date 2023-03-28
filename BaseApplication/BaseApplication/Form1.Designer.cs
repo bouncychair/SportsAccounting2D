@@ -30,15 +30,11 @@
         {
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
+            this.searchKWordBtn = new System.Windows.Forms.Button();
             this.modulesInfoBtn = new System.Windows.Forms.Button();
             this.goToEditDescBtn = new System.Windows.Forms.Button();
             this.addFileBtn = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.keyword = new System.Windows.Forms.Label();
-            this.searchBtn = new System.Windows.Forms.Button();
-            this.showBalance = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.showTransac = new System.Windows.Forms.Button();
             this.registerPage = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,7 +42,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.registerFeedbackBox = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.userTypeBox = new System.Windows.Forms.TextBox();
             this.passwordBox = new System.Windows.Forms.TextBox();
@@ -57,7 +52,6 @@
             this.loginPage = new System.Windows.Forms.TabPage();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.loginFeedbackBox = new System.Windows.Forms.RichTextBox();
             this.button3 = new System.Windows.Forms.Button();
             this.loginPasswordBox = new System.Windows.Forms.TextBox();
             this.loginUsernameBox = new System.Windows.Forms.TextBox();
@@ -87,15 +81,21 @@
             this.bankRefEditLbl = new System.Windows.Forms.Label();
             this.bRefCBox = new System.Windows.Forms.ComboBox();
             this.searchKeyword = new System.Windows.Forms.TabPage();
-            this.searchTableCBox = new System.Windows.Forms.ComboBox();
-            this.searchColumnCBox = new System.Windows.Forms.ComboBox();
-            this.keywordSeach = new System.Windows.Forms.TextBox();
-            this.seachTableLbl = new System.Windows.Forms.Label();
-            this.searchColumnLbl = new System.Windows.Forms.Label();
-            this.searchKeywordLbl = new System.Windows.Forms.Label();
-            this.searchKeywordBtn = new System.Windows.Forms.Button();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
-            this.searchKWordBtn = new System.Windows.Forms.Button();
+            this.searchKeywordBtn = new System.Windows.Forms.Button();
+            this.searchKeywordLbl = new System.Windows.Forms.Label();
+            this.searchColumnLbl = new System.Windows.Forms.Label();
+            this.seachTableLbl = new System.Windows.Forms.Label();
+            this.keywordSeach = new System.Windows.Forms.TextBox();
+            this.searchColumnCBox = new System.Windows.Forms.ComboBox();
+            this.searchTableCBox = new System.Windows.Forms.ComboBox();
+            this.addMember = new System.Windows.Forms.TabPage();
+            this.addMemberBtn = new System.Windows.Forms.Button();
+            this.memberEmail = new System.Windows.Forms.Label();
+            this.memberEmailBox = new System.Windows.Forms.TextBox();
+            this.memberNameBox = new System.Windows.Forms.TextBox();
+            this.memberNameLbl = new System.Windows.Forms.Label();
+            this.addMemberBtnMain = new System.Windows.Forms.Button();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
@@ -104,6 +104,7 @@
             this.modules.SuspendLayout();
             this.editDescription.SuspendLayout();
             this.searchKeyword.SuspendLayout();
+            this.addMember.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigation
@@ -115,6 +116,7 @@
             this.navigation.Controls.Add(this.modules);
             this.navigation.Controls.Add(this.editDescription);
             this.navigation.Controls.Add(this.searchKeyword);
+            this.navigation.Controls.Add(this.addMember);
             this.navigation.Location = new System.Drawing.Point(1, 0);
             this.navigation.Name = "navigation";
             this.navigation.SelectedIndex = 0;
@@ -123,16 +125,12 @@
             // 
             // mainPage
             // 
+            this.mainPage.Controls.Add(this.addMemberBtnMain);
             this.mainPage.Controls.Add(this.searchKWordBtn);
             this.mainPage.Controls.Add(this.modulesInfoBtn);
             this.mainPage.Controls.Add(this.goToEditDescBtn);
             this.mainPage.Controls.Add(this.addFileBtn);
-            this.mainPage.Controls.Add(this.comboBox1);
-            this.mainPage.Controls.Add(this.keyword);
-            this.mainPage.Controls.Add(this.searchBtn);
-            this.mainPage.Controls.Add(this.showBalance);
             this.mainPage.Controls.Add(this.richTextBox1);
-            this.mainPage.Controls.Add(this.showTransac);
             this.mainPage.Location = new System.Drawing.Point(4, 25);
             this.mainPage.Name = "mainPage";
             this.mainPage.Padding = new System.Windows.Forms.Padding(3);
@@ -141,9 +139,19 @@
             this.mainPage.Text = "Base";
             this.mainPage.UseVisualStyleBackColor = true;
             // 
+            // searchKWordBtn
+            // 
+            this.searchKWordBtn.Location = new System.Drawing.Point(195, 93);
+            this.searchKWordBtn.Name = "searchKWordBtn";
+            this.searchKWordBtn.Size = new System.Drawing.Size(156, 32);
+            this.searchKWordBtn.TabIndex = 17;
+            this.searchKWordBtn.Text = "Search keyword";
+            this.searchKWordBtn.UseVisualStyleBackColor = true;
+            this.searchKWordBtn.Click += new System.EventHandler(this.searchKWordBtn_Click);
+            // 
             // modulesInfoBtn
             // 
-            this.modulesInfoBtn.Location = new System.Drawing.Point(13, 280);
+            this.modulesInfoBtn.Location = new System.Drawing.Point(17, 33);
             this.modulesInfoBtn.Name = "modulesInfoBtn";
             this.modulesInfoBtn.Size = new System.Drawing.Size(156, 32);
             this.modulesInfoBtn.TabIndex = 16;
@@ -153,7 +161,7 @@
             // 
             // goToEditDescBtn
             // 
-            this.goToEditDescBtn.Location = new System.Drawing.Point(201, 280);
+            this.goToEditDescBtn.Location = new System.Drawing.Point(195, 33);
             this.goToEditDescBtn.Name = "goToEditDescBtn";
             this.goToEditDescBtn.Size = new System.Drawing.Size(156, 32);
             this.goToEditDescBtn.TabIndex = 15;
@@ -163,53 +171,13 @@
             // 
             // addFileBtn
             // 
-            this.addFileBtn.Location = new System.Drawing.Point(13, 345);
+            this.addFileBtn.Location = new System.Drawing.Point(109, 338);
             this.addFileBtn.Name = "addFileBtn";
-            this.addFileBtn.Size = new System.Drawing.Size(156, 32);
+            this.addFileBtn.Size = new System.Drawing.Size(156, 46);
             this.addFileBtn.TabIndex = 14;
             this.addFileBtn.Text = "Add file";
             this.addFileBtn.UseVisualStyleBackColor = true;
             this.addFileBtn.Click += new System.EventHandler(this.addFileBtn_Click);
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "available_balance",
-            "final_opening_balance",
-            "transactions",
-            "transaction_reference"});
-            this.comboBox1.Location = new System.Drawing.Point(202, 71);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(155, 24);
-            this.comboBox1.TabIndex = 13;
-            // 
-            // keyword
-            // 
-            this.keyword.AutoSize = true;
-            this.keyword.Location = new System.Drawing.Point(251, 52);
-            this.keyword.Name = "keyword";
-            this.keyword.Size = new System.Drawing.Size(62, 16);
-            this.keyword.TabIndex = 12;
-            this.keyword.Text = "Keyword:";
-            // 
-            // searchBtn
-            // 
-            this.searchBtn.Location = new System.Drawing.Point(238, 149);
-            this.searchBtn.Name = "searchBtn";
-            this.searchBtn.Size = new System.Drawing.Size(75, 23);
-            this.searchBtn.TabIndex = 11;
-            this.searchBtn.Text = "Search";
-            this.searchBtn.UseVisualStyleBackColor = true;
-            // 
-            // showBalance
-            // 
-            this.showBalance.Location = new System.Drawing.Point(13, 140);
-            this.showBalance.Name = "showBalance";
-            this.showBalance.Size = new System.Drawing.Size(156, 32);
-            this.showBalance.TabIndex = 10;
-            this.showBalance.Text = "Show Balance";
-            this.showBalance.UseVisualStyleBackColor = true;
             // 
             // richTextBox1
             // 
@@ -219,15 +187,6 @@
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
-            // showTransac
-            // 
-            this.showTransac.Location = new System.Drawing.Point(13, 66);
-            this.showTransac.Name = "showTransac";
-            this.showTransac.Size = new System.Drawing.Size(156, 32);
-            this.showTransac.TabIndex = 8;
-            this.showTransac.Text = "Show Transactions";
-            this.showTransac.UseVisualStyleBackColor = true;
-            // 
             // registerPage
             // 
             this.registerPage.Controls.Add(this.label6);
@@ -236,7 +195,6 @@
             this.registerPage.Controls.Add(this.label3);
             this.registerPage.Controls.Add(this.label2);
             this.registerPage.Controls.Add(this.label1);
-            this.registerPage.Controls.Add(this.registerFeedbackBox);
             this.registerPage.Controls.Add(this.button2);
             this.registerPage.Controls.Add(this.userTypeBox);
             this.registerPage.Controls.Add(this.passwordBox);
@@ -255,7 +213,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(113, 223);
+            this.label6.Location = new System.Drawing.Point(225, 249);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(65, 16);
             this.label6.TabIndex = 13;
@@ -264,7 +222,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(113, 182);
+            this.label5.Location = new System.Drawing.Point(225, 208);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(67, 16);
             this.label5.TabIndex = 12;
@@ -273,7 +231,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(113, 142);
+            this.label4.Location = new System.Drawing.Point(225, 168);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 16);
             this.label4.TabIndex = 11;
@@ -282,7 +240,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(114, 100);
+            this.label3.Location = new System.Drawing.Point(226, 126);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 16);
             this.label3.TabIndex = 10;
@@ -291,7 +249,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(113, 59);
+            this.label2.Location = new System.Drawing.Point(225, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 16);
             this.label2.TabIndex = 9;
@@ -300,25 +258,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(113, 19);
+            this.label1.Location = new System.Drawing.Point(225, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 16);
             this.label1.TabIndex = 8;
             this.label1.Text = "Username";
             // 
-            // registerFeedbackBox
-            // 
-            this.registerFeedbackBox.Location = new System.Drawing.Point(563, 19);
-            this.registerFeedbackBox.Name = "registerFeedbackBox";
-            this.registerFeedbackBox.Size = new System.Drawing.Size(179, 226);
-            this.registerFeedbackBox.TabIndex = 7;
-            this.registerFeedbackBox.Text = "";
-            // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(7, 329);
+            this.button2.Location = new System.Drawing.Point(281, 306);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 65);
+            this.button2.Size = new System.Drawing.Size(100, 47);
             this.button2.TabIndex = 6;
             this.button2.Text = "REGISTER";
             this.button2.UseVisualStyleBackColor = true;
@@ -326,52 +276,51 @@
             // 
             // userTypeBox
             // 
-            this.userTypeBox.Location = new System.Drawing.Point(7, 223);
+            this.userTypeBox.Location = new System.Drawing.Point(325, 243);
             this.userTypeBox.Name = "userTypeBox";
-            this.userTypeBox.Size = new System.Drawing.Size(100, 22);
+            this.userTypeBox.Size = new System.Drawing.Size(124, 22);
             this.userTypeBox.TabIndex = 5;
             // 
             // passwordBox
             // 
-            this.passwordBox.Location = new System.Drawing.Point(7, 182);
+            this.passwordBox.Location = new System.Drawing.Point(325, 202);
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.PasswordChar = '*';
-            this.passwordBox.Size = new System.Drawing.Size(100, 22);
+            this.passwordBox.Size = new System.Drawing.Size(124, 22);
             this.passwordBox.TabIndex = 4;
             // 
             // emailBox
             // 
-            this.emailBox.Location = new System.Drawing.Point(7, 142);
+            this.emailBox.Location = new System.Drawing.Point(325, 162);
             this.emailBox.Name = "emailBox";
-            this.emailBox.Size = new System.Drawing.Size(100, 22);
+            this.emailBox.Size = new System.Drawing.Size(124, 22);
             this.emailBox.TabIndex = 3;
             // 
             // lastNameBox
             // 
-            this.lastNameBox.Location = new System.Drawing.Point(7, 100);
+            this.lastNameBox.Location = new System.Drawing.Point(325, 120);
             this.lastNameBox.Name = "lastNameBox";
-            this.lastNameBox.Size = new System.Drawing.Size(100, 22);
+            this.lastNameBox.Size = new System.Drawing.Size(124, 22);
             this.lastNameBox.TabIndex = 2;
             // 
             // firstNameBox
             // 
-            this.firstNameBox.Location = new System.Drawing.Point(7, 59);
+            this.firstNameBox.Location = new System.Drawing.Point(325, 79);
             this.firstNameBox.Name = "firstNameBox";
-            this.firstNameBox.Size = new System.Drawing.Size(100, 22);
+            this.firstNameBox.Size = new System.Drawing.Size(124, 22);
             this.firstNameBox.TabIndex = 1;
             // 
             // usernameBox
             // 
-            this.usernameBox.Location = new System.Drawing.Point(7, 19);
+            this.usernameBox.Location = new System.Drawing.Point(325, 39);
             this.usernameBox.Name = "usernameBox";
-            this.usernameBox.Size = new System.Drawing.Size(100, 22);
+            this.usernameBox.Size = new System.Drawing.Size(124, 22);
             this.usernameBox.TabIndex = 0;
             // 
             // loginPage
             // 
             this.loginPage.Controls.Add(this.label8);
             this.loginPage.Controls.Add(this.label7);
-            this.loginPage.Controls.Add(this.loginFeedbackBox);
             this.loginPage.Controls.Add(this.button3);
             this.loginPage.Controls.Add(this.loginPasswordBox);
             this.loginPage.Controls.Add(this.loginUsernameBox);
@@ -385,7 +334,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(132, 73);
+            this.label8.Location = new System.Drawing.Point(451, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(67, 16);
             this.label8.TabIndex = 13;
@@ -394,25 +343,17 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(132, 25);
+            this.label7.Location = new System.Drawing.Point(248, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(70, 16);
             this.label7.TabIndex = 9;
             this.label7.Text = "Username";
             // 
-            // loginFeedbackBox
-            // 
-            this.loginFeedbackBox.Location = new System.Drawing.Point(602, 25);
-            this.loginFeedbackBox.Name = "loginFeedbackBox";
-            this.loginFeedbackBox.Size = new System.Drawing.Size(156, 169);
-            this.loginFeedbackBox.TabIndex = 3;
-            this.loginFeedbackBox.Text = "";
-            // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(17, 311);
+            this.button3.Location = new System.Drawing.Point(328, 215);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 76);
+            this.button3.Size = new System.Drawing.Size(100, 53);
             this.button3.TabIndex = 2;
             this.button3.Text = "LOGIN";
             this.button3.UseVisualStyleBackColor = true;
@@ -420,17 +361,17 @@
             // 
             // loginPasswordBox
             // 
-            this.loginPasswordBox.Location = new System.Drawing.Point(17, 73);
+            this.loginPasswordBox.Location = new System.Drawing.Point(418, 148);
             this.loginPasswordBox.Name = "loginPasswordBox";
             this.loginPasswordBox.PasswordChar = '*';
-            this.loginPasswordBox.Size = new System.Drawing.Size(100, 22);
+            this.loginPasswordBox.Size = new System.Drawing.Size(130, 22);
             this.loginPasswordBox.TabIndex = 1;
             // 
             // loginUsernameBox
             // 
-            this.loginUsernameBox.Location = new System.Drawing.Point(17, 25);
+            this.loginUsernameBox.Location = new System.Drawing.Point(219, 148);
             this.loginUsernameBox.Name = "loginUsernameBox";
-            this.loginUsernameBox.Size = new System.Drawing.Size(100, 22);
+            this.loginUsernameBox.Size = new System.Drawing.Size(130, 22);
             this.loginUsernameBox.TabIndex = 0;
             // 
             // editTransaction
@@ -692,56 +633,13 @@
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
             // 
-            // searchTableCBox
+            // richTextBox3
             // 
-            this.searchTableCBox.FormattingEnabled = true;
-            this.searchTableCBox.Location = new System.Drawing.Point(72, 105);
-            this.searchTableCBox.Name = "searchTableCBox";
-            this.searchTableCBox.Size = new System.Drawing.Size(135, 24);
-            this.searchTableCBox.TabIndex = 0;
-            this.searchTableCBox.SelectionChangeCommitted += new System.EventHandler(this.searchTableCBox_SelectionChangeCommitted);
-            // 
-            // searchColumnCBox
-            // 
-            this.searchColumnCBox.FormattingEnabled = true;
-            this.searchColumnCBox.Location = new System.Drawing.Point(243, 105);
-            this.searchColumnCBox.Name = "searchColumnCBox";
-            this.searchColumnCBox.Size = new System.Drawing.Size(183, 24);
-            this.searchColumnCBox.TabIndex = 1;
-            // 
-            // keywordSeach
-            // 
-            this.keywordSeach.Location = new System.Drawing.Point(474, 105);
-            this.keywordSeach.Name = "keywordSeach";
-            this.keywordSeach.Size = new System.Drawing.Size(135, 22);
-            this.keywordSeach.TabIndex = 2;
-            // 
-            // seachTableLbl
-            // 
-            this.seachTableLbl.AutoSize = true;
-            this.seachTableLbl.Location = new System.Drawing.Point(88, 86);
-            this.seachTableLbl.Name = "seachTableLbl";
-            this.seachTableLbl.Size = new System.Drawing.Size(101, 16);
-            this.seachTableLbl.TabIndex = 3;
-            this.seachTableLbl.Text = "Table to search";
-            // 
-            // searchColumnLbl
-            // 
-            this.searchColumnLbl.AutoSize = true;
-            this.searchColumnLbl.Location = new System.Drawing.Point(277, 84);
-            this.searchColumnLbl.Name = "searchColumnLbl";
-            this.searchColumnLbl.Size = new System.Drawing.Size(110, 16);
-            this.searchColumnLbl.TabIndex = 4;
-            this.searchColumnLbl.Text = "Column to search";
-            // 
-            // searchKeywordLbl
-            // 
-            this.searchKeywordLbl.AutoSize = true;
-            this.searchKeywordLbl.Location = new System.Drawing.Point(474, 84);
-            this.searchKeywordLbl.Name = "searchKeywordLbl";
-            this.searchKeywordLbl.Size = new System.Drawing.Size(135, 16);
-            this.searchKeywordLbl.TabIndex = 5;
-            this.searchKeywordLbl.Text = "Keyword to search for";
+            this.richTextBox3.Location = new System.Drawing.Point(105, 269);
+            this.richTextBox3.Name = "richTextBox3";
+            this.richTextBox3.Size = new System.Drawing.Size(613, 96);
+            this.richTextBox3.TabIndex = 7;
+            this.richTextBox3.Text = "";
             // 
             // searchKeywordBtn
             // 
@@ -753,23 +651,123 @@
             this.searchKeywordBtn.UseVisualStyleBackColor = true;
             this.searchKeywordBtn.Click += new System.EventHandler(this.searchKeywordBtn_Click);
             // 
-            // richTextBox3
+            // searchKeywordLbl
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(105, 269);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(613, 96);
-            this.richTextBox3.TabIndex = 7;
-            this.richTextBox3.Text = "";
+            this.searchKeywordLbl.AutoSize = true;
+            this.searchKeywordLbl.Location = new System.Drawing.Point(474, 84);
+            this.searchKeywordLbl.Name = "searchKeywordLbl";
+            this.searchKeywordLbl.Size = new System.Drawing.Size(135, 16);
+            this.searchKeywordLbl.TabIndex = 5;
+            this.searchKeywordLbl.Text = "Keyword to search for";
             // 
-            // searchKWordBtn
+            // searchColumnLbl
             // 
-            this.searchKWordBtn.Location = new System.Drawing.Point(201, 345);
-            this.searchKWordBtn.Name = "searchKWordBtn";
-            this.searchKWordBtn.Size = new System.Drawing.Size(156, 32);
-            this.searchKWordBtn.TabIndex = 17;
-            this.searchKWordBtn.Text = "Search keyword";
-            this.searchKWordBtn.UseVisualStyleBackColor = true;
-            this.searchKWordBtn.Click += new System.EventHandler(this.searchKWordBtn_Click);
+            this.searchColumnLbl.AutoSize = true;
+            this.searchColumnLbl.Location = new System.Drawing.Point(277, 84);
+            this.searchColumnLbl.Name = "searchColumnLbl";
+            this.searchColumnLbl.Size = new System.Drawing.Size(110, 16);
+            this.searchColumnLbl.TabIndex = 4;
+            this.searchColumnLbl.Text = "Column to search";
+            // 
+            // seachTableLbl
+            // 
+            this.seachTableLbl.AutoSize = true;
+            this.seachTableLbl.Location = new System.Drawing.Point(88, 86);
+            this.seachTableLbl.Name = "seachTableLbl";
+            this.seachTableLbl.Size = new System.Drawing.Size(101, 16);
+            this.seachTableLbl.TabIndex = 3;
+            this.seachTableLbl.Text = "Table to search";
+            // 
+            // keywordSeach
+            // 
+            this.keywordSeach.Location = new System.Drawing.Point(474, 105);
+            this.keywordSeach.Name = "keywordSeach";
+            this.keywordSeach.Size = new System.Drawing.Size(135, 22);
+            this.keywordSeach.TabIndex = 2;
+            // 
+            // searchColumnCBox
+            // 
+            this.searchColumnCBox.FormattingEnabled = true;
+            this.searchColumnCBox.Location = new System.Drawing.Point(243, 105);
+            this.searchColumnCBox.Name = "searchColumnCBox";
+            this.searchColumnCBox.Size = new System.Drawing.Size(183, 24);
+            this.searchColumnCBox.TabIndex = 1;
+            // 
+            // searchTableCBox
+            // 
+            this.searchTableCBox.FormattingEnabled = true;
+            this.searchTableCBox.Location = new System.Drawing.Point(72, 105);
+            this.searchTableCBox.Name = "searchTableCBox";
+            this.searchTableCBox.Size = new System.Drawing.Size(135, 24);
+            this.searchTableCBox.TabIndex = 0;
+            this.searchTableCBox.SelectionChangeCommitted += new System.EventHandler(this.searchTableCBox_SelectionChangeCommitted);
+            // 
+            // addMember
+            // 
+            this.addMember.Controls.Add(this.addMemberBtn);
+            this.addMember.Controls.Add(this.memberEmail);
+            this.addMember.Controls.Add(this.memberEmailBox);
+            this.addMember.Controls.Add(this.memberNameBox);
+            this.addMember.Controls.Add(this.memberNameLbl);
+            this.addMember.Location = new System.Drawing.Point(4, 25);
+            this.addMember.Name = "addMember";
+            this.addMember.Padding = new System.Windows.Forms.Padding(3);
+            this.addMember.Size = new System.Drawing.Size(793, 418);
+            this.addMember.TabIndex = 7;
+            this.addMember.Text = "Add Member ";
+            this.addMember.UseVisualStyleBackColor = true;
+            // 
+            // addMemberBtn
+            // 
+            this.addMemberBtn.Location = new System.Drawing.Point(117, 252);
+            this.addMemberBtn.Name = "addMemberBtn";
+            this.addMemberBtn.Size = new System.Drawing.Size(112, 37);
+            this.addMemberBtn.TabIndex = 4;
+            this.addMemberBtn.Text = "Add member";
+            this.addMemberBtn.UseVisualStyleBackColor = true;
+            this.addMemberBtn.Click += new System.EventHandler(this.addMemberBtn_Click);
+            // 
+            // memberEmail
+            // 
+            this.memberEmail.AutoSize = true;
+            this.memberEmail.Location = new System.Drawing.Point(155, 177);
+            this.memberEmail.Name = "memberEmail";
+            this.memberEmail.Size = new System.Drawing.Size(45, 16);
+            this.memberEmail.TabIndex = 3;
+            this.memberEmail.Text = "E-mail";
+            // 
+            // memberEmailBox
+            // 
+            this.memberEmailBox.Location = new System.Drawing.Point(82, 196);
+            this.memberEmailBox.Name = "memberEmailBox";
+            this.memberEmailBox.Size = new System.Drawing.Size(194, 22);
+            this.memberEmailBox.TabIndex = 2;
+            // 
+            // memberNameBox
+            // 
+            this.memberNameBox.Location = new System.Drawing.Point(82, 108);
+            this.memberNameBox.Name = "memberNameBox";
+            this.memberNameBox.Size = new System.Drawing.Size(194, 22);
+            this.memberNameBox.TabIndex = 1;
+            // 
+            // memberNameLbl
+            // 
+            this.memberNameLbl.AutoSize = true;
+            this.memberNameLbl.Location = new System.Drawing.Point(145, 89);
+            this.memberNameLbl.Name = "memberNameLbl";
+            this.memberNameLbl.Size = new System.Drawing.Size(68, 16);
+            this.memberNameLbl.TabIndex = 0;
+            this.memberNameLbl.Text = "Full Name";
+            // 
+            // addMemberBtnMain
+            // 
+            this.addMemberBtnMain.Location = new System.Drawing.Point(17, 93);
+            this.addMemberBtnMain.Name = "addMemberBtnMain";
+            this.addMemberBtnMain.Size = new System.Drawing.Size(156, 32);
+            this.addMemberBtnMain.TabIndex = 18;
+            this.addMemberBtnMain.Text = "Add member";
+            this.addMemberBtnMain.UseVisualStyleBackColor = true;
+            this.addMemberBtnMain.Click += new System.EventHandler(this.addMemberBtnMain_Click);
             // 
             // Form1
             // 
@@ -781,7 +779,6 @@
             this.Text = "Form1";
             this.navigation.ResumeLayout(false);
             this.mainPage.ResumeLayout(false);
-            this.mainPage.PerformLayout();
             this.registerPage.ResumeLayout(false);
             this.registerPage.PerformLayout();
             this.loginPage.ResumeLayout(false);
@@ -794,6 +791,8 @@
             this.editDescription.PerformLayout();
             this.searchKeyword.ResumeLayout(false);
             this.searchKeyword.PerformLayout();
+            this.addMember.ResumeLayout(false);
+            this.addMember.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -802,12 +801,7 @@
 
         private System.Windows.Forms.TabControl navigation;
         private System.Windows.Forms.TabPage mainPage;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label keyword;
-        private System.Windows.Forms.Button searchBtn;
-        private System.Windows.Forms.Button showBalance;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button showTransac;
         private System.Windows.Forms.TabPage registerPage;
         private System.Windows.Forms.TabPage loginPage;
         private System.Windows.Forms.Label label6;
@@ -816,7 +810,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox registerFeedbackBox;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox userTypeBox;
         private System.Windows.Forms.TextBox passwordBox;
@@ -826,7 +819,6 @@
         private System.Windows.Forms.TextBox usernameBox;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.RichTextBox loginFeedbackBox;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.TextBox loginPasswordBox;
         private System.Windows.Forms.TextBox loginUsernameBox;
@@ -868,6 +860,13 @@
         private System.Windows.Forms.ComboBox searchColumnCBox;
         private System.Windows.Forms.ComboBox searchTableCBox;
         private System.Windows.Forms.Button searchKWordBtn;
+        private System.Windows.Forms.TabPage addMember;
+        private System.Windows.Forms.Button addMemberBtn;
+        private System.Windows.Forms.Label memberEmail;
+        private System.Windows.Forms.TextBox memberEmailBox;
+        private System.Windows.Forms.TextBox memberNameBox;
+        private System.Windows.Forms.Label memberNameLbl;
+        private System.Windows.Forms.Button addMemberBtnMain;
     }
 }
 

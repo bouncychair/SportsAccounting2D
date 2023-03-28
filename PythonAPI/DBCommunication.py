@@ -68,10 +68,10 @@ def update_transaction_description():
 
 @app.route('/api/getTransactionDescription/<bank_ref>', methods=["GET"])
 def get_transaction_description(bank_ref):
-    mycursor.execute("SELECT d.customDetails FROM transaction_details d JOIN transaction t ON d.id = "
-                     "t.transactionDetailsId WHERE t.bankReference = %s" % bank_ref)
-    myresult = mycursor.fetchall()
-    return myresult
+    mycursor.callproc('SowCustomDetailsBasedOnBankReference', [bank_ref])
+    for result in mycursor.stored_results():
+        myresult = result.fetchall()
+        return myresult
 
 
 @app.route('/api/updateCategory', methods=["POST"])
@@ -112,23 +112,38 @@ def connect_to_app():
     username = request.form['username']
     password = request.form['password']
     if action_type == "register":
-        if check_if_exist(username) is not False:
-            return "Username is taken"
         first_name = request.form['firstName']
         last_name = request.form['lastName']
         date_of_join = datetime.now().strftime("%Y-%m-%d")
         email = request.form['email']
         role = request.form['role']
-        sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        val = (username, first_name, last_name, password, email, date_of_join, role)
-        mycursor.execute(sql, val)
-        mydb.commit()
-        return "User added"
+        try:
+            sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+            val = (username, first_name, last_name, password, email, date_of_join, role)
+            mycursor.execute(sql, val)
+            mydb.commit()
+            return "User added"
+        except mysql.connector.Error as err:
+            return err.msg
     elif action_type == "login":
         username = request.form['username']
         if check_if_exist(username) == password:
             return "Success"
         return "Wrong password"
+
+
+@app.route('/api/addMember', methods=["POST"])
+def add_member():
+    name = request.form['name']
+    email = request.form['email']
+    try:
+        insert_member = "INSERT INTO member (name, email) VALUES (%s, %s)"
+        val = (name, email)
+        mycursor.execute(insert_member, val)
+        mydb.commit()
+        return "Member added"
+    except mysql.connector.Error as err:
+        return "Member already exists"
 
 
 def check_if_exist(username):
@@ -212,6 +227,13 @@ def make_transactions_summary():
     # database = json.dumps(database, indent=4)
     # with open(f"C:/MainStuff/DatabaseTables/database.json", "w") as outfile:
     #     outfile.write(database)
+
+
+@app.route('/api/getCustomDetails', methods=["GET"])
+def get_custom_details():
+    mycursor.execute("SET @p0 = '00000000001005'; CALL SowCustomDetailsBasedOnBankReference(@p0);", multi=True)
+    myresult = mycursor.fetchall()
+    return myresult
 
 
 def is_duplicate(file):

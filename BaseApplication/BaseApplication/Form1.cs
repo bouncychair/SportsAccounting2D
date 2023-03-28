@@ -2,23 +2,20 @@
 using Microsoft.AspNetCore.Identity;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
+using System.ComponentModel.DataAnnotations;
 
 namespace BaseApplication
 {
@@ -31,42 +28,21 @@ namespace BaseApplication
             navigation.TabPages.Remove(editDescription);
             navigation.TabPages.Remove(modules);
             navigation.TabPages.Remove(searchKeyword);
+            navigation.TabPages.Remove(addMember);
 
         }
 
-        List<Dictionary<TextBox, TextBox>> assignCategoryHelper = new();
+        string userRole = "";
+        List<Dictionary<TextBox, ComboBox>> assignCategoryHelper = new();
         private List<User> users = new();
         JObject modulesInformation = new();
-
-        async Task GetRequest(string request)
-        {
-            string url;
-            if (request == "balance")
-            {
-                url = "http://127.0.0.1:122/api/getBalance/63eccee5211dcc98b44e182a";
-            }
-            else if (request == "")
-            {
-                url = "http://127.0.0.1:122/api/getTransactions";
-            }
-            else
-            {
-                url = "http://127.0.0.1:122/api/searchKeyword?transaction_id=63eccee5211dcc98b44e182a&element=" + request;
-            }
-            using var client = new HttpClient();
-
-            var content = await client.GetStringAsync(url);
-
-            richTextBox1.Text = content;
-
-        }
 
         string UploadToAPI(string fileToUpload)
         {
             string url = "http://127.0.0.1:122/api/uploadFile";
             using var client = new WebClient();
-            byte[] result = client.UploadFile(url, fileToUpload);
-            return Encoding.Default.GetString(result);
+            var response = client.UploadFile(url, fileToUpload);
+            return Encoding.Default.GetString(response);
             
         }
 
@@ -83,8 +59,7 @@ namespace BaseApplication
             using var client = new WebClient();
             userInfo.Add("type", type);
             var response = client.UploadValues(url, userInfo);
-            MessageBox.Show(Encoding.ASCII.GetString(response));
-            
+            MessageBox.Show(Encoding.Default.GetString(response));
         }
         void UploadToMongoDB(string fileToUpload)
         {
@@ -99,50 +74,16 @@ namespace BaseApplication
         }
         private void Login(String username, String password)
         {
-            loginFeedbackBox.Text = "";
             NameValueCollection userInfo = new()
             {
                 {"username", loginUsernameBox.Text},
                 {"password", new PasswordHasher<object?>().HashPassword(null, loginPasswordBox.Text)}
             };
             ConnectToApp(userInfo, "login");
-            foreach (var user in users)
-            {
-                if (username.Equals(user.getUsername()))
-                {
-                    loginFeedbackBox.Text += "Found same user\n";
-                    if (user.verifyPassword(password))
-                    {
-                    }
-                    else { loginFeedbackBox.Text += "Password is wrong, not logged in\n"; }
-
-                }
-                else
-                {
-                    loginFeedbackBox.Text += "No username found\n";
-                }
-            }
-            loginUsernameBox.Text = "";
-            loginPasswordBox.Text = "";
         }
-        private async void searchBtn_Click(object sender, EventArgs e)
-        {
-            string request = comboBox1.SelectedItem.ToString();
-            await GetRequest(request);
-        }
-
-        private async void showTransac_Click(object sender, EventArgs e)
-        {
-            await GetRequest("");
-        }
-
-        private async void showBalance_Click(object sender, EventArgs e)
-        {
-            await GetRequest("balance");
-        }
+        
         private bool ValidateRegister()
         {
-            registerFeedbackBox.Text = "";
             //username
             if(!string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length <= 50)
             {
@@ -159,16 +100,34 @@ namespace BaseApplication
                             {
                                 return true;
                             }
-                            else { registerFeedbackBox.Text += "Password cannot be empty and must be at least 7 characters!\n"; return false; }
-
+                            else 
+                            {
+                                MessageBox.Show("Password cannot be empty and must be at least 7 characters!"); 
+                                return false; 
+                            }
                         }
-                        else { registerFeedbackBox.Text += "Email must not be empty and must contain a @!\n"; return false; }
+                        else {
+                            MessageBox.Show("Email must not be empty and must contain a @!"); 
+                            return false; 
+                        }
                     }
-                    else { registerFeedbackBox.Text += "Last name must not be empty!\n"; return false; }
+                    else 
+                    {
+                        MessageBox.Show("Last name must not be empty!"); 
+                        return false; 
+                    }
                 }
-                else { registerFeedbackBox.Text += "First name must not be empty!\n"; return false; }
+                else 
+                {
+                    MessageBox.Show("First name must not be empty!"); 
+                    return false; 
+                }
             }
-            else { registerFeedbackBox.Text += "Username must not be empty!\n"; return false; }
+            else 
+            {
+                MessageBox.Show("Username must not be empty!");
+                return false; 
+            }
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -188,17 +147,12 @@ namespace BaseApplication
                 };
                 ConnectToApp(userInfo, "register");
             }
-            else
-            {
-                registerFeedbackBox.Text += "Register failed.\n";
-            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            this.Login(loginUsernameBox.Text, loginPasswordBox.Text);
+            Login(loginUsernameBox.Text, loginPasswordBox.Text);
         }
-
 
         private async Task<string[]> GetTransactions()
         {
@@ -225,28 +179,32 @@ namespace BaseApplication
                 TextBox bRef = new()
                 {
                     Text = TrimString(bankReference),
-                    Location = new Point(bRefX, pointY)
-                };
+                    Location = new Point(bRefX, pointY),
+                    ReadOnly = true
+            };
                 editTransaction.Controls.Add(bRef);
 
-                TextBox category = new()
+                ComboBox category = new()
                 {
-                    Location = new Point(categoryX, pointY)
-                };
+                    Location = new Point(categoryX, pointY),
+                    DropDownStyle = ComboBoxStyle.DropDownList
+            };
+                category.Items.Add("bar");
+                category.Items.Add("membership fee");
+                category.Items.Add("rental");
+                category.SelectedIndex = 0;
                 editTransaction.Controls.Add(category);
                 pointY += 25;
-
-                assignCategoryHelper.Add(new Dictionary<TextBox, TextBox> { { bRef, category } });
+                
+                assignCategoryHelper.Add(new Dictionary<TextBox, ComboBox> { { bRef, category } });
             }
-
-
         }
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            foreach (Dictionary<TextBox, TextBox> dict in assignCategoryHelper)
+            foreach (Dictionary<TextBox, ComboBox> dict in assignCategoryHelper)
             {
-                foreach (KeyValuePair<TextBox, TextBox> pair in dict)
+                foreach (KeyValuePair<TextBox, ComboBox> pair in dict)
                 {
                     NameValueCollection updatedCategories = new();
                     string bankReference = pair.Key.Text;
@@ -272,7 +230,6 @@ namespace BaseApplication
                 if (response.Equals("File uploaded"))
                 {
                     MessageBox.Show("File uploaded. Please give each transaction a category");
-                    //UploadToMongoDB(file);
                     navigation.TabPages.Add(editTransaction);
                     navigation.SelectTab(editTransaction);
                     EditTabs(true);
@@ -445,6 +402,40 @@ namespace BaseApplication
             searchTableCBox.DropDownStyle = ComboBoxStyle.DropDownList;
             searchColumnCBox.DropDownStyle = ComboBoxStyle.DropDownList;
             searchTableCBox.SelectedIndex = 0;
+        }
+
+        private void addMemberBtn_Click(object sender, EventArgs e)
+        {
+            using var client = new WebClient();
+            string url = "http://127.0.0.1:122/api/addMember";
+            var emailValid = new EmailAddressAttribute();
+            if (emailValid.IsValid(memberEmailBox.Text))
+            {
+                string email = memberEmailBox.Text;
+                string name = memberNameBox.Text;
+                NameValueCollection memberInfo = new()
+                {
+                    {"name", name},
+                    {"email", email}
+                };
+                string response = Encoding.Default.GetString(client.UploadValues(url, memberInfo));
+                MessageBox.Show(response);
+                if (response.Equals("Member added"))
+                {
+                    navigation.SelectTab(mainPage);
+                    navigation.TabPages.Remove(addMember);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Invalid email address");
+            }
+        }
+
+        private void addMemberBtnMain_Click(object sender, EventArgs e)
+        {
+            navigation.TabPages.Add(addMember);
+            navigation.SelectTab(addMember);
         }
     }
 }
