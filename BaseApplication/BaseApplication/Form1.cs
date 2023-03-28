@@ -84,26 +84,6 @@ namespace BaseApplication
             var document = new BsonDocument { { "file", content } };
             collection.InsertOneAsync(document);
         }
-        private void RegisterAccount(User user)
-        {
-            foreach (var registeredUser in this.users)
-            {
-                if (registeredUser.Equals(user))
-                {
-                    registerFeedbackBox.Text = "Account already exists";
-                    return;
-                }
-            }
-            this.users.Add(user);
-            //add user to database
-            registerFeedbackBox.Text = "Account registered";
-            usernameBox.Text = "";
-            firstNameBox.Text = "";
-            lastNameBox.Text = "";
-            emailBox.Text = "";
-            passwordBox.Text = "";
-            usernameBox.Text = "";
-        }
         private void Login(String username, String password)
         {
             loginFeedbackBox.Text = "";
@@ -142,11 +122,77 @@ namespace BaseApplication
         {
             await GetRequest("balance");
         }
+        private bool ValidateRegister()
+        {
+            registerFeedbackBox.Text = "";
+            //username
+            if(string.IsNullOrEmpty(usernameBox.Text) && usernameBox.Text.Length <= 50)
+            {
+                //firstName
+                if(string.IsNullOrEmpty(firstNameBox.Text) && firstNameBox.Text.Length <= 20)
+                {
+                    //lastName
+                    if(string.IsNullOrEmpty(lastNameBox.Text) && lastNameBox.Text.Length <= 20)
+                    {
+                        //email
+                        if(string.IsNullOrEmpty(emailBox.Text) && emailBox.Text.Length <= 320 && emailBox.Text.Contains("@"))
+                        {
+                            if(string.IsNullOrEmpty(passwordBox.Text) && passwordBox.Text.Length <= 255 && passwordBox.Text.Length >= 7)
+                            {
+                                return true;
+                            }
+                            else { registerFeedbackBox.Text += "Password cannot be empty and must be at least 7 characters!\n"; return false; }
 
+                        }
+                        else { registerFeedbackBox.Text += "Email must not be empty and must contain a @!\n"; return false; }
+                    }
+                    else { registerFeedbackBox.Text += "Last name must not be empty!\n"; return false; }
+                }
+                else { registerFeedbackBox.Text += "First name must not be empty!\n"; return false; }
+            }
+            else { registerFeedbackBox.Text += "Username must not be empty!\n"; return false; }
+        }
         private void button2_Click(object sender, EventArgs e)
         {
-            this.RegisterAccount(new User(usernameBox.Text, firstNameBox.Text, lastNameBox.Text, emailBox.Text,
-                passwordBox.Text, userTypeBox.Text));
+            if (ValidateRegister())
+            {
+                var dateOfJoin = DateTime.Now.ToShortDateString();
+                NameValueCollection userInfo = new NameValueCollection();
+                userInfo.Add("username", usernameBox.Text);
+                userInfo.Add("firstName", firstNameBox.Text);
+                userInfo.Add("lastName", lastNameBox.Text);
+                userInfo.Add("email", emailBox.Text);
+                userInfo.Add("password", passwordBox.Text);
+                userInfo.Add("dateOfJoin", dateOfJoin);
+                UpdateCategories(userInfo);
+
+            }
+            else
+            {
+                registerFeedbackBox.Text += "Register failed.\n";
+            }
+            foreach (Dictionary<TextBox, TextBox> dict in assignCategoryHelper)
+            {
+                foreach (KeyValuePair<TextBox, TextBox> pair in dict)
+                {
+                    NameValueCollection updatedCategories = new();
+                    string bankReference = pair.Key.Text;
+                    string category = pair.Value.Text;
+                    updatedCategories.Add("bankReference", bankReference);
+                    updatedCategories.Add("category", category);
+                    UpdateCategories(updatedCategories);
+                    registerFeedbackBox.Text = "Account registered";
+                    usernameBox.Text = "";
+                    firstNameBox.Text = "";
+                    lastNameBox.Text = "";
+                    emailBox.Text = "";
+                    passwordBox.Text = "";
+                    usernameBox.Text = "";
+                }
+            }
+            EditTabs(false);
+            navigation.SelectTab(mainPage);
+            navigation.TabPages.Remove(editTransaction);
         }
 
         private void button3_Click(object sender, EventArgs e)
