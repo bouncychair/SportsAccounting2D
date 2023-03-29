@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace BaseApplication
 {
@@ -24,19 +25,22 @@ namespace BaseApplication
         public Form1()
         {
             InitializeComponent();            
+        }
+
+        string userRole = "";
+        List<Tuple<TextBox, ComboBox, ComboBox>> assignCategoryHelper = new();
+        private List<User> users = new();
+        JObject modulesInformation = new();
+        private void Form1_Load(object sender, EventArgs e)
+        {
             navigation.TabPages.Remove(editTransaction);
             navigation.TabPages.Remove(editDescription);
             navigation.TabPages.Remove(modules);
             navigation.TabPages.Remove(searchKeyword);
             navigation.TabPages.Remove(addMember);
-
+            UpdateBalance();
         }
-
-        string userRole = "";
-        List<Dictionary<TextBox, ComboBox>> assignCategoryHelper = new();
-        private List<User> users = new();
-        JObject modulesInformation = new();
-
+        
         string UploadToAPI(string fileToUpload)
         {
             string url = "http://127.0.0.1:122/api/uploadFile";
@@ -51,6 +55,7 @@ namespace BaseApplication
             string url = "http://127.0.0.1:122/api/updateCategory";
             using var client = new WebClient();
             client.UploadValues(url, categories);
+            assignCategoryHelper.Clear();
         }
 
         void ConnectToApp(NameValueCollection userInfo, string type)
@@ -60,24 +65,14 @@ namespace BaseApplication
             userInfo.Add("type", type);
             var response = client.UploadValues(url, userInfo);
             MessageBox.Show(Encoding.Default.GetString(response));
-        }
-        void UploadToMongoDB(string fileToUpload)
-        {
-            string connectionString = "mongodb+srv://bigUser:bigPassword@project.0tii4ke.mongodb.net/?retryWrites=true&w=majority";
-            MongoClient dbClient = new(connectionString);
-            var database = dbClient.GetDatabase("ProjTest");
-            var collection = database.GetCollection<BsonDocument>("MT940Raw");
-
-            string content = File.ReadAllText(fileToUpload);
-            var document = new BsonDocument { { "file", content } };
-            collection.InsertOneAsync(document);
-        }
+        }         
+        
         private void Login(String username, String password)
         {
             NameValueCollection userInfo = new()
             {
-                {"username", loginUsernameBox.Text},
-                {"password", new PasswordHasher<object?>().HashPassword(null, loginPasswordBox.Text)}
+                {"username", username},
+                {"password", new PasswordHasher<object?>().HashPassword(null, password)}
             };
             ConnectToApp(userInfo, "login");
         }
@@ -166,10 +161,11 @@ namespace BaseApplication
         
         private async Task GetTransactionAsync()
         {
-            assignCategoryHelper.Clear();
+            
 
             int bRefX = 30;
             int categoryX = 180;
+            int membersX = 330;
             int pointY = 40;
 
             string[] transactionList = await GetTransactions();
@@ -181,42 +177,65 @@ namespace BaseApplication
                     Text = TrimString(bankReference),
                     Location = new Point(bRefX, pointY),
                     ReadOnly = true
-            };
+                };
                 editTransaction.Controls.Add(bRef);
 
                 ComboBox category = new()
                 {
                     Location = new Point(categoryX, pointY),
                     DropDownStyle = ComboBoxStyle.DropDownList
-            };
+                };
                 category.Items.Add("bar");
                 category.Items.Add("membership fee");
                 category.Items.Add("rental");
                 category.SelectedIndex = 0;
                 editTransaction.Controls.Add(category);
+
+                ComboBox members = new()
+                {
+                    Location = new Point(membersX, pointY),
+                    DropDownStyle = ComboBoxStyle.DropDownList
+                };
+                members.Items.Add("not applicable");
+                foreach (string member in await GetMembers())
+                {
+                    members.Items.Add(TrimString(member));
+                }
+                members.SelectedIndex = 0;
+                editTransaction.Controls.Add(members);
                 pointY += 25;
-                
-                assignCategoryHelper.Add(new Dictionary<TextBox, ComboBox> { { bRef, category } });
+
+                assignCategoryHelper.Add(new Tuple<TextBox, ComboBox, ComboBox>(bRef, category, members));
             }
         }
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            foreach (Dictionary<TextBox, ComboBox> dict in assignCategoryHelper)
+            List<Tuple<TextBox, ComboBox, ComboBox>> tuples = assignCategoryHelper.ToList();
+            foreach (Tuple<TextBox, ComboBox, ComboBox> tuple in tuples)
             {
-                foreach (KeyValuePair<TextBox, ComboBox> pair in dict)
-                {
-                    NameValueCollection updatedCategories = new();
-                    string bankReference = pair.Key.Text;
-                    string category = pair.Value.Text;
-                    updatedCategories.Add("bankReference", bankReference);
-                    updatedCategories.Add("category", category);
-                    UpdateCategories(updatedCategories);
-                }
+                NameValueCollection updatedCategories = new();
+                string bankReference = tuple.Item1.Text;
+                string category = tuple.Item2.Text;
+                string member = tuple.Item3.Text;
+                updatedCategories.Add("bankReference", bankReference);
+                updatedCategories.Add("category", category);
+                updatedCategories.Add("member", member);
+                UpdateCategories(updatedCategories);
             }
             EditTabs(false);
             navigation.SelectTab(mainPage);
             navigation.TabPages.Remove(editTransaction);
+        }
+
+        private async Task<string[]> GetMembers()
+        {
+            string url = "http://127.0.0.1:122/api/getMembers";
+            using var client = new HttpClient();
+
+            string response = await client.GetStringAsync(url);
+
+            return SplitResponse(response);
         }
 
         private async void addFileBtn_Click(object sender, EventArgs e)
@@ -234,6 +253,7 @@ namespace BaseApplication
                     navigation.SelectTab(editTransaction);
                     EditTabs(true);
                     await GetTransactionAsync();
+                    UpdateBalance();
                 }
                 else if(response.Equals("Duplicate file"))
                 {
@@ -289,6 +309,7 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             await client.GetStringAsync(url);
+            MessageBox.Show("Summary generated");
         }
 
         private void modulesInfoBtn_Click(object sender, EventArgs e)
@@ -434,8 +455,45 @@ namespace BaseApplication
 
         private void addMemberBtnMain_Click(object sender, EventArgs e)
         {
-            navigation.TabPages.Add(addMember);
+            if (!navigation.TabPages.Contains(addMember))
+            {
+                navigation.TabPages.Add(addMember);
+                navigation.SelectTab(addMember);
+            }
             navigation.SelectTab(addMember);
+        }
+        private async Task<string> GetBalance()
+        {
+            string url = "http://127.0.0.1:122/api/getBalance";
+            using var client = new HttpClient();
+
+            return await client.GetStringAsync(url);
+
+        }
+
+        private async void UpdateBalance()
+        {
+            string balance = TrimString(await GetBalance());
+            if (balance == "No balance")
+            {
+                availableBalanceLbl.Visible = false;
+                generateSummaryBtn.Visible = false;
+            }
+            else
+            {
+                availableBalanceLbl.Visible = true;
+                availableBalanceLbl.Text = "Account Balance: " + balance + "EUR";
+                generateSummaryBtn.Visible = true;
+            }
+        }
+
+        private async void summaryBtn_Click(object sender, EventArgs e)
+        {
+            string url = "http://127.0.0.1:122/api/Summary";
+            using var client = new HttpClient();
+
+            await client.GetStringAsync(url);
+            MessageBox.Show("Summary generated");
         }
     }
 }

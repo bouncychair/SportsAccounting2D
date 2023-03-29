@@ -74,11 +74,25 @@ def get_transaction_description(bank_ref):
         return myresult
 
 
+@app.route('/api/getBalance', methods=["GET"])
+def get_balance():
+    mycursor.execute("SELECT amount FROM detailedinfo WHERE Id = (SELECT availableBalanceId FROM file ORDER BY id DESC LIMIT 1)")
+    myresult = mycursor.fetchall()
+    if len(myresult) == 0:
+        return "No balance"
+    return myresult
+
+
 @app.route('/api/updateCategory', methods=["POST"])
 def update_transaction_category():
     bank_reference = request.form['bankReference']
     category = request.form['category']
-
+    if category == "membership fee":
+        member = request.form['member']
+        make_connection = "INSERT INTO transaction_connect (memberId, bankReference) SELECT m.id, %s FROM member m WHERE m.name = %s "
+        val = (bank_reference, member)
+        mycursor.execute(make_connection, val)
+        mydb.commit()
     update_category = "UPDATE transaction SET categoryName = %s WHERE bankReference = %s"
     val = (category, bank_reference)
     mycursor.execute(update_category, val)
@@ -192,41 +206,74 @@ def make_modules_summary():
     return json_summary
 
 
-@app.route('/api/TransactionsSummary', methods=["GET"])
-def make_transactions_summary():
-    mycursor.execute("SHOW TABLES")
-    tables = mycursor.fetchall()
-    for table in tables:
-        table = table[0]
-        data_query = f"SELECT * FROM {table}"
-        mycursor.execute(data_query)
-        data = mycursor.fetchall()
-        columns_query = f"SHOW COLUMNS FROM {table}"
-        mycursor.execute(columns_query)
-        columns = mycursor.fetchall()
-        data = [dict(zip([column[0] for column in columns], row)) for row in data]
-        data = {table: data}
-        json_data = json.dumps(data, indent=4)
-        with open(f"C:/MainStuff/DatabaseTables/{table}.json", "w") as outfile:
-            outfile.write(json_data)
+@app.route('/api/getMembers', methods=["GET"])
+def get_members():
+    mycursor.execute("SELECT name FROM member")
+    myresult = mycursor.fetchall()
+    return myresult
+
+
+def get_transaction_details(details_id):
+    get_details = "SELECT transactionDetails,extraDetails,customDetails FROM transaction_details WHERE Id = %s" % details_id
+    mycursor.execute(get_details)
+    details = mycursor.fetchall()
+    t_details = []
+    for y in details:
+        t_details.append({"transactionDetails": y[0], "extraDetails": y[1], "customDetails": y[2]})
+    return t_details
+
+
+def get_file_info():
+    get_summary = "SELECT * FROM file"
+    mycursor.execute(get_summary)
+    summary = mycursor.fetchall()
+    f_summary = []
+    for y in summary:
+        f_summary.append({"transactionReference": y[0],
+                          "availableBalanceId": get_detailed_info(y[1]),
+                          "finalClosingBalanceId": get_detailed_info(y[2]),
+                          "finalOpeningBalanceId": get_detailed_info(y[3]),
+                          "forwardAvailableBalanceId": get_detailed_info(y[4]),
+                          "accountIdentification": y[5],
+                          "sequenceNumber": y[6]})
+    return f_summary
+
+
+def get_transaction_info():
+    get_transactions = "SELECT * FROM transaction"
+    mycursor.execute(get_transactions)
+    myresult = mycursor.fetchall()
+    transactions = []
+    for x in myresult:
+        transactions.append({"bankReference": x[0], "transactionReference": x[1], "category": x[2],
+                             "detailedInfo": get_detailed_info(x[3]), "entryDate": str(x[4]),
+                             "guessedEntryDate": str(x[5]), "id": x[6], "fundsCode": x[7],
+                             "transactionDetails": get_transaction_details(x[8])})
+    return transactions
+
+
+def get_detailed_info(info_id):
+    get_info = "SELECT amount,currency,date,status,type FROM detailedinfo WHERE Id = %s" % info_id
+    mycursor.execute(get_info)
+    info = mycursor.fetchall()
+    d_info = []
+    for y in info:
+        d_info.append({"amount": y[0], "currency": y[1], "date": str(y[2]), "status": y[3], "type": y[4]})
+    return d_info
+
+
+@app.route('/api/Summary', methods=["GET"])
+def make_summary():
+    summary = {"file": get_file_info(), "transactions": get_transaction_info()}
+    # convert dict to json
+    json_summary = json.dumps(summary, indent=4)
+    # convert dict to xml and make it look nice
+    xml_summary = parseString(dicttoxml2.dicttoxml(summary)).toprettyxml(indent="\t", encoding="utf-8")
+    with open("C:/MainStuff/DatabaseTables/summary.json", "w") as outfile:
+        outfile.write(json_summary)
+    with open("C:/MainStuff/DatabaseTables/summary.xml", "wb") as outfile:
+        outfile.write(xml_summary)
     return "Summary created"
-    # mycursor.execute("SHOW TABLES")
-    # tables = mycursor.fetchall()
-    # database = {}
-    # for table in tables:
-    #     table = table[0]
-    #     data_query = f"SELECT * FROM {table}"
-    #     mycursor.execute(data_query)
-    #     data = mycursor.fetchall()
-    #     columns_query = f"SHOW COLUMNS FROM {table}"
-    #     mycursor.execute(columns_query)
-    #     columns = mycursor.fetchall()
-    #     data = [dict(zip([column[0] for column in columns], row)) for row in data]
-    #     data = {table: data}
-    #     database.update(data)
-    # database = json.dumps(database, indent=4)
-    # with open(f"C:/MainStuff/DatabaseTables/database.json", "w") as outfile:
-    #     outfile.write(database)
 
 
 @app.route('/api/getCustomDetails', methods=["GET"])
