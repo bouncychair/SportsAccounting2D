@@ -17,6 +17,7 @@ using System.Windows.Forms;
 using JsonConvert = Newtonsoft.Json.JsonConvert;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Cryptography;
 
 namespace BaseApplication
 {
@@ -72,7 +73,7 @@ namespace BaseApplication
             NameValueCollection userInfo = new()
             {
                 {"username", username},
-                {"password", new PasswordHasher<object?>().HashPassword(null, password)}
+                {"password", ComputeHash(password) },
             };
             ConnectToApp(userInfo, "login");
         }
@@ -128,15 +129,17 @@ namespace BaseApplication
         {
             if (ValidateRegister())
             {
+                
                 var hashedPassword = new PasswordHasher<object?>().HashPassword(null, passwordBox.Text);
                 var dateOfJoin = DateTime.Now.ToShortDateString();
                 NameValueCollection userInfo = new()
+      
                 {
                     { "username", usernameBox.Text },
                     { "firstName", firstNameBox.Text },
                     { "lastName", lastNameBox.Text },
                     { "email", emailBox.Text },
-                    { "password", hashedPassword },
+                    { "password", ComputeHash(passwordBox.Text) },
                     { "dateOfJoin", dateOfJoin },
                     { "role", userTypeBox.Text}
                 };
@@ -486,6 +489,16 @@ namespace BaseApplication
                 generateSummaryBtn.Visible = true;
             }
         }
+        static string ComputeHash(string data)
+        {
+            byte[] hashBytes;
+            using (var hmac = new HMACSHA256(Encoding.UTF8.GetBytes("iLoveBozosort")))
+            {
+                hashBytes = hmac.ComputeHash(Encoding.UTF8.GetBytes(data));
+            }
+            return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+        }
+
 
         private async void summaryBtn_Click(object sender, EventArgs e)
         {

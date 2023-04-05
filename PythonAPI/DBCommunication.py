@@ -166,7 +166,7 @@ def check_if_exist(username):
     if len(myresult) == 0:
         return False
     else:
-        return myresult[0][3]
+        return myresult[0][5]
 
 
 @app.route('/api/Columns/<table>', methods=["GET"])
