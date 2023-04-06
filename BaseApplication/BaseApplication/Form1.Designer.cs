@@ -37,6 +37,12 @@
             this.modulesInfoBtn = new System.Windows.Forms.Button();
             this.goToEditDescBtn = new System.Windows.Forms.Button();
             this.addFileBtn = new System.Windows.Forms.Button();
+            this.loginPage = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button3 = new System.Windows.Forms.Button();
+            this.loginPasswordBox = new System.Windows.Forms.TextBox();
+            this.loginUsernameBox = new System.Windows.Forms.TextBox();
             this.registerPage = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,13 +57,8 @@
             this.lastNameBox = new System.Windows.Forms.TextBox();
             this.firstNameBox = new System.Windows.Forms.TextBox();
             this.usernameBox = new System.Windows.Forms.TextBox();
-            this.loginPage = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
-            this.loginPasswordBox = new System.Windows.Forms.TextBox();
-            this.loginUsernameBox = new System.Windows.Forms.TextBox();
             this.editTransaction = new System.Windows.Forms.TabPage();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.memberTrans = new System.Windows.Forms.Label();
             this.categoryLbl = new System.Windows.Forms.Label();
             this.bankRefLbl = new System.Windows.Forms.Label();
@@ -100,8 +101,8 @@
             this.memberNameLbl = new System.Windows.Forms.Label();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
-            this.registerPage.SuspendLayout();
             this.loginPage.SuspendLayout();
+            this.registerPage.SuspendLayout();
             this.editTransaction.SuspendLayout();
             this.modules.SuspendLayout();
             this.editDescription.SuspendLayout();
@@ -112,8 +113,8 @@
             // navigation
             // 
             this.navigation.Controls.Add(this.mainPage);
-            this.navigation.Controls.Add(this.registerPage);
             this.navigation.Controls.Add(this.loginPage);
+            this.navigation.Controls.Add(this.registerPage);
             this.navigation.Controls.Add(this.editTransaction);
             this.navigation.Controls.Add(this.modules);
             this.navigation.Controls.Add(this.editDescription);
@@ -158,9 +159,9 @@
             this.availableBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.availableBalanceLbl.Location = new System.Drawing.Point(53, 14);
             this.availableBalanceLbl.Name = "availableBalanceLbl";
-            this.availableBalanceLbl.Size = new System.Drawing.Size(64, 25);
+            this.availableBalanceLbl.Size = new System.Drawing.Size(89, 25);
             this.availableBalanceLbl.TabIndex = 19;
-            this.availableBalanceLbl.Text = "label9";
+            this.availableBalanceLbl.Text = "Balance:";
             // 
             // addMemberBtnMain
             // 
@@ -211,6 +212,63 @@
             this.addFileBtn.Text = "Add file";
             this.addFileBtn.UseVisualStyleBackColor = true;
             this.addFileBtn.Click += new System.EventHandler(this.addFileBtn_Click);
+            // 
+            // loginPage
+            // 
+            this.loginPage.Controls.Add(this.label8);
+            this.loginPage.Controls.Add(this.label7);
+            this.loginPage.Controls.Add(this.button3);
+            this.loginPage.Controls.Add(this.loginPasswordBox);
+            this.loginPage.Controls.Add(this.loginUsernameBox);
+            this.loginPage.Location = new System.Drawing.Point(4, 25);
+            this.loginPage.Name = "loginPage";
+            this.loginPage.Size = new System.Drawing.Size(793, 418);
+            this.loginPage.TabIndex = 2;
+            this.loginPage.Text = "Login";
+            this.loginPage.UseVisualStyleBackColor = true;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(451, 129);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(67, 16);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Password";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(248, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(70, 16);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Username";
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(328, 215);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(100, 53);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "LOGIN";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // loginPasswordBox
+            // 
+            this.loginPasswordBox.Location = new System.Drawing.Point(418, 148);
+            this.loginPasswordBox.Name = "loginPasswordBox";
+            this.loginPasswordBox.PasswordChar = '*';
+            this.loginPasswordBox.Size = new System.Drawing.Size(130, 22);
+            this.loginPasswordBox.TabIndex = 1;
+            // 
+            // loginUsernameBox
+            // 
+            this.loginUsernameBox.Location = new System.Drawing.Point(219, 148);
+            this.loginUsernameBox.Name = "loginUsernameBox";
+            this.loginUsernameBox.Size = new System.Drawing.Size(130, 22);
+            this.loginUsernameBox.TabIndex = 0;
             // 
             // registerPage
             // 
@@ -342,65 +400,9 @@
             this.usernameBox.Size = new System.Drawing.Size(124, 22);
             this.usernameBox.TabIndex = 0;
             // 
-            // loginPage
-            // 
-            this.loginPage.Controls.Add(this.label8);
-            this.loginPage.Controls.Add(this.label7);
-            this.loginPage.Controls.Add(this.button3);
-            this.loginPage.Controls.Add(this.loginPasswordBox);
-            this.loginPage.Controls.Add(this.loginUsernameBox);
-            this.loginPage.Location = new System.Drawing.Point(4, 25);
-            this.loginPage.Name = "loginPage";
-            this.loginPage.Size = new System.Drawing.Size(793, 418);
-            this.loginPage.TabIndex = 2;
-            this.loginPage.Text = "Login";
-            this.loginPage.UseVisualStyleBackColor = true;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(451, 129);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(67, 16);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Password";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(248, 129);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(70, 16);
-            this.label7.TabIndex = 9;
-            this.label7.Text = "Username";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(328, 215);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 53);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "LOGIN";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // loginPasswordBox
-            // 
-            this.loginPasswordBox.Location = new System.Drawing.Point(418, 148);
-            this.loginPasswordBox.Name = "loginPasswordBox";
-            this.loginPasswordBox.PasswordChar = '*';
-            this.loginPasswordBox.Size = new System.Drawing.Size(130, 22);
-            this.loginPasswordBox.TabIndex = 1;
-            // 
-            // loginUsernameBox
-            // 
-            this.loginUsernameBox.Location = new System.Drawing.Point(219, 148);
-            this.loginUsernameBox.Name = "loginUsernameBox";
-            this.loginUsernameBox.Size = new System.Drawing.Size(130, 22);
-            this.loginUsernameBox.TabIndex = 0;
-            // 
             // editTransaction
             // 
+            this.editTransaction.Controls.Add(this.panel1);
             this.editTransaction.Controls.Add(this.memberTrans);
             this.editTransaction.Controls.Add(this.categoryLbl);
             this.editTransaction.Controls.Add(this.bankRefLbl);
@@ -411,6 +413,14 @@
             this.editTransaction.TabIndex = 3;
             this.editTransaction.Text = "Edit Transaction";
             this.editTransaction.UseVisualStyleBackColor = true;
+            // 
+            // panel1
+            // 
+            this.panel1.AutoScroll = true;
+            this.panel1.Location = new System.Drawing.Point(7, 42);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(638, 289);
+            this.panel1.TabIndex = 6;
             // 
             // memberTrans
             // 
@@ -441,7 +451,7 @@
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(158, 331);
+            this.submitBtn.Location = new System.Drawing.Point(269, 349);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(87, 34);
             this.submitBtn.TabIndex = 2;
@@ -806,10 +816,10 @@
             this.navigation.ResumeLayout(false);
             this.mainPage.ResumeLayout(false);
             this.mainPage.PerformLayout();
-            this.registerPage.ResumeLayout(false);
-            this.registerPage.PerformLayout();
             this.loginPage.ResumeLayout(false);
             this.loginPage.PerformLayout();
+            this.registerPage.ResumeLayout(false);
+            this.registerPage.PerformLayout();
             this.editTransaction.ResumeLayout(false);
             this.editTransaction.PerformLayout();
             this.modules.ResumeLayout(false);
@@ -896,6 +906,7 @@
         private System.Windows.Forms.Label memberTrans;
         private System.Windows.Forms.Label availableBalanceLbl;
         private System.Windows.Forms.Button summaryBtn;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

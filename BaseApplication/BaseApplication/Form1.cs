@@ -38,7 +38,7 @@ namespace BaseApplication
             navigation.TabPages.Remove(modules);
             navigation.TabPages.Remove(searchKeyword);
             navigation.TabPages.Remove(addMember);
-            navigation.TabPages.Remove(mainPage);
+            //navigation.TabPages.Remove(mainPage);
             UpdateBalance();
         }
         
@@ -173,8 +173,6 @@ namespace BaseApplication
         
         private async Task GetTransactionAsync()
         {
-            
-
             int bRefX = 30;
             int categoryX = 180;
             int membersX = 330;
@@ -190,7 +188,8 @@ namespace BaseApplication
                     Location = new Point(bRefX, pointY),
                     ReadOnly = true
                 };
-                editTransaction.Controls.Add(bRef);
+                //editTransaction.Controls.Add(bRef);
+                panel1.Controls.Add(bRef);
 
                 ComboBox category = new()
                 {
@@ -201,7 +200,8 @@ namespace BaseApplication
                 category.Items.Add("membership fee");
                 category.Items.Add("rental");
                 category.SelectedIndex = 0;
-                editTransaction.Controls.Add(category);
+                //editTransaction.Controls.Add(category);
+                panel1.Controls.Add(category);
 
                 ComboBox members = new()
                 {
@@ -214,7 +214,8 @@ namespace BaseApplication
                     members.Items.Add(TrimString(member));
                 }
                 members.SelectedIndex = 0;
-                editTransaction.Controls.Add(members);
+                //editTransaction.Controls.Add(members);
+                panel1.Controls.Add(members);
                 pointY += 25;
 
                 assignCategoryHelper.Add(new Tuple<TextBox, ComboBox, ComboBox>(bRef, category, members));
@@ -236,6 +237,7 @@ namespace BaseApplication
                 UpdateCategories(updatedCategories);
             }
             EditTabs(false);
+            panel1.Controls.Clear();
             navigation.SelectTab(mainPage);
             navigation.TabPages.Remove(editTransaction);
         }
@@ -252,15 +254,23 @@ namespace BaseApplication
 
         private async void addFileBtn_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog1 = new();
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
+            OpenFileDialog openFileDialog1 = new()
             {
-                string file = openFileDialog1.FileName;
-                string response = UploadToAPI(file);
-                if (response.Equals("File uploaded"))
+                Title = "Select MT940 Files",
+                Multiselect = true,
+            };
+
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string response = "";
+                foreach (String fileName in openFileDialog1.FileNames)
                 {
-                    MessageBox.Show("File uploaded. Please give each transaction a category");
+                    response += UploadToAPI(fileName) + " ";
+                }
+                if (!response.Contains("Unsupported file format"))
+                {
+                    MessageBox.Show("File(s) uploaded. Please give each transaction a category");
                     navigation.TabPages.Add(editTransaction);
                     navigation.SelectTab(editTransaction);
                     EditTabs(true);
@@ -270,6 +280,10 @@ namespace BaseApplication
                 else if(response.Equals("Duplicate file"))
                 {
                     MessageBox.Show("Duplicate file");
+                }
+                else
+                {
+                    MessageBox.Show("Unsupported file format");
                 }
                 
             }

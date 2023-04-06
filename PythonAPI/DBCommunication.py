@@ -45,20 +45,21 @@ def perform_backup():
 @app.route('/api/uploadFile', methods=["POST"])
 def save_file_to_database():
     file = request.files['file']
-    file = parse_mt940_file(file)
-    if is_duplicate(file):
-        return "Duplicate file"
-
-    balances = list(key for key in file if "balance" in key)
-    insert_file_info(file, collect_detailed_ids(file, balances))
-    insert_transaction_info(file)
-    collection.insert_one(file)
+    if file.filename != '':
+        file = parse_mt940_file(file)
+        # TODO: Check if file is bad
+        if is_duplicate(file):
+            return "Duplicate file"
+        balances = list(key for key in file if "balance" in key)
+        insert_file_info(file, collect_detailed_ids(file, balances))
+        insert_transaction_info(file)
+        collection.insert_one(file)
     return "File uploaded"
 
 
 @app.route('/api/getTransactions', methods=["GET"])
 def retrieve_transactions():
-    mycursor.execute("SELECT `bankReference` FROM transaction")
+    mycursor.execute("SELECT `bankReference` FROM transaction WHERE `categoryName` = 'other'")
     myresult = mycursor.fetchall()
     return myresult
 
@@ -365,11 +366,21 @@ def insert_file_info(file, ids):
     return mycursor.lastrowid
 
 
+def check_if_transaction_exists(bank_reference):
+    mycursor.execute("SELECT * FROM transaction WHERE bankReference = %s LIMIT 1", (bank_reference,))
+    myresult = mycursor.fetchall()
+    if len(myresult) > 0:
+        return True
+    return False
+
+
 def insert_transaction_info(file):
     transactions = file['transactions']
     for transaction in transactions:
-        detailed_info_id = insert_detailed_info(transaction, 'transaction')
         bank_reference = transaction['bank_reference']
+        if check_if_transaction_exists(bank_reference):
+            return
+        detailed_info_id = insert_detailed_info(transaction, 'transaction')
         entry_date = transaction['entry_date']
         funds_code = transaction['funds_code']
         guessed_entry_date = transaction['guessed_entry_date']
