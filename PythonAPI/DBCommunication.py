@@ -9,6 +9,7 @@ import json
 import mysql.connector
 import dicttoxml2
 from xml.dom.minidom import parseString
+from Converter import JSONSchemaValidate
 
 # MySql connection
 mydb = mysql.connector.connect(
@@ -47,7 +48,7 @@ def save_file_to_database():
     file = request.files['file']
     if file.filename != '':
         file = parse_mt940_file(file)
-        # TODO: Check if file is bad
+        JSONSchemaValidate(file)
         if is_duplicate(file):
             return "Duplicate file"
         balances = list(key for key in file if "balance" in key)
@@ -289,7 +290,7 @@ def make_summary():
 
 @app.route('/api/getCustomDetails', methods=["GET"])
 def get_custom_details():
-    mycursor.execute("SET @p0 = '00000000001005'; CALL SowCustomDetailsBasedOnBankReference(@p0);", multi=True)
+    mycursor.execute("SET @p0 = '00000000001005'; CALL ShowCustomDetailsBasedOnBankReference(@p0);", multi=True)
     myresult = mycursor.fetchall()
     return myresult
 
@@ -412,3 +413,4 @@ def parse_mt940_file(file_path):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=122)
+
