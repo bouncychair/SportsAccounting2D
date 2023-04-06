@@ -1,3 +1,4 @@
+import subprocess
 from datetime import datetime
 
 import mt940
@@ -31,6 +32,14 @@ app = Flask(__name__)
 @app.route('/api/test', methods=["GET"])
 def test():
     return "Hi"
+
+
+@app.route('/api/PerformBackup', methods=["GET"])
+def perform_backup():
+    file_name = "backup_" + datetime.now().strftime("%d-%m-%Y") + ".sql"
+    subprocess.Popen("C:/xampp/mysql/bin/mysqldump.exe -h localhost -P 3306 -u root sportsaccounting --routines > "
+                     "../Backup/" + file_name, shell=True)
+    return "Backup performed"
 
 
 @app.route('/api/uploadFile', methods=["POST"])
@@ -76,7 +85,8 @@ def get_transaction_description(bank_ref):
 
 @app.route('/api/getBalance', methods=["GET"])
 def get_balance():
-    mycursor.execute("SELECT amount FROM detailedinfo WHERE Id = (SELECT availableBalanceId FROM file ORDER BY id DESC LIMIT 1)")
+    mycursor.execute(
+        "SELECT amount FROM detailedinfo WHERE Id = (SELECT availableBalanceId FROM file ORDER BY id DESC LIMIT 1)")
     myresult = mycursor.fetchall()
     if len(myresult) == 0:
         return "No balance"
@@ -136,13 +146,13 @@ def connect_to_app():
             val = (username, first_name, last_name, password, email, date_of_join, role)
             mycursor.execute(sql, val)
             mydb.commit()
-            return "User added"
+            return "Register successful"
         except mysql.connector.Error as err:
             return err.msg
     elif action_type == "login":
         username = request.form['username']
         if check_if_exist(username) == password:
-            return "Success"
+            return "Login successful"
         return "Wrong password"
 
 

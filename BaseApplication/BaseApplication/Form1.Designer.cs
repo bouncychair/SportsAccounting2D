@@ -30,6 +30,8 @@
         {
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
+            this.summaryBtn = new System.Windows.Forms.Button();
+            this.availableBalanceLbl = new System.Windows.Forms.Label();
             this.addMemberBtnMain = new System.Windows.Forms.Button();
             this.searchKWordBtn = new System.Windows.Forms.Button();
             this.modulesInfoBtn = new System.Windows.Forms.Button();
@@ -96,9 +98,6 @@
             this.memberEmailBox = new System.Windows.Forms.TextBox();
             this.memberNameBox = new System.Windows.Forms.TextBox();
             this.memberNameLbl = new System.Windows.Forms.Label();
-            this.availableBalanceLbl = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.summaryBtn = new System.Windows.Forms.Button();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.registerPage.SuspendLayout();
@@ -135,7 +134,6 @@
             this.mainPage.Controls.Add(this.modulesInfoBtn);
             this.mainPage.Controls.Add(this.goToEditDescBtn);
             this.mainPage.Controls.Add(this.addFileBtn);
-            this.mainPage.Controls.Add(this.richTextBox1);
             this.mainPage.Location = new System.Drawing.Point(4, 25);
             this.mainPage.Name = "mainPage";
             this.mainPage.Padding = new System.Windows.Forms.Padding(3);
@@ -144,9 +142,29 @@
             this.mainPage.Text = "Base";
             this.mainPage.UseVisualStyleBackColor = true;
             // 
+            // summaryBtn
+            // 
+            this.summaryBtn.Location = new System.Drawing.Point(217, 340);
+            this.summaryBtn.Name = "summaryBtn";
+            this.summaryBtn.Size = new System.Drawing.Size(156, 46);
+            this.summaryBtn.TabIndex = 20;
+            this.summaryBtn.Text = "Generate Summary";
+            this.summaryBtn.UseVisualStyleBackColor = true;
+            this.summaryBtn.Click += new System.EventHandler(this.summaryBtn_Click);
+            // 
+            // availableBalanceLbl
+            // 
+            this.availableBalanceLbl.AutoSize = true;
+            this.availableBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.availableBalanceLbl.Location = new System.Drawing.Point(53, 14);
+            this.availableBalanceLbl.Name = "availableBalanceLbl";
+            this.availableBalanceLbl.Size = new System.Drawing.Size(64, 25);
+            this.availableBalanceLbl.TabIndex = 19;
+            this.availableBalanceLbl.Text = "label9";
+            // 
             // addMemberBtnMain
             // 
-            this.addMemberBtnMain.Location = new System.Drawing.Point(25, 118);
+            this.addMemberBtnMain.Location = new System.Drawing.Point(217, 118);
             this.addMemberBtnMain.Name = "addMemberBtnMain";
             this.addMemberBtnMain.Size = new System.Drawing.Size(156, 32);
             this.addMemberBtnMain.TabIndex = 18;
@@ -156,7 +174,7 @@
             // 
             // searchKWordBtn
             // 
-            this.searchKWordBtn.Location = new System.Drawing.Point(203, 118);
+            this.searchKWordBtn.Location = new System.Drawing.Point(217, 58);
             this.searchKWordBtn.Name = "searchKWordBtn";
             this.searchKWordBtn.Size = new System.Drawing.Size(156, 32);
             this.searchKWordBtn.TabIndex = 17;
@@ -176,7 +194,7 @@
             // 
             // goToEditDescBtn
             // 
-            this.goToEditDescBtn.Location = new System.Drawing.Point(203, 58);
+            this.goToEditDescBtn.Location = new System.Drawing.Point(25, 118);
             this.goToEditDescBtn.Name = "goToEditDescBtn";
             this.goToEditDescBtn.Size = new System.Drawing.Size(156, 32);
             this.goToEditDescBtn.TabIndex = 15;
@@ -776,34 +794,6 @@
             this.memberNameLbl.TabIndex = 0;
             this.memberNameLbl.Text = "Full Name";
             // 
-            // availableBalanceLbl
-            // 
-            this.availableBalanceLbl.AutoSize = true;
-            this.availableBalanceLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.availableBalanceLbl.Location = new System.Drawing.Point(53, 14);
-            this.availableBalanceLbl.Name = "availableBalanceLbl";
-            this.availableBalanceLbl.Size = new System.Drawing.Size(64, 25);
-            this.availableBalanceLbl.TabIndex = 19;
-            this.availableBalanceLbl.Text = "label9";
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(393, 14);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(387, 390);
-            this.richTextBox1.TabIndex = 9;
-            this.richTextBox1.Text = "";
-            // 
-            // summaryBtn
-            // 
-            this.summaryBtn.Location = new System.Drawing.Point(217, 340);
-            this.summaryBtn.Name = "summaryBtn";
-            this.summaryBtn.Size = new System.Drawing.Size(156, 46);
-            this.summaryBtn.TabIndex = 20;
-            this.summaryBtn.Text = "Generate Summary";
-            this.summaryBtn.UseVisualStyleBackColor = true;
-            this.summaryBtn.Click += new System.EventHandler(this.summaryBtn_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -905,7 +895,6 @@
         private System.Windows.Forms.Button addMemberBtnMain;
         private System.Windows.Forms.Label memberTrans;
         private System.Windows.Forms.Label availableBalanceLbl;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button summaryBtn;
     }
 }

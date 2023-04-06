@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Drawing;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -39,6 +38,7 @@ namespace BaseApplication
             navigation.TabPages.Remove(modules);
             navigation.TabPages.Remove(searchKeyword);
             navigation.TabPages.Remove(addMember);
+            navigation.TabPages.Remove(mainPage);
             UpdateBalance();
         }
         
@@ -65,8 +65,17 @@ namespace BaseApplication
             using var client = new WebClient();
             userInfo.Add("type", type);
             var response = client.UploadValues(url, userInfo);
-            MessageBox.Show(Encoding.Default.GetString(response));
-        }         
+            string responseString = Encoding.Default.GetString(response);
+            MessageBox.Show(responseString);
+            if(responseString == "Register successful")
+            {
+                userRole = userInfo["role"];
+                navigation.TabPages.Add(mainPage);
+                navigation.TabPages.Remove(registerPage);
+                navigation.TabPages.Remove(loginPage);
+                navigation.SelectTab(mainPage);
+            }
+        }
         
         private void Login(String username, String password)
         {
@@ -271,14 +280,10 @@ namespace BaseApplication
             if (hide)
             {
                 navigation.TabPages.Remove(mainPage);
-                navigation.TabPages.Remove(registerPage);
-                navigation.TabPages.Remove(loginPage);
             }
             else
             {
                 navigation.TabPages.Add(mainPage);
-                navigation.TabPages.Add(registerPage);
-                navigation.TabPages.Add(loginPage);
             }
         }
 
@@ -498,7 +503,6 @@ namespace BaseApplication
             }
             return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
         }
-
 
         private async void summaryBtn_Click(object sender, EventArgs e)
         {
