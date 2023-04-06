@@ -181,7 +181,7 @@ def check_if_exist(username):
 
 @app.route('/api/Columns/<table>', methods=["GET"])
 def get_columns(table):
-    mycursor.execute("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = '%s'" % table)
+    mycursor.execute("SELECT DISTINCT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'sportsaccounting' AND TABLE_NAME = '%s'" % table)
     columns = mycursor.fetchall()
     return columns
 

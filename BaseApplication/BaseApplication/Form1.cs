@@ -67,7 +67,7 @@ namespace BaseApplication
             var response = client.UploadValues(url, userInfo);
             string responseString = Encoding.Default.GetString(response);
             MessageBox.Show(responseString);
-            if(responseString == "Register successful")
+            if(responseString.Contains("successful"))
             {
                 userRole = userInfo["role"];
                 navigation.TabPages.Add(mainPage);
