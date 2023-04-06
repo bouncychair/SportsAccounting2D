@@ -1,6 +1,5 @@
 ﻿using ConsoleApp2;
 using Microsoft.AspNetCore.Identity;
-using MongoDB.Bson;
 using MongoDB.Driver;
 using Newtonsoft.Json.Linq;
 using System;
@@ -38,7 +37,7 @@ namespace BaseApplication
             navigation.TabPages.Remove(modules);
             navigation.TabPages.Remove(searchKeyword);
             navigation.TabPages.Remove(addMember);
-            //navigation.TabPages.Remove(mainPage);
+            navigation.TabPages.Remove(mainPage);
             UpdateBalance();
         }
         
@@ -161,9 +160,9 @@ namespace BaseApplication
             Login(loginUsernameBox.Text, loginPasswordBox.Text);
         }
 
-        private async Task<string[]> GetTransactions()
+        private async Task<string[]> GetTransactions(string request)
         {
-            string url = "http://127.0.0.1:122/api/getTransactions";
+            string url = $"http://127.0.0.1:122/api/getTransactions/{request}";
             using var client = new HttpClient();
 
             string transactions = await client.GetStringAsync(url);
@@ -178,7 +177,7 @@ namespace BaseApplication
             int membersX = 330;
             int pointY = 40;
 
-            string[] transactionList = await GetTransactions();
+            string[] transactionList = await GetTransactions("other");
 
             foreach (string bankReference in transactionList)
             {
@@ -268,7 +267,7 @@ namespace BaseApplication
                 {
                     response += UploadToAPI(fileName) + " ";
                 }
-                if (!response.Contains("Unsupported file format"))
+                if (!response.Contains("Unsupported file format") && !response.Contains("Duplicate file"))
                 {
                     MessageBox.Show("File(s) uploaded. Please give each transaction a category");
                     navigation.TabPages.Add(editTransaction);
@@ -277,7 +276,7 @@ namespace BaseApplication
                     await GetTransactionAsync();
                     UpdateBalance();
                 }
-                else if(response.Equals("Duplicate file"))
+                else if(response.Contains("Duplicate file"))
                 {
                     MessageBox.Show("Duplicate file");
                 }
@@ -345,7 +344,7 @@ namespace BaseApplication
             if (!navigation.TabPages.Contains(editDescription))
             {
                 navigation.TabPages.Add(editDescription);
-                string[] transactionList = await GetTransactions();
+                string[] transactionList = await GetTransactions("all");
 
                 foreach (string bankReference in transactionList)
                 {
@@ -411,7 +410,6 @@ namespace BaseApplication
                 searchColumnCBox.Items.Add(TrimString(column));
             }
             searchColumnCBox.SelectedIndex = 0;
-
         }
 
         private string TrimString(string str)
