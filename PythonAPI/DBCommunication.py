@@ -57,9 +57,12 @@ def save_file_to_database():
     return "File uploaded"
 
 
-@app.route('/api/getTransactions', methods=["GET"])
-def retrieve_transactions():
-    mycursor.execute("SELECT `bankReference` FROM transaction WHERE `categoryName` = 'other'")
+@app.route('/api/getTransactions/<request_type>', methods=["GET"])
+def retrieve_transactions(request_type):
+    if request_type == "other":
+        mycursor.execute("SELECT `bankReference` FROM transaction WHERE `categoryName` = 'other'")
+    elif request_type == "all":
+        mycursor.execute("SELECT `bankReference` FROM transaction")
     myresult = mycursor.fetchall()
     return myresult
 
@@ -386,18 +389,13 @@ def insert_transaction_info(file):
         guessed_entry_date = transaction['guessed_entry_date']
         transaction_id = transaction['id']
         transaction_reference = file['transaction_reference']
+        category = 'other'
 
         transaction_details = transaction['transaction_details']
         extra_details = transaction['extra_details']
-        category = 'other'
-        transaction_details_id = insert_transaction_details(transaction_details, extra_details)
-        insert_to_transaction = "INSERT INTO transaction (bankReference, transactionReference, categoryName, " \
-                                "balanceId, entryDate, guessedEntryDate, id, fundsCode, " \
-                                "transactionDetailsId) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (bank_reference, transaction_reference, category, detailed_info_id, entry_date, guessed_entry_date,
-               transaction_id, funds_code, transaction_details_id)
-        mycursor.execute(insert_to_transaction, val)
-        mydb.commit()
+        custom_details = ""
+
+        mycursor.callproc('InsertTransactionWithDetails', [bank_reference, transaction_reference, category, detailed_info_id, entry_date, guessed_entry_date, funds_code, transaction_id, transaction_details, extra_details, custom_details])
 
 
 def parse_mt940_file(file_path):

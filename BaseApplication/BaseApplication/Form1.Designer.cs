@@ -222,7 +222,7 @@
             this.loginPage.Controls.Add(this.loginUsernameBox);
             this.loginPage.Location = new System.Drawing.Point(4, 25);
             this.loginPage.Name = "loginPage";
-            this.loginPage.Size = new System.Drawing.Size(793, 418);
+            this.loginPage.Size = new System.Drawing.Size(793, 415);
             this.loginPage.TabIndex = 2;
             this.loginPage.Text = "Login";
             this.loginPage.UseVisualStyleBackColor = true;
@@ -288,7 +288,7 @@
             this.registerPage.Location = new System.Drawing.Point(4, 25);
             this.registerPage.Name = "registerPage";
             this.registerPage.Padding = new System.Windows.Forms.Padding(3);
-            this.registerPage.Size = new System.Drawing.Size(793, 418);
+            this.registerPage.Size = new System.Drawing.Size(793, 415);
             this.registerPage.TabIndex = 1;
             this.registerPage.Text = "Register";
             this.registerPage.UseVisualStyleBackColor = true;
@@ -553,6 +553,7 @@
             // 
             this.rentalTurnoverTxt.Location = new System.Drawing.Point(445, 170);
             this.rentalTurnoverTxt.Name = "rentalTurnoverTxt";
+            this.rentalTurnoverTxt.ReadOnly = true;
             this.rentalTurnoverTxt.Size = new System.Drawing.Size(100, 22);
             this.rentalTurnoverTxt.TabIndex = 6;
             // 
@@ -560,6 +561,7 @@
             // 
             this.rentalIncomeTxt.Location = new System.Drawing.Point(322, 170);
             this.rentalIncomeTxt.Name = "rentalIncomeTxt";
+            this.rentalIncomeTxt.ReadOnly = true;
             this.rentalIncomeTxt.Size = new System.Drawing.Size(100, 22);
             this.rentalIncomeTxt.TabIndex = 5;
             // 
@@ -567,6 +569,7 @@
             // 
             this.rentalCostTxt.Location = new System.Drawing.Point(201, 171);
             this.rentalCostTxt.Name = "rentalCostTxt";
+            this.rentalCostTxt.ReadOnly = true;
             this.rentalCostTxt.Size = new System.Drawing.Size(100, 22);
             this.rentalCostTxt.TabIndex = 4;
             // 
@@ -574,6 +577,7 @@
             // 
             this.barTurnoverTxt.Location = new System.Drawing.Point(445, 112);
             this.barTurnoverTxt.Name = "barTurnoverTxt";
+            this.barTurnoverTxt.ReadOnly = true;
             this.barTurnoverTxt.Size = new System.Drawing.Size(100, 22);
             this.barTurnoverTxt.TabIndex = 3;
             // 
@@ -581,6 +585,7 @@
             // 
             this.barIncomeTxt.Location = new System.Drawing.Point(322, 112);
             this.barIncomeTxt.Name = "barIncomeTxt";
+            this.barIncomeTxt.ReadOnly = true;
             this.barIncomeTxt.Size = new System.Drawing.Size(100, 22);
             this.barIncomeTxt.TabIndex = 2;
             // 
@@ -588,6 +593,7 @@
             // 
             this.barCostTxt.Location = new System.Drawing.Point(201, 112);
             this.barCostTxt.Name = "barCostTxt";
+            this.barCostTxt.ReadOnly = true;
             this.barCostTxt.Size = new System.Drawing.Size(100, 22);
             this.barCostTxt.TabIndex = 1;
             // 
@@ -673,7 +679,7 @@
             this.searchKeyword.Location = new System.Drawing.Point(4, 25);
             this.searchKeyword.Name = "searchKeyword";
             this.searchKeyword.Padding = new System.Windows.Forms.Padding(3);
-            this.searchKeyword.Size = new System.Drawing.Size(793, 418);
+            this.searchKeyword.Size = new System.Drawing.Size(793, 415);
             this.searchKeyword.TabIndex = 6;
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
@@ -757,7 +763,7 @@
             this.addMember.Location = new System.Drawing.Point(4, 25);
             this.addMember.Name = "addMember";
             this.addMember.Padding = new System.Windows.Forms.Padding(3);
-            this.addMember.Size = new System.Drawing.Size(793, 418);
+            this.addMember.Size = new System.Drawing.Size(793, 415);
             this.addMember.TabIndex = 7;
             this.addMember.Text = "Add Member ";
             this.addMember.UseVisualStyleBackColor = true;
