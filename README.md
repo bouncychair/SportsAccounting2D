@@ -59,4 +59,9 @@ When the code is not readable or agreeable, doesn't follow the conventions or ra
 1. Open the solution located in the base application folder in Visual Studio
 1. Run the form
 
+## User Guide
 
+1. Navigate to the register tab and create an account
+1. Once you have created a user, log into that user account
+1. You can now view the Base application tab of the application
+1. From here you can viewe modules info, add/edit descriptions, search for keywords, and add members of the sports club (add/edit descriptions and add members are only available to admin users)
