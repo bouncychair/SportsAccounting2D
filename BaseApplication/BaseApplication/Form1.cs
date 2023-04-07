@@ -41,6 +41,20 @@ namespace BaseApplication
             UpdateBalance();
         }
         
+        void AdjustUser()
+        {
+            if (userRole == "user")
+            {
+                Controls.Remove(addMemberBtnMain);
+                Controls.Remove(goToEditDescBtn);
+                Controls.Remove(addFileBtn);
+                addMemberBtnMain.Dispose();
+                goToEditDescBtn.Dispose();
+                addFileBtn.Dispose();
+
+            }
+        }
+        
         string UploadToAPI(string fileToUpload)
         {
             string url = "http://127.0.0.1:122/api/uploadFile";
@@ -73,6 +87,7 @@ namespace BaseApplication
                 navigation.TabPages.Remove(registerPage);
                 navigation.TabPages.Remove(loginPage);
                 navigation.SelectTab(mainPage);
+                AdjustUser();
             }
             else
             {
@@ -505,12 +520,14 @@ namespace BaseApplication
             {
                 availableBalanceLbl.Visible = false;
                 generateSummaryBtn.Visible = false;
+                generateSummaryBtn.Enabled = false;
             }
             else
             {
                 availableBalanceLbl.Visible = true;
                 availableBalanceLbl.Text = "Account Balance: " + balance + "EUR";
                 generateSummaryBtn.Visible = true;
+                generateSummaryBtn.Enabled = true;
             }
         }
         static string ComputeHash(string data)

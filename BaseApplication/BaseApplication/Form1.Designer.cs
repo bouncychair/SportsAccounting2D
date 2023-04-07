@@ -46,6 +46,7 @@ namespace BaseApplication
             this.loginPasswordBox = new System.Windows.Forms.TextBox();
             this.loginUsernameBox = new System.Windows.Forms.TextBox();
             this.registerPage = new System.Windows.Forms.TabPage();
+            this.userTypeBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -101,7 +102,6 @@ namespace BaseApplication
             this.memberNameBox = new System.Windows.Forms.TextBox();
             this.memberNameLbl = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.userTypeBox = new System.Windows.Forms.ComboBox();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.loginPage.SuspendLayout();
@@ -143,7 +143,7 @@ namespace BaseApplication
             this.mainPage.Padding = new System.Windows.Forms.Padding(3);
             this.mainPage.Size = new System.Drawing.Size(793, 418);
             this.mainPage.TabIndex = 0;
-            this.mainPage.Text = "Base";
+            this.mainPage.Text = "Main";
             this.mainPage.UseVisualStyleBackColor = true;
             // 
             // summaryBtn
@@ -295,6 +295,18 @@ namespace BaseApplication
             this.registerPage.TabIndex = 1;
             this.registerPage.Text = "Register";
             this.registerPage.UseVisualStyleBackColor = true;
+            // 
+            // userTypeBox
+            // 
+            this.userTypeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.userTypeBox.FormattingEnabled = true;
+            this.userTypeBox.Items.AddRange(new object[] {
+            "user",
+            "admin"});
+            this.userTypeBox.Location = new System.Drawing.Point(325, 249);
+            this.userTypeBox.Name = "userTypeBox";
+            this.userTypeBox.Size = new System.Drawing.Size(121, 24);
+            this.userTypeBox.TabIndex = 14;
             // 
             // label6
             // 
@@ -805,19 +817,6 @@ namespace BaseApplication
             this.memberNameLbl.Size = new System.Drawing.Size(68, 16);
             this.memberNameLbl.TabIndex = 0;
             this.memberNameLbl.Text = "Full Name";
-            // 
-            // userTypeBox
-            // 
-            this.userTypeBox.FormattingEnabled = true;
-            this.userTypeBox.Items.AddRange(new object[] {
-            "user",
-            "admin"});
-            this.userTypeBox.Location = new System.Drawing.Point(325, 249);
-            this.userTypeBox.Name = "userTypeBox";
-            this.userTypeBox.Size = new System.Drawing.Size(121, 24);
-            this.userTypeBox.TabIndex = 14;
-            this.userTypeBox.SelectedIndex = 0;
-            this.userTypeBox.DropDownStyle = ComboBoxStyle.DropDownList;
             // 
             // Form1
             // 
