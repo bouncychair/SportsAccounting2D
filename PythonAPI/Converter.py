@@ -18,4 +18,4 @@ def XMLSchemaValidate():
 
 def JSONSchemaValidate(json_file):
     valid = validate(instance=json_file, schema=schema)
-    print(valid)
+    return valid
