@@ -1,4 +1,6 @@
-﻿namespace BaseApplication
+﻿using System.Windows.Forms;
+
+namespace BaseApplication
 {
     partial class Form1
     {
@@ -51,7 +53,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
-            this.userTypeBox = new System.Windows.Forms.TextBox();
             this.passwordBox = new System.Windows.Forms.TextBox();
             this.emailBox = new System.Windows.Forms.TextBox();
             this.lastNameBox = new System.Windows.Forms.TextBox();
@@ -99,6 +100,8 @@
             this.memberEmailBox = new System.Windows.Forms.TextBox();
             this.memberNameBox = new System.Windows.Forms.TextBox();
             this.memberNameLbl = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.userTypeBox = new System.Windows.Forms.ComboBox();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.loginPage.SuspendLayout();
@@ -222,7 +225,7 @@
             this.loginPage.Controls.Add(this.loginUsernameBox);
             this.loginPage.Location = new System.Drawing.Point(4, 25);
             this.loginPage.Name = "loginPage";
-            this.loginPage.Size = new System.Drawing.Size(793, 415);
+            this.loginPage.Size = new System.Drawing.Size(793, 418);
             this.loginPage.TabIndex = 2;
             this.loginPage.Text = "Login";
             this.loginPage.UseVisualStyleBackColor = true;
@@ -272,6 +275,7 @@
             // 
             // registerPage
             // 
+            this.registerPage.Controls.Add(this.userTypeBox);
             this.registerPage.Controls.Add(this.label6);
             this.registerPage.Controls.Add(this.label5);
             this.registerPage.Controls.Add(this.label4);
@@ -279,7 +283,6 @@
             this.registerPage.Controls.Add(this.label2);
             this.registerPage.Controls.Add(this.label1);
             this.registerPage.Controls.Add(this.button2);
-            this.registerPage.Controls.Add(this.userTypeBox);
             this.registerPage.Controls.Add(this.passwordBox);
             this.registerPage.Controls.Add(this.emailBox);
             this.registerPage.Controls.Add(this.lastNameBox);
@@ -288,7 +291,7 @@
             this.registerPage.Location = new System.Drawing.Point(4, 25);
             this.registerPage.Name = "registerPage";
             this.registerPage.Padding = new System.Windows.Forms.Padding(3);
-            this.registerPage.Size = new System.Drawing.Size(793, 415);
+            this.registerPage.Size = new System.Drawing.Size(793, 418);
             this.registerPage.TabIndex = 1;
             this.registerPage.Text = "Register";
             this.registerPage.UseVisualStyleBackColor = true;
@@ -356,13 +359,6 @@
             this.button2.Text = "REGISTER";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // userTypeBox
-            // 
-            this.userTypeBox.Location = new System.Drawing.Point(325, 243);
-            this.userTypeBox.Name = "userTypeBox";
-            this.userTypeBox.Size = new System.Drawing.Size(124, 22);
-            this.userTypeBox.TabIndex = 5;
             // 
             // passwordBox
             // 
@@ -679,7 +675,7 @@
             this.searchKeyword.Location = new System.Drawing.Point(4, 25);
             this.searchKeyword.Name = "searchKeyword";
             this.searchKeyword.Padding = new System.Windows.Forms.Padding(3);
-            this.searchKeyword.Size = new System.Drawing.Size(793, 415);
+            this.searchKeyword.Size = new System.Drawing.Size(793, 418);
             this.searchKeyword.TabIndex = 6;
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
@@ -763,7 +759,7 @@
             this.addMember.Location = new System.Drawing.Point(4, 25);
             this.addMember.Name = "addMember";
             this.addMember.Padding = new System.Windows.Forms.Padding(3);
-            this.addMember.Size = new System.Drawing.Size(793, 415);
+            this.addMember.Size = new System.Drawing.Size(793, 418);
             this.addMember.TabIndex = 7;
             this.addMember.Text = "Add Member ";
             this.addMember.UseVisualStyleBackColor = true;
@@ -810,6 +806,19 @@
             this.memberNameLbl.TabIndex = 0;
             this.memberNameLbl.Text = "Full Name";
             // 
+            // userTypeBox
+            // 
+            this.userTypeBox.FormattingEnabled = true;
+            this.userTypeBox.Items.AddRange(new object[] {
+            "user",
+            "admin"});
+            this.userTypeBox.Location = new System.Drawing.Point(325, 249);
+            this.userTypeBox.Name = "userTypeBox";
+            this.userTypeBox.Size = new System.Drawing.Size(121, 24);
+            this.userTypeBox.TabIndex = 14;
+            this.userTypeBox.SelectedIndex = 0;
+            this.userTypeBox.DropDownStyle = ComboBoxStyle.DropDownList;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -853,7 +862,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.TextBox userTypeBox;
         private System.Windows.Forms.TextBox passwordBox;
         private System.Windows.Forms.TextBox emailBox;
         private System.Windows.Forms.TextBox lastNameBox;
@@ -913,6 +921,8 @@
         private System.Windows.Forms.Label availableBalanceLbl;
         private System.Windows.Forms.Button summaryBtn;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.ComboBox userTypeBox;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 

@@ -74,6 +74,10 @@ namespace BaseApplication
                 navigation.TabPages.Remove(loginPage);
                 navigation.SelectTab(mainPage);
             }
+            else
+            {
+                MessageBox.Show("There was an error accessing the database");
+            }
         }
         
         private void Login(String username, String password)
@@ -137,8 +141,6 @@ namespace BaseApplication
         {
             if (ValidateRegister())
             {
-                
-                var hashedPassword = new PasswordHasher<object?>().HashPassword(null, passwordBox.Text);
                 var dateOfJoin = DateTime.Now.ToShortDateString();
                 NameValueCollection userInfo = new()
       
@@ -149,7 +151,7 @@ namespace BaseApplication
                     { "email", emailBox.Text },
                     { "password", ComputeHash(passwordBox.Text) },
                     { "dateOfJoin", dateOfJoin },
-                    { "role", userTypeBox.Text}
+                    { "role", userTypeBox.SelectedItem.ToString()}
                 };
                 ConnectToApp(userInfo, "register");
             }

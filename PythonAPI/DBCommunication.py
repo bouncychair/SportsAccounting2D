@@ -39,7 +39,7 @@ def test():
 def perform_backup():
     file_name = "backup_" + datetime.now().strftime("%d-%m-%Y") + ".sql"
     subprocess.Popen("C:/xampp/mysql/bin/mysqldump.exe -h localhost -P 3306 -u root sportsaccounting --routines > "
-                     "../Backup/database.sql", shell=True)
+                     "../Backup/" + file_name, shell=True)
     return "Backup performed"
 
 
