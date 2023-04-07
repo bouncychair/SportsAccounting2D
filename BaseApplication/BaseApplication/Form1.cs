@@ -336,7 +336,11 @@ namespace BaseApplication
 
         private void modulesInfoBtn_Click(object sender, EventArgs e)
         {
-            navigation.TabPages.Add(modules);
+            if (!navigation.TabPages.Contains(modules))
+            {
+                navigation.TabPages.Add(modules);
+                navigation.SelectTab(modules);
+            }
             navigation.SelectTab(modules);
         }
 

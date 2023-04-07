@@ -39,7 +39,7 @@ def test():
 def perform_backup():
     file_name = "backup_" + datetime.now().strftime("%d-%m-%Y") + ".sql"
     subprocess.Popen("C:/xampp/mysql/bin/mysqldump.exe -h localhost -P 3306 -u root sportsaccounting --routines > "
-                     "../Backup/" + file_name, shell=True)
+                     "../Backup/database.sql", shell=True)
     return "Backup performed"
 
 
@@ -215,9 +215,9 @@ def make_modules_summary():
     json_summary = json.dumps(summary, indent=4)
     # convert dict to xml and make it look nice
     xml_summary = parseString(dicttoxml2.dicttoxml(summary)).toprettyxml(indent="\t", encoding="utf-8")
-    with open("C:/MainStuff/modules_summary.json", "w") as outfile:
+    with open("../Summaries/modules_summary.json", "w") as outfile:
         outfile.write(json_summary)
-    with open("C:/MainStuff/modules_summary.xml", "wb") as outfile:
+    with open("../Summaries/modules_summary.xml", "wb") as outfile:
         outfile.write(xml_summary)
     return json_summary
 
@@ -285,9 +285,9 @@ def make_summary():
     json_summary = json.dumps(summary, indent=4)
     # convert dict to xml and make it look nice
     xml_summary = parseString(dicttoxml2.dicttoxml(summary)).toprettyxml(indent="\t", encoding="utf-8")
-    with open("C:/MainStuff/DatabaseTables/summary.json", "w") as outfile:
+    with open("../Summaries/summary.json", "w") as outfile:
         outfile.write(json_summary)
-    with open("C:/MainStuff/DatabaseTables/summary.xml", "wb") as outfile:
+    with open("../Summaries/summary.xml", "wb") as outfile:
         outfile.write(xml_summary)
     return "Summary created"
 
