@@ -42,3 +42,21 @@ Nested indenting should look like this:
 
 ### Working on code
 When the code is not readable or agreeable, doesn't follow the conventions or raises questions, then the code change can be requested and needs to be approved by the orginal author.
+
+
+## Setup
+### Prerequisites:
+* Installed and configured XAMPP (Other database hosting services will work, but the application was created using xampp.)
+* Installed Visual Studio
+* Installed IntelliJ or similar IDE that supports Python with Python 3.10 or higher configured
+### Steps:
+1. Download the project files to your device
+1. Launch XAMPP.
+1. Run Apache and MySQL
+1. Press the Admin button next to the start/stop button for SQL to enter phpmyadmin
+1. In phpmyadmin import the database.sql file (from the downloaded GitHub repo)
+1. Open the pythonAPI folder in IntelliJ and run DBCommunication.py
+1. Open the solution located in the base application folder in Visual Studio
+1. Run the form
+
+
