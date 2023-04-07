@@ -257,6 +257,7 @@ namespace BaseApplication
             {
                 Title = "Select MT940 Files",
                 Multiselect = true,
+                Filter = "MT940 Files|*.sta; *.txt"
             };
 
             DialogResult result = openFileDialog1.ShowDialog();
