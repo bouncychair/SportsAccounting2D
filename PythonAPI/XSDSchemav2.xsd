@@ -1,0 +1,480 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="root">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="file">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="transactionReference">
+                        <xs:simpleType>
+                          <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="255"/>
+                          </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                    <xs:element name="availableBalanceId">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="amount">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:float">
+                                       <xs:minLength value="0"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="currency">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="3"/>
+                                        <xs:maxLength value="3"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="date">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:date">
+                                        <xs:maxLength value="11"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="status">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="type">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="50"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="finalClosingBalanceId">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="amount">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:float">
+                                        <xs:minLength value="0"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="currency">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="3"/>
+                                        <xs:maxLength value="3"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="date">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:date">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="11"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="status">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="type">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="50"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="finalOpeningBalanceId">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="amount">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:float">
+                                       <xs:minLength value="0"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="currency">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="3"/>
+                                        <xs:maxLength value="3"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="date">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:date">
+                                        <xs:maxLength value="11"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="status">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="type">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="50"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="forwardAvailableBalanceId">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="amount">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:float">
+                                        <xs:minLength value="0"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="currency">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="3"/>
+                                        <xs:maxLength value="3"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="date">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:date">
+                                        <xs:maxLength value="11"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="status">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="type">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="50"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="accountIdentification">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="11"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="sequenceNumber">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:extension base="xs:string">
+                            <xs:attribute type="xs:string" name="type"/>
+                          </xs:extension>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="type"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="type"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="transactions">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="item" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="bankReference">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:short">
+                            <xs:maxLength value="20"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="transactionReference">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="255"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="category">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="50"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="detailedInfo">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="amount">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:float">
+                                        <xs:minLength value="0"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="currency">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                       <xs:minLength value="3"/>
+                                        <xs:maxLength value="3"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="date">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:date">
+                                       <xs:minLength value="0"/>
+                                        <xs:maxLength value="11"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="status">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="1"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="type">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="50"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="entryDate">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:date">
+                           <xs:minLength value="0"/>
+                            <xs:maxLength value="11"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="guessedEntryDate">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:date">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="11"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="id">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="4"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="fundsCode">
+                      <xs:complexType>
+                        <xs:simpleContent>
+                          <xs:restriction base="xs:string">
+                            <xs:maxLength value="50"/>
+                          </xs:restriction>
+                        </xs:simpleContent>
+                      </xs:complexType>
+                    </xs:element>
+                    <xs:element name="transactionDetails">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="item">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="transactionDetails">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:minLength value="0"/>
+                                        <xs:maxLength value="255"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="extraDetails">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="255"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                                <xs:element name="customDetails">
+                                  <xs:complexType>
+                                    <xs:simpleContent>
+                                      <xs:restriction base="xs:string">
+                                        <xs:maxLength value="255"/>
+                                      </xs:restriction>
+                                    </xs:simpleContent>
+                                  </xs:complexType>
+                                </xs:element>
+                              </xs:sequence>
+                              <xs:attribute type="xs:string" name="type" use="optional"/>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                        <xs:attribute type="xs:string" name="type" use="optional"/>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string" name="type" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute type="xs:string" name="type"/>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
