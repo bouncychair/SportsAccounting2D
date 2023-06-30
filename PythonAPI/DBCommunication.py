@@ -94,10 +94,20 @@ def get_balance():
     mycursor.execute(
         "SELECT amount FROM detailedinfo WHERE Id = (SELECT availableBalanceId FROM file ORDER BY id DESC LIMIT 1)")
     myresult = mycursor.fetchall()
+    print(myresult)
     if len(myresult) == 0:
         return "No balance"
     return myresult
 
+@app.route('/api/getTransactionsForChart', methods=["GET"])
+def get_balance_for_chart():
+    mycursor.execute(
+        "SELECT amount, `date` FROM detailedinfo WHERE type = 'transaction'")
+    myresult = mycursor.fetchall()
+    print(myresult)
+    if len(myresult) == 0:
+        return "No transactions"
+    return myresult
 
 @app.route('/api/updateCategory', methods=["POST"])
 def update_transaction_category():

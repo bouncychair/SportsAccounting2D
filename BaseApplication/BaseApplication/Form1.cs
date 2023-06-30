@@ -16,6 +16,8 @@ using JsonConvert = Newtonsoft.Json.JsonConvert;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Globalization;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace BaseApplication
 {
@@ -88,6 +90,8 @@ namespace BaseApplication
                 navigation.TabPages.Remove(loginPage);
                 navigation.SelectTab(mainPage);
                 AdjustUser();
+                populateChart();
+                chart1.Series["Series1"].Name = "Money";
             }
             else
             {
@@ -547,6 +551,35 @@ namespace BaseApplication
 
             await client.GetStringAsync(url);
             MessageBox.Show("Summary generated");
+        }
+
+        private async void populateChart()
+        {
+            string url = "http://127.0.0.1:122/api/getTransactionsForChart";
+            using var client = new HttpClient();
+
+            var json = await client.GetStringAsync(url);
+            object[][] dataArray;
+            dataArray = JsonConvert.DeserializeObject<object[][]>(json);
+
+            for (int i = 0; i < dataArray.Length; i++)
+            {
+                if (dataArray[i].Length > 1 && dataArray[i][1] is string dateString)
+                {
+                    if (DateTime.TryParseExact(dateString, "ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                    {
+                        dataArray[i][1] = date.ToString("yyyy-MM-dd");
+                    }
+                    dataArray = dataArray.OrderBy(item => DateTime.Parse((string)item[1])).ToArray();
+                }
+            }
+            foreach (var item in dataArray)
+            {
+                var xValue = item[1].ToString(); // Assuming date is the x-value
+                var yValue = Convert.ToDouble(item[0]); // Assuming value is the y-value
+
+                chart1.Series[0].Points.AddXY(xValue, yValue);
+            }
         }
     }
 }
