@@ -65,24 +65,27 @@ namespace BaseApplication
             return Encoding.Default.GetString(response);
             
         }
-
         void UpdateCategories(NameValueCollection categories)
         {
+            var dictionary = categories.AllKeys.ToDictionary(key => key, key => categories[key]);
+            string json = JsonConvert.SerializeObject(dictionary);
             string url = "http://127.0.0.1:122/api/updateCategory";
             using var client = new WebClient();
-            client.UploadValues(url, categories);
+            client.Headers[HttpRequestHeader.ContentType] = "application/json";
+            client.UploadString(url, "POST", json);
             assignCategoryHelper.Clear();
         }
-
+        
         void ConnectToApp(NameValueCollection userInfo, string type)
         {
-            string url = "http://127.0.0.1:122/api/ConnectToApp";
+            var dictionary = userInfo.AllKeys.ToDictionary(key => key, key => userInfo[key]);
+            string json = JsonConvert.SerializeObject(dictionary);
+            string url = "http://127.0.0.1:122/api/user/" + type;
             using var client = new WebClient();
-            userInfo.Add("type", type);
-            var response = client.UploadValues(url, userInfo);
-            string responseString = Encoding.Default.GetString(response);
+            client.Headers[HttpRequestHeader.ContentType] = "application/json";
+            string responseString = client.UploadString(url, "POST", json);
             MessageBox.Show(responseString);
-            if(responseString.Contains("successful"))
+            if (responseString.Contains("successful"))
             {
                 userRole = userInfo["role"];
                 navigation.TabPages.Add(mainPage);
@@ -98,7 +101,7 @@ namespace BaseApplication
                 MessageBox.Show("There was an error accessing the database");
             }
         }
-        
+
         private void Login(String username, String password)
         {
             NameValueCollection userInfo = new()
@@ -470,7 +473,6 @@ namespace BaseApplication
             searchColumnCBox.DropDownStyle = ComboBoxStyle.DropDownList;
             searchTableCBox.SelectedIndex = 0;
         }
-
         private void addMemberBtn_Click(object sender, EventArgs e)
         {
             using var client = new WebClient();
@@ -480,18 +482,15 @@ namespace BaseApplication
             {
                 string email = memberEmailBox.Text;
                 string name = memberNameBox.Text;
-                NameValueCollection memberInfo = new()
+                var memberInfo = new Dictionary<string, string>
                 {
                     {"name", name},
                     {"email", email}
                 };
-                string response = Encoding.Default.GetString(client.UploadValues(url, memberInfo));
+                string json = JsonConvert.SerializeObject(memberInfo);
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                string response = client.UploadString(url, "POST", json);
                 MessageBox.Show(response);
-                if (response.Equals("Member added"))
-                {
-                    navigation.SelectTab(mainPage);
-                    navigation.TabPages.Remove(addMember);
-                }
             }
             else
             {

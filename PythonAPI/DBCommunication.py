@@ -109,12 +109,14 @@ def get_balance_for_chart():
         return "No transactions"
     return myresult
 
+
 @app.route('/api/updateCategory', methods=["POST"])
 def update_transaction_category():
-    bank_reference = request.form['bankReference']
-    category = request.form['category']
+    category_info = request.get_json()
+    bank_reference = category_info.get('bankReference')
+    category = category_info.get('category')
     if category == "membership fee":
-        member = request.form['member']
+        member = category_info.get('member')
         make_connection = "INSERT INTO transaction_connect (memberId, bankReference) SELECT m.id, %s FROM member m WHERE m.name = %s "
         val = (bank_reference, member)
         mycursor.execute(make_connection, val)
@@ -146,36 +148,43 @@ def get_tables():
     return tables
 
 
-@app.route('/api/ConnectToApp', methods=["POST"])
-def connect_to_app():
-    action_type = request.form['type']
-    username = request.form['username']
-    password = request.form['password']
-    if action_type == "register":
-        first_name = request.form['firstName']
-        last_name = request.form['lastName']
-        date_of_join = datetime.now().strftime("%Y-%m-%d")
-        email = request.form['email']
-        role = request.form['role']
-        try:
-            sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            val = (username, first_name, last_name, password, email, date_of_join, role)
-            mycursor.execute(sql, val)
-            mydb.commit()
-            return "Register successful"
-        except mysql.connector.Error as err:
-            return err.msg
-    elif action_type == "login":
-        username = request.form['username']
-        if check_if_exist(username) == password:
-            return "Login successful"
-        return "Wrong password"
+@app.route('/api/user/register', methods=["POST"])
+def register():
+    user_info = request.get_json()
+    username = user_info.get('username')
+    password = user_info.get('password')
+    first_name = user_info.get('firstName')
+    last_name = user_info.get('lastName')
+    email = user_info.get('email')
+    role = user_info.get('role')
+    date_of_join = datetime.now().strftime("%Y-%m-%d")
+
+    try:
+        sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        val = (username, first_name, last_name, password, email, date_of_join, role)
+        mycursor.execute(sql, val)
+        mydb.commit()
+        return "Register successful"
+    except mysql.connector.Error as err:
+        return err.msg
+
+
+@app.route('/api/user/login', methods=["POST"])
+def login():
+    user_info = request.get_json()
+    username = user_info.get('username')
+    password = user_info.get('password')
+
+    if check_if_exist(username) == password:
+        return "Login successful"
+    return "Wrong password"
 
 
 @app.route('/api/addMember', methods=["POST"])
 def add_member():
-    name = request.form['name']
-    email = request.form['email']
+    member_info = request.get_json()
+    name = member_info.get('name')
+    email = member_info.get('email')
     try:
         insert_member = "INSERT INTO member (name, email) VALUES (%s, %s)"
         val = (name, email)

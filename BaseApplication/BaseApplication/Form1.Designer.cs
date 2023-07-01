@@ -830,13 +830,13 @@ namespace BaseApplication
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(415, 30);
+            this.chart1.Location = new System.Drawing.Point(389, 86);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(348, 280);
+            this.chart1.Size = new System.Drawing.Size(382, 300);
             this.chart1.TabIndex = 21;
             this.chart1.Text = "chart1";
             // 
