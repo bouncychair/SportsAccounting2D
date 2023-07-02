@@ -5,22 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8bf00196-e52c-4fe4-81f7-01f9b914d32d" name="Changes" comment="search keyword functionality">
-      <change afterPath="$PROJECT_DIR$/../Backup/backup.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Backup/backup_2023-04-05.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/FileContentIndex/bdf4683f-eae1-4788-a183-f873e93bb909.vsidx" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/validation/XML/XMLTest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/validation/XML/XSDSchemav3.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DBCommunication.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBCommunication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonAPI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validation/Validator.py" beforeDir="false" afterPath="$PROJECT_DIR$/validation/Validator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/validation/XML/XSDSchemav2.xsd" beforeDir="false" afterPath="$PROJECT_DIR$/validation/XML/XSDSchemav2.xsd" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,25 +44,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.go.formatter.settings.were.checked": "true",
+    "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "dev",
+    "go.import.settings.migrated": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="DBCommunication" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PythonAPI" />
@@ -113,6 +113,8 @@
       <workItem from="1680123926385" duration="7461000" />
       <workItem from="1680701541155" duration="2805000" />
       <workItem from="1680774553406" duration="1784000" />
+      <workItem from="1688332420832" duration="22000" />
+      <workItem from="1688332460084" duration="3313000" />
     </task>
     <task id="LOCAL-00001" summary="user can now add custom description and export modules summary as json">
       <created>1679607445325</created>
@@ -151,7 +153,6 @@
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/PythonAPI$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1680707410672" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1680774926352" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688332473063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

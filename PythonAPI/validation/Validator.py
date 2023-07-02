@@ -1,18 +1,9 @@
 import json
 import jsonschema
-# from validation.Draft07Schema import schema
+from lxml import etree
 
-# def JSONtoXMLconvert():
-#     xml = json2xml.Json2xml(jsonFile).to_xml()
-#     return xml
-#
-#
-# def XMLSchemaValidate():
-#     my_schema = xmlschema.XMLSchema('XSDSchema.xsd')
-#     data = my_schema.is_valid(JSONtoXMLconvert())
-#     print(data)
-
-with open(r'validation\JSON\validation.json') as file:
+# JSON Validation
+with open(r'JSON\validation.json') as file:
     schema = json.load(file)
 
 
@@ -22,3 +13,22 @@ def json_schema_validate(json_file):
         return True
     except jsonschema.exceptions.ValidationError:
         return False
+
+
+# XML Validation
+with open('XML/XMLTest.xml', 'r', encoding='utf-8') as xml_file:
+    xml_content = xml_file.read()
+
+with open('XML/XSDSchemav3.xsd', 'r', encoding='utf-8') as xsd_file:
+    xsd_content = xsd_file.read()
+
+
+def xml_schema_validate(xml_file):
+    xmlschema = etree.XMLSchema(etree.fromstring(xsd_content))
+    parser = etree.XMLParser(schema=xmlschema)
+
+    try:
+        etree.fromstring(xml_file.encode(), parser)
+        return True, None
+    except etree.XMLSyntaxError as e:
+        return False, str(e)

@@ -9,7 +9,7 @@ import json
 import mysql.connector
 import dicttoxml2
 from xml.dom.minidom import parseString
-from validation.Validator import json_schema_validate
+from validation.Validator import json_schema_validate, xml_schema_validate
 
 # MySql connection
 mydb = mysql.connector.connect(
@@ -48,7 +48,7 @@ def save_file_to_database():
     file = request.files['file']
     if file.filename != '':
         file = parse_mt940_file(file)
-        if json_schema_validate(file) is False:
+        if json_schema_validate(file) & xml_schema_validate(file) is False:
             return "Unsupported file format"
         if is_duplicate(file):
             return "Duplicate file"
