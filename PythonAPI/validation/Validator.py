@@ -1,9 +1,15 @@
 import json
 import jsonschema
 from lxml import etree
+import os
+
+current_directory = os.path.dirname(__file__)
+json_file_path = os.path.join(current_directory, 'JSON', 'validation.json')
+xml_file_path = os.path.join(current_directory, 'XML', 'XMLTest.xml')
+xsd_file_path = os.path.join(current_directory, 'XML', 'XSDSchemav3.xsd')
 
 # JSON Validation
-with open(r'JSON\validation.json') as file:
+with open(json_file_path, 'r') as file:
     schema = json.load(file)
 
 
@@ -16,10 +22,10 @@ def json_schema_validate(json_file):
 
 
 # XML Validation
-with open('XML/XMLTest.xml', 'r', encoding='utf-8') as xml_file:
+with open(xml_test_file_path, 'r', encoding='utf-8') as xml_file:
     xml_content = xml_file.read()
 
-with open('XML/XSDSchemav3.xsd', 'r', encoding='utf-8') as xsd_file:
+with open(xsd_file_path, 'r', encoding='utf-8') as xsd_file:
     xsd_content = xsd_file.read()
 
 
