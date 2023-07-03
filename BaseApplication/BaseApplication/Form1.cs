@@ -565,7 +565,27 @@ namespace BaseApplication
             }
             else
             {
-                navigation.TabPages.Add(chartPage);
+                string tabNameToCheck = "Transaction Chart";
+
+                bool tabExists = false;
+
+                foreach (TabPage tabPage in navigation.TabPages)
+                {
+                    if (tabPage.Name == tabNameToCheck)
+                    {
+                        tabExists = true;
+                        break;
+                    }
+                }
+                if(tabExists)
+                {
+
+                }
+                else
+                {
+                    navigation.TabPages.Add(chartPage);
+                }
+                chart1.Series.Clear();
                 object[][] dataArray;
                 dataArray = JsonConvert.DeserializeObject<object[][]>(json);
 
