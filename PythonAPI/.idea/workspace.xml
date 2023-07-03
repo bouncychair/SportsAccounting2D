@@ -6,20 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8bf00196-e52c-4fe4-81f7-01f9b914d32d" name="Changes" comment="search keyword functionality">
       <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferences.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferences.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_07_2023_22_52__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_07_2023_22_52__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonAPI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DBCommunication.py" beforeDir="false" afterPath="$PROJECT_DIR$/DBCommunication.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,6 +110,7 @@
       <workItem from="1688332460084" duration="3313000" />
       <workItem from="1688384880263" duration="1510000" />
       <workItem from="1688410185499" duration="190000" />
+      <workItem from="1688411812942" duration="1169000" />
     </task>
     <task id="LOCAL-00001" summary="user can now add custom description and export modules summary as json">
       <created>1679607445325</created>
@@ -155,6 +149,6 @@
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688410246450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688412788232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

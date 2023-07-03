@@ -95,7 +95,6 @@ namespace BaseApplication
                 navigation.SelectTab(mainPage);
                 AdjustUser();
                 populateChart();
-                chart1.Series["Series1"].Name = "Money";
             }
             else
             {
@@ -555,6 +554,7 @@ namespace BaseApplication
 
         private async void populateChart()
         {
+            chart1.Series[0].Points.Clear();
             string url = "http://127.0.0.1:122/api/getTransactionsForChart";
             using var client = new HttpClient();
 
@@ -563,8 +563,6 @@ namespace BaseApplication
             {
                 return;
             }
-            else
-            {
                 string tabNameToCheck = "Transaction Chart";
 
                 bool tabExists = false;
@@ -577,15 +575,10 @@ namespace BaseApplication
                         break;
                     }
                 }
-                if(tabExists)
-                {
-
-                }
-                else
+                if(!tabExists)
                 {
                     navigation.TabPages.Add(chartPage);
                 }
-                chart1.Series.Clear();
                 object[][] dataArray;
                 dataArray = JsonConvert.DeserializeObject<object[][]>(json);
 
@@ -600,7 +593,6 @@ namespace BaseApplication
                         dataArray = dataArray.OrderBy(item => DateTime.Parse((string)item[1])).ToArray();
                     }
                 }
-                chart1.Series[0].Name = "Money, EUR";
                 foreach (var item in dataArray)
                 {
                     var xValue = item[1].ToString(); // Assuming date is the x-value
@@ -608,7 +600,7 @@ namespace BaseApplication
 
                     chart1.Series[0].Points.AddXY(xValue, yValue);
                 }
-            }
+                chart1.Series[0].Name = "Money, EUR";
         }
 
         private void chart1_Click(object sender, EventArgs e)

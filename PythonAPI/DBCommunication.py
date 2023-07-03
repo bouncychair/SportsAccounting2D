@@ -48,8 +48,8 @@ def save_file_to_database():
     file = request.files['file']
     if file.filename != '':
         file = parse_mt940_file(file)
-        if json_schema_validate(file) & xml_schema_validate(file) is False:
-            return "Unsupported file format"
+        #if json_schema_validate(file) & xml_schema_validate(file) is False:
+            #return "Unsupported file format"
         if is_duplicate(file):
             return "Duplicate file"
         balances = list(key for key in file if "balance" in key)
