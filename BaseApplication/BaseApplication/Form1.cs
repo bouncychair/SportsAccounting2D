@@ -40,6 +40,7 @@ namespace BaseApplication
             navigation.TabPages.Remove(searchKeyword);
             navigation.TabPages.Remove(addMember);
             navigation.TabPages.Remove(mainPage);
+            navigation.TabPages.Remove(chartPage);
             UpdateBalance();
         }
         
@@ -190,7 +191,7 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             string transactions = await client.GetStringAsync(url);
-
+            populateChart();
             return SplitResponse(transactions);
         }
         
@@ -558,27 +559,41 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             var json = await client.GetStringAsync(url);
-            object[][] dataArray;
-            dataArray = JsonConvert.DeserializeObject<object[][]>(json);
-
-            for (int i = 0; i < dataArray.Length; i++)
+            if (json == "No transactions")
             {
-                if (dataArray[i].Length > 1 && dataArray[i][1] is string dateString)
+                return;
+            }
+            else
+            {
+                navigation.TabPages.Add(chartPage);
+                object[][] dataArray;
+                dataArray = JsonConvert.DeserializeObject<object[][]>(json);
+
+                for (int i = 0; i < dataArray.Length; i++)
                 {
-                    if (DateTime.TryParseExact(dateString, "ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                    if (dataArray[i].Length > 1 && dataArray[i][1] is string dateString)
                     {
-                        dataArray[i][1] = date.ToString("yyyy-MM-dd");
+                        if (DateTime.TryParseExact(dateString, "ddd, dd MMM yyyy HH:mm:ss 'GMT'", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+                        {
+                            dataArray[i][1] = date.ToString("yyyy-MM-dd");
+                        }
+                        dataArray = dataArray.OrderBy(item => DateTime.Parse((string)item[1])).ToArray();
                     }
-                    dataArray = dataArray.OrderBy(item => DateTime.Parse((string)item[1])).ToArray();
+                }
+                chart1.Series[0].Name = "Money, EUR";
+                foreach (var item in dataArray)
+                {
+                    var xValue = item[1].ToString(); // Assuming date is the x-value
+                    var yValue = Convert.ToDouble(item[0]); // Assuming value is the y-value
+
+                    chart1.Series[0].Points.AddXY(xValue, yValue);
                 }
             }
-            foreach (var item in dataArray)
-            {
-                var xValue = item[1].ToString(); // Assuming date is the x-value
-                var yValue = Convert.ToDouble(item[0]); // Assuming value is the y-value
+        }
 
-                chart1.Series[0].Points.AddXY(xValue, yValue);
-            }
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

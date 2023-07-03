@@ -105,6 +105,7 @@ namespace BaseApplication
             this.memberNameBox = new System.Windows.Forms.TextBox();
             this.memberNameLbl = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.chartPage = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
@@ -115,6 +116,7 @@ namespace BaseApplication
             this.editDescription.SuspendLayout();
             this.searchKeyword.SuspendLayout();
             this.addMember.SuspendLayout();
+            this.chartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -128,6 +130,7 @@ namespace BaseApplication
             this.navigation.Controls.Add(this.editDescription);
             this.navigation.Controls.Add(this.searchKeyword);
             this.navigation.Controls.Add(this.addMember);
+            this.navigation.Controls.Add(this.chartPage);
             this.navigation.Location = new System.Drawing.Point(1, 0);
             this.navigation.Name = "navigation";
             this.navigation.SelectedIndex = 0;
@@ -136,7 +139,6 @@ namespace BaseApplication
             // 
             // mainPage
             // 
-            this.mainPage.Controls.Add(this.chart1);
             this.mainPage.Controls.Add(this.summaryBtn);
             this.mainPage.Controls.Add(this.availableBalanceLbl);
             this.mainPage.Controls.Add(this.addMemberBtnMain);
@@ -824,21 +826,32 @@ namespace BaseApplication
             this.memberNameLbl.TabIndex = 0;
             this.memberNameLbl.Text = "Full Name";
             // 
+            // chartPage
+            // 
+            this.chartPage.Controls.Add(this.chart1);
+            this.chartPage.Location = new System.Drawing.Point(4, 25);
+            this.chartPage.Name = "chartPage";
+            this.chartPage.Size = new System.Drawing.Size(793, 418);
+            this.chartPage.TabIndex = 8;
+            this.chartPage.Text = "Transaction Chart";
+            this.chartPage.UseVisualStyleBackColor = true;
+            // 
             // chart1
             // 
             chartArea1.Name = "ChartArea1";
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(389, 86);
+            this.chart1.Location = new System.Drawing.Point(8, 4);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(382, 300);
-            this.chart1.TabIndex = 21;
+            this.chart1.Size = new System.Drawing.Size(785, 414);
+            this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // Form1
             // 
@@ -866,6 +879,7 @@ namespace BaseApplication
             this.searchKeyword.PerformLayout();
             this.addMember.ResumeLayout(false);
             this.addMember.PerformLayout();
+            this.chartPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.ResumeLayout(false);
 
@@ -945,6 +959,7 @@ namespace BaseApplication
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox userTypeBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private TabPage chartPage;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
