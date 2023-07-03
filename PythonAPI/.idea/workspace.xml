@@ -110,7 +110,7 @@
       <workItem from="1688332460084" duration="3313000" />
       <workItem from="1688384880263" duration="1510000" />
       <workItem from="1688410185499" duration="190000" />
-      <workItem from="1688411812942" duration="1169000" />
+      <workItem from="1688411812942" duration="1891000" />
     </task>
     <task id="LOCAL-00001" summary="user can now add custom description and export modules summary as json">
       <created>1679607445325</created>
@@ -149,6 +149,6 @@
     <settings-migrated>true</settings-migrated>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688412788232" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688413782926" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

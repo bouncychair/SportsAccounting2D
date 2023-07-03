@@ -563,22 +563,11 @@ namespace BaseApplication
             {
                 return;
             }
-                string tabNameToCheck = "Transaction Chart";
-
-                bool tabExists = false;
-
-                foreach (TabPage tabPage in navigation.TabPages)
-                {
-                    if (tabPage.Name == tabNameToCheck)
-                    {
-                        tabExists = true;
-                        break;
-                    }
-                }
-                if(!tabExists)
-                {
+                if(!navigation.TabPages.Contains(chartPage))
+            {
                     navigation.TabPages.Add(chartPage);
-                }
+                    chart1.Series[0].Name = "Money, EUR";
+            }
                 object[][] dataArray;
                 dataArray = JsonConvert.DeserializeObject<object[][]>(json);
 
@@ -600,7 +589,7 @@ namespace BaseApplication
 
                     chart1.Series[0].Points.AddXY(xValue, yValue);
                 }
-                chart1.Series[0].Name = "Money, EUR";
+                //chart1.Series[0].Name = "Money, EUR";
         }
 
         private void chart1_Click(object sender, EventArgs e)
