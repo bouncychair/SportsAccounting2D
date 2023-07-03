@@ -22,7 +22,7 @@ def json_schema_validate(json_file):
 
 
 # XML Validation
-with open(xml_test_file_path, 'r', encoding='utf-8') as xml_file:
+with open(xml_file_path, 'r', encoding='utf-8') as xml_file:
     xml_content = xml_file.read()
 
 with open(xsd_file_path, 'r', encoding='utf-8') as xsd_file:
