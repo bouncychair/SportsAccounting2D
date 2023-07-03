@@ -63,7 +63,7 @@ namespace BaseApplication
             string url = "http://127.0.0.1:122/api/uploadFile";
             using var client = new WebClient();
             var response = client.UploadFile(url, fileToUpload);
-            return Encoding.Default.GetString(response);
+            return GetResponse(Encoding.Default.GetString(response));
             
         }
         void UpdateCategories(NameValueCollection categories)
@@ -84,7 +84,7 @@ namespace BaseApplication
             string url = "http://127.0.0.1:122/api/user/" + type;
             using var client = new WebClient();
             client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string responseString = client.UploadString(url, "POST", json);
+            string responseString = GetResponse(client.UploadString(url, "POST", json));
             MessageBox.Show(responseString);
             if (responseString.Contains("successful"))
             {
@@ -98,7 +98,7 @@ namespace BaseApplication
             }
             else
             {
-                MessageBox.Show("There was an error accessing the database");
+                MessageBox.Show(responseString);
             }
         }
 
@@ -407,7 +407,7 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             string response = await client.GetStringAsync(url);
-            MessageBox.Show(response);
+            MessageBox.Show(GetResponse(response));
 
             navigation.TabPages.Remove(editDescription);
             navigation.SelectTab(mainPage);
@@ -490,7 +490,7 @@ namespace BaseApplication
                 string json = JsonConvert.SerializeObject(memberInfo);
                 client.Headers[HttpRequestHeader.ContentType] = "application/json";
                 string response = client.UploadString(url, "POST", json);
-                MessageBox.Show(response);
+                MessageBox.Show(GetResponse(response));
             }
             else
             {
@@ -592,9 +592,24 @@ namespace BaseApplication
                 //chart1.Series[0].Name = "Money, EUR";
         }
 
-        private void chart1_Click(object sender, EventArgs e)
+        public static string GetResponse(string jsonResponse)
         {
+            // Parse the JSON response
+            JObject responseJson = JObject.Parse(jsonResponse);
 
+            // Extract the "response" value
+            JToken responseToken = responseJson["response"];
+
+            // Check if the "response" value is not null and is of type string
+            if (responseToken != null && responseToken.Type == JTokenType.String)
+            {
+                // Extract the "Hi" part
+                string hiPart = responseToken.Value<string>();
+                return hiPart;
+            }
+
+            // Return an empty string if the "Hi" part couldn't be extracted
+            return jsonResponse;
         }
     }
 }

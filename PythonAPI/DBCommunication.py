@@ -2,7 +2,7 @@ import subprocess
 from datetime import datetime
 
 import mt940
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from pymongo import MongoClient
 from connectionString import connection_string
 import json
@@ -32,7 +32,11 @@ app = Flask(__name__)
 
 @app.route('/api/test', methods=["GET"])
 def test():
-    return "Hi"
+    return json_response("Hi")
+
+
+def json_response(data, status=200):
+    return jsonify({"response": data}), status
 
 
 @app.route('/api/PerformBackup', methods=["GET"])
@@ -40,7 +44,7 @@ def perform_backup():
     file_name = "backup_" + datetime.now().strftime("%d-%m-%Y") + ".sql"
     subprocess.Popen("C:/xampp/mysql/bin/mysqldump.exe -h localhost -P 3306 -u root sportsaccounting --routines > "
                      "../Backup/" + file_name, shell=True)
-    return "Backup performed"
+    return json_response("Backup performed")
 
 
 @app.route('/api/uploadFile', methods=["POST"])
@@ -48,15 +52,15 @@ def save_file_to_database():
     file = request.files['file']
     if file.filename != '':
         file = parse_mt940_file(file)
-        #if json_schema_validate(file) & xml_schema_validate(file) is False:
-            #return "Unsupported file format"
+        if json_schema_validate(file) is False:  # & xml_schema_validate(file) is False:
+            return json_response("Unsupported file format")
         if is_duplicate(file):
-            return "Duplicate file"
+            return json_response("File already exists")
         balances = list(key for key in file if "balance" in key)
         insert_file_info(file, collect_detailed_ids(file, balances))
         insert_transaction_info(file)
         collection.insert_one(file)
-    return "File uploaded"
+    return json_response("File uploaded")
 
 
 @app.route('/api/getTransactions/<request_type>', methods=["GET"])
@@ -78,7 +82,7 @@ def update_transaction_description():
     val = (custom_details, bank_reference)
     mycursor.execute(update_desc, val)
     mydb.commit()
-    return "Description updated"
+    return json_response("Transaction description updated")
 
 
 @app.route('/api/getTransactionDescription/<bank_ref>', methods=["GET"])
@@ -96,8 +100,9 @@ def get_balance():
     myresult = mycursor.fetchall()
     print(myresult)
     if len(myresult) == 0:
-        return "No balance"
+        return json_response("No balance")
     return myresult
+
 
 @app.route('/api/getTransactionsForChart', methods=["GET"])
 def get_balance_for_chart():
@@ -106,7 +111,7 @@ def get_balance_for_chart():
     myresult = mycursor.fetchall()
     print(myresult)
     if len(myresult) == 0:
-        return "No transactions"
+        return json_response("No balance")
     return myresult
 
 
@@ -125,7 +130,7 @@ def update_transaction_category():
     val = (category, bank_reference)
     mycursor.execute(update_category, val)
     mydb.commit()
-    return "Category updated"
+    return json_response("Transaction category updated")
 
 
 @app.route('/api/ModuleInfo/<module>', methods=["GET"])
@@ -164,9 +169,9 @@ def register():
         val = (username, first_name, last_name, password, email, date_of_join, role)
         mycursor.execute(sql, val)
         mydb.commit()
-        return "Register successful"
+        return json_response("Registration successful")
     except mysql.connector.Error as err:
-        return err.msg
+        return json_response(err.msg)
 
 
 @app.route('/api/user/login', methods=["POST"])
@@ -176,8 +181,8 @@ def login():
     password = user_info.get('password')
 
     if check_if_exist(username) == password:
-        return "Login successful"
-    return "Wrong password"
+        return json_response("Login successful")
+    return json_response("Login failed")
 
 
 @app.route('/api/addMember', methods=["POST"])
@@ -190,9 +195,9 @@ def add_member():
         val = (name, email)
         mycursor.execute(insert_member, val)
         mydb.commit()
-        return "Member added"
+        return json_response("Member added")
     except mysql.connector.Error as err:
-        return "Member already exists"
+        return json_response("User already exists")
 
 
 def check_if_exist(username):
@@ -206,7 +211,8 @@ def check_if_exist(username):
 
 @app.route('/api/Columns/<table>', methods=["GET"])
 def get_columns(table):
-    mycursor.execute("SELECT DISTINCT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'sportsaccounting' AND TABLE_NAME = '%s'" % table)
+    mycursor.execute(
+        "SELECT DISTINCT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'sportsaccounting' AND TABLE_NAME = '%s'" % table)
     columns = mycursor.fetchall()
     return columns
 
@@ -308,7 +314,7 @@ def make_summary():
         outfile.write(json_summary)
     with open("../Summaries/summary.xml", "wb") as outfile:
         outfile.write(xml_summary)
-    return "Summary created"
+    return json_response("Summary created successfully")
 
 
 @app.route('/api/getCustomDetails', methods=["GET"])
@@ -416,7 +422,10 @@ def insert_transaction_info(file):
         extra_details = transaction['extra_details']
         custom_details = ""
 
-        mycursor.callproc('InsertTransactionWithDetails', [bank_reference, transaction_reference, category, detailed_info_id, entry_date, guessed_entry_date, funds_code, transaction_id, transaction_details, extra_details, custom_details])
+        mycursor.callproc('InsertTransactionWithDetails',
+                          [bank_reference, transaction_reference, category, detailed_info_id, entry_date,
+                           guessed_entry_date, funds_code, transaction_id, transaction_details, extra_details,
+                           custom_details])
 
 
 def parse_mt940_file(file_path):
@@ -431,4 +440,3 @@ def parse_mt940_file(file_path):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=122)
-

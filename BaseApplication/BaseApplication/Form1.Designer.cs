@@ -851,7 +851,6 @@ namespace BaseApplication
             this.chart1.Size = new System.Drawing.Size(785, 414);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            this.chart1.Click += new System.EventHandler(this.chart1_Click);
             // 
             // Form1
             // 
