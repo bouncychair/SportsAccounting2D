@@ -519,7 +519,7 @@ namespace BaseApplication
         private async void UpdateBalance()
         {
             string balance = TrimString(await GetBalance());
-            if (balance == "No balance")
+            if (balance.Contains("No balance"))
             {
                 availableBalanceLbl.Visible = false;
                 generateSummaryBtn.Visible = false;
@@ -559,15 +559,15 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             var json = await client.GetStringAsync(url);
-            if (json == "No transactions")
+            if (json.Contains("No transactions"))
             {
                 return;
             }
                 if(!navigation.TabPages.Contains(chartPage))
-            {
+                {
                     navigation.TabPages.Add(chartPage);
                     chart1.Series[0].Name = "Money, EUR";
-            }
+                }
                 object[][] dataArray;
                 dataArray = JsonConvert.DeserializeObject<object[][]>(json);
 
@@ -594,21 +594,15 @@ namespace BaseApplication
 
         public static string GetResponse(string jsonResponse)
         {
-            // Parse the JSON response
             JObject responseJson = JObject.Parse(jsonResponse);
-
-            // Extract the "response" value
             JToken responseToken = responseJson["response"];
 
-            // Check if the "response" value is not null and is of type string
             if (responseToken != null && responseToken.Type == JTokenType.String)
             {
-                // Extract the "Hi" part
                 string hiPart = responseToken.Value<string>();
                 return hiPart;
             }
 
-            // Return an empty string if the "Hi" part couldn't be extracted
             return jsonResponse;
         }
     }

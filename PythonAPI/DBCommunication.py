@@ -111,7 +111,7 @@ def get_balance_for_chart():
     myresult = mycursor.fetchall()
     print(myresult)
     if len(myresult) == 0:
-        return json_response("No balance")
+        return json_response("No transactions")
     return myresult
 
 
