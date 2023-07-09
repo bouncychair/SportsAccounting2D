@@ -34,7 +34,7 @@ namespace BaseApplication
         }
 
         string userRole = "";
-        string commType = "xml";
+        string commType = "json";
         List<Tuple<TextBox, ComboBox, ComboBox>> assignCategoryHelper = new();
         private List<User> users = new();
         JObject modulesInformation = new();
@@ -636,6 +636,8 @@ namespace BaseApplication
             MessageBox.Show("Summary generated");
         }
 
+
+        
         private async void populateChart()
         {
             chart1.Series[0].Points.Clear();
@@ -731,6 +733,20 @@ namespace BaseApplication
         private void jsonResponseSlct_CheckedChanged(object sender, EventArgs e)
         {
             commType = "json";
+        }
+
+        private void LogoutBtn_Click(object sender, EventArgs e)
+        {
+            navigation.TabPages.Remove(editTransaction);
+            navigation.TabPages.Remove(editDescription);
+            navigation.TabPages.Remove(modules);
+            navigation.TabPages.Remove(searchKeyword);
+            navigation.TabPages.Remove(addMember);
+            navigation.TabPages.Remove(mainPage);
+            navigation.TabPages.Remove(chartPage);
+            navigation.TabPages.Add(loginPage);
+            navigation.TabPages.Add(registerPage);
+            navigation.SelectTab(loginPage);
         }
     }
 }

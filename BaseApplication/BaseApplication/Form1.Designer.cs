@@ -93,6 +93,7 @@ namespace BaseApplication
             this.bankRefEditLbl = new System.Windows.Forms.Label();
             this.bRefCBox = new System.Windows.Forms.ComboBox();
             this.searchKeyword = new System.Windows.Forms.TabPage();
+            this.searchTable = new System.Windows.Forms.DataGridView();
             this.searchKeywordBtn = new System.Windows.Forms.Button();
             this.searchKeywordLbl = new System.Windows.Forms.Label();
             this.searchColumnLbl = new System.Windows.Forms.Label();
@@ -110,7 +111,7 @@ namespace BaseApplication
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.searchTable = new System.Windows.Forms.DataGridView();
+            this.LogoutBtn = new System.Windows.Forms.Button();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.responseTypeBox.SuspendLayout();
@@ -120,10 +121,10 @@ namespace BaseApplication
             this.modules.SuspendLayout();
             this.editDescription.SuspendLayout();
             this.searchKeyword.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).BeginInit();
             this.addMember.SuspendLayout();
             this.chartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).BeginInit();
             this.SuspendLayout();
             // 
             // navigation
@@ -145,6 +146,7 @@ namespace BaseApplication
             // 
             // mainPage
             // 
+            this.mainPage.Controls.Add(this.LogoutBtn);
             this.mainPage.Controls.Add(this.responseTypeBox);
             this.mainPage.Controls.Add(this.summaryBtn);
             this.mainPage.Controls.Add(this.availableBalanceLbl);
@@ -742,6 +744,16 @@ namespace BaseApplication
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
             // 
+            // searchTable
+            // 
+            this.searchTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchTable.Location = new System.Drawing.Point(7, 135);
+            this.searchTable.Name = "searchTable";
+            this.searchTable.RowHeadersWidth = 51;
+            this.searchTable.RowTemplate.Height = 24;
+            this.searchTable.Size = new System.Drawing.Size(776, 262);
+            this.searchTable.TabIndex = 7;
+            // 
             // searchKeywordBtn
             // 
             this.searchKeywordBtn.Location = new System.Drawing.Point(661, 103);
@@ -886,15 +898,15 @@ namespace BaseApplication
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
-            // searchTable
+            // LogoutBtn
             // 
-            this.searchTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.searchTable.Location = new System.Drawing.Point(7, 135);
-            this.searchTable.Name = "searchTable";
-            this.searchTable.RowHeadersWidth = 51;
-            this.searchTable.RowTemplate.Height = 24;
-            this.searchTable.Size = new System.Drawing.Size(776, 262);
-            this.searchTable.TabIndex = 7;
+            this.LogoutBtn.Location = new System.Drawing.Point(603, 341);
+            this.LogoutBtn.Name = "LogoutBtn";
+            this.LogoutBtn.Size = new System.Drawing.Size(99, 45);
+            this.LogoutBtn.TabIndex = 22;
+            this.LogoutBtn.Text = "Logout";
+            this.LogoutBtn.UseVisualStyleBackColor = true;
+            this.LogoutBtn.Click += new System.EventHandler(this.LogoutBtn_Click);
             // 
             // Form1
             // 
@@ -922,11 +934,11 @@ namespace BaseApplication
             this.editDescription.PerformLayout();
             this.searchKeyword.ResumeLayout(false);
             this.searchKeyword.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).EndInit();
             this.addMember.ResumeLayout(false);
             this.addMember.PerformLayout();
             this.chartPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1011,6 +1023,7 @@ namespace BaseApplication
         private RadioButton xmlResponseSlct;
         private RadioButton jsonResponseSlct;
         private DataGridView searchTable;
+        private Button LogoutBtn;
     }
 }
 
