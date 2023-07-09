@@ -14,16 +14,10 @@
       <change afterPath="$PROJECT_DIR$/validation/XML/modules_summary_schema.xsd" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/validation/XML/register_schema.xsd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/.vs/BaseApplication/v17/.suo" afterDir="false" />
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.Designer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/Form1.cs" afterDir="false" />
->>>>>>> cdf85685259f6d90d18288b77669b3d066d01f1d
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/bin/Debug/BaseApplication.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.AssemblyReference.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.CoreCompileInputs.cache" afterDir="false" />
-<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.FileListAbsolute.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.FileListAbsolute.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
@@ -37,15 +31,6 @@
       <change beforePath="$PROJECT_DIR$/../Summaries/modules_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Summaries/modules_summary.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Summaries/summary.json" beforeDir="false" afterPath="$PROJECT_DIR$/../Summaries/summary.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Summaries/summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Summaries/summary.xml" afterDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.csproj.GenerateResource.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/BaseApplication.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferences.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferences.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../BaseApplication/BaseApplication/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PythonAPI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PythonAPI.iml" afterDir="false" />
->>>>>>> cdf85685259f6d90d18288b77669b3d066d01f1d
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,10 +65,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
-<<<<<<< HEAD
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Chris/Desktop/SportsAccounting/Summaries/modules_summary.json&quot;,
-=======
->>>>>>> cdf85685259f6d90d18288b77669b3d066d01f1d
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -155,13 +137,7 @@
       <workItem from="1688493510365" duration="65000" />
       <workItem from="1688553761241" duration="49000" />
       <workItem from="1688553943142" duration="2949000" />
-<<<<<<< HEAD
       <workItem from="1688912824196" duration="9724000" />
-=======
-      <workItem from="1688902738131" duration="346000" />
-      <workItem from="1688903899444" duration="853000" />
-      <workItem from="1688907909116" duration="547000" />
->>>>>>> cdf85685259f6d90d18288b77669b3d066d01f1d
     </task>
     <task id="LOCAL-00001" summary="user can now add custom description and export modules summary as json">
       <created>1679607445325</created>
@@ -207,11 +183,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-<<<<<<< HEAD
     <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication2.coverage" NAME="DBCommunication2 Coverage Results" MODIFIED="1688387493378" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="" />
     <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688921845369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-=======
-    <SUITE FILE_PATH="coverage/DBCommunication_py$DBCommunication.coverage" NAME="DBCommunication Coverage Results" MODIFIED="1688907910298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
->>>>>>> cdf85685259f6d90d18288b77669b3d066d01f1d
   </component>
 </project>
