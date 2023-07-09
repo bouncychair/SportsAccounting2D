@@ -444,6 +444,7 @@ namespace BaseApplication
 
         private async void searchKeywordBtn_Click(object sender, EventArgs e)
         {
+            searchTable.Rows.Clear();
             string table = searchTableCBox.SelectedItem.ToString();
             string column = searchColumnCBox.SelectedItem.ToString();
             string keyword = keywordSeach.Text;
@@ -451,7 +452,30 @@ namespace BaseApplication
             string url = $"http://127.0.0.1:122/api/searchKeyword?table={table}&column={column}&keyword={keyword}";
             using var client = new HttpClient();
             string response = await client.GetStringAsync(url);
-            richTextBox3.Text = response;
+            string[][] parsedResponse = ParseStringToArray(response);
+            for (int i = 0; i < parsedResponse.Length; i++)
+            {
+                searchTable.Rows.Add(parsedResponse[i]);
+            }
+        }
+
+        static string[][] ParseStringToArray(string input)
+        {
+            JArray jsonArray = JsonConvert.DeserializeObject<JArray>(input);
+            string[][] array = new string[jsonArray.Count][];
+
+            for (int i = 0; i < jsonArray.Count; i++)
+            {
+                JArray innerArray = jsonArray[i].ToObject<JArray>();
+                array[i] = new string[innerArray.Count];
+
+                for (int j = 0; j < innerArray.Count; j++)
+                {
+                    array[i][j] = innerArray[j].ToString();
+                }
+            }
+
+            return array;
         }
 
         private async void searchTableCBox_SelectionChangeCommitted(object sender, EventArgs e)
@@ -463,9 +487,19 @@ namespace BaseApplication
             string response = await client.GetStringAsync(url);
             string[] columns = SplitResponse(response);
             searchColumnCBox.Items.Clear();
+            searchTable.Columns.Clear();
+            searchTable.Rows.Clear();
             foreach (string column in columns)
             {   
                 searchColumnCBox.Items.Add(TrimString(column));
+
+                string columnName = TrimString(column);
+
+                DataGridViewTextBoxColumn insertedColumn = new DataGridViewTextBoxColumn();
+                insertedColumn.HeaderText = columnName;
+                insertedColumn.DataPropertyName = columnName;
+
+                searchTable.Columns.Add(insertedColumn);
             }
             searchColumnCBox.SelectedIndex = 0;
         }

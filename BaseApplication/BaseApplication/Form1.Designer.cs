@@ -93,7 +93,6 @@ namespace BaseApplication
             this.bankRefEditLbl = new System.Windows.Forms.Label();
             this.bRefCBox = new System.Windows.Forms.ComboBox();
             this.searchKeyword = new System.Windows.Forms.TabPage();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.searchKeywordBtn = new System.Windows.Forms.Button();
             this.searchKeywordLbl = new System.Windows.Forms.Label();
             this.searchColumnLbl = new System.Windows.Forms.Label();
@@ -111,6 +110,8 @@ namespace BaseApplication
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.searchTable = new System.Windows.Forms.DataGridView();
+            this.backgroundWorker3 = new System.ComponentModel.BackgroundWorker();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.responseTypeBox.SuspendLayout();
@@ -123,6 +124,7 @@ namespace BaseApplication
             this.addMember.SuspendLayout();
             this.chartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).BeginInit();
             this.SuspendLayout();
             // 
             // navigation
@@ -725,7 +727,7 @@ namespace BaseApplication
             // 
             // searchKeyword
             // 
-            this.searchKeyword.Controls.Add(this.richTextBox3);
+            this.searchKeyword.Controls.Add(this.searchTable);
             this.searchKeyword.Controls.Add(this.searchKeywordBtn);
             this.searchKeyword.Controls.Add(this.searchKeywordLbl);
             this.searchKeyword.Controls.Add(this.searchColumnLbl);
@@ -740,17 +742,6 @@ namespace BaseApplication
             this.searchKeyword.TabIndex = 6;
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.Location = new System.Drawing.Point(91, 199);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(613, 96);
-            this.richTextBox3.TabIndex = 7;
-            this.richTextBox3.Text = "";
-            // 
-            // searchKeywordBtn
-            // 
             this.searchKeywordBtn.Location = new System.Drawing.Point(661, 103);
             this.searchKeywordBtn.Name = "searchKeywordBtn";
             this.searchKeywordBtn.Size = new System.Drawing.Size(75, 23);
@@ -893,6 +884,16 @@ namespace BaseApplication
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
             // 
+            // searchTable
+            // 
+            this.searchTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchTable.Location = new System.Drawing.Point(72, 152);
+            this.searchTable.Name = "searchTable";
+            this.searchTable.RowHeadersWidth = 51;
+            this.searchTable.RowTemplate.Height = 24;
+            this.searchTable.Size = new System.Drawing.Size(664, 246);
+            this.searchTable.TabIndex = 8;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -923,6 +924,8 @@ namespace BaseApplication
             this.addMember.PerformLayout();
             this.chartPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -979,7 +982,6 @@ namespace BaseApplication
         private System.Windows.Forms.Label bankRefEditLbl;
         private System.Windows.Forms.Button modulesInfoBtn;
         private System.Windows.Forms.TabPage searchKeyword;
-        private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button searchKeywordBtn;
         private System.Windows.Forms.Label searchKeywordLbl;
         private System.Windows.Forms.Label searchColumnLbl;
@@ -1007,6 +1009,8 @@ namespace BaseApplication
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private RadioButton xmlResponseSlct;
         private RadioButton jsonResponseSlct;
+        private DataGridView searchTable;
+        private System.ComponentModel.BackgroundWorker backgroundWorker3;
     }
 }
 
