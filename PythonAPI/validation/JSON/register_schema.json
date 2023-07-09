@@ -16,17 +16,23 @@
     "username": {
       "title": "Username",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[a-zA-Z0-9_-]{4,16}$",
+      "minLength": 2,
+      "maxLength": 30
     },
     "firstName": {
       "title": "Firstname",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[A-Za-z]+$",
+      "minLength": 2,
+      "maxLength": 30
     },
     "lastName": {
       "title": "Lastname",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[A-Za-z]+$",
+      "minLength": 2,
+      "maxLength": 30
     },
     "email": {
       "title": "Email",
@@ -36,7 +42,8 @@
     "password": {
       "title": "Password",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^.*$",
+      "minLength": 7
     },
     "dateOfJoin": {
       "title": "Dateofjoin",
@@ -46,7 +53,7 @@
     "role": {
       "title": "Role",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[A-Za-z]+$"
     }
   }
 }

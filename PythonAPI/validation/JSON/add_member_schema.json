@@ -11,12 +11,16 @@
     "name": {
       "title": "Name",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[A-Za-z]+$",
+      "minLength": 2,
+      "maxLength": 50
     },
     "email": {
       "title": "Email",
       "type": "string",
-      "pattern": "^.*$"
+      "pattern": "^[A-Za-z]+$",
+      "minLength": 2,
+      "maxLength": 50
     }
   }
 }
