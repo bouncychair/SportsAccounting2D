@@ -2,12 +2,13 @@ import subprocess
 from datetime import datetime
 
 import mt940
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response, make_response
 from pymongo import MongoClient
 from connectionString import connection_string
 import json
 import mysql.connector
 import dicttoxml2
+import xmltodict
 from xml.dom.minidom import parseString
 from validation.Validator import json_schema_validate, xml_schema_validate
 
@@ -32,11 +33,19 @@ app = Flask(__name__)
 
 @app.route('/api/test', methods=["GET"])
 def test():
-    return json_response("Hi")
+    return generate_response("Hi")
 
 
-def json_response(data, status=200):
-    return jsonify({"response": data}), status
+def generate_response(data, content_type="application/json", status=200):
+    if content_type == "application/json":
+        response_content = jsonify({"response": data}), status
+    elif content_type == "application/xml":
+        response_content = parseString(dicttoxml2.dicttoxml({"response": data})).toprettyxml(), status
+    else:
+        return generate_response("Unsupported content type", "application/json", 400)
+    response = make_response(response_content)
+    response.headers['Content-Type'] = content_type
+    return response
 
 
 @app.route('/api/PerformBackup', methods=["GET"])
@@ -44,7 +53,7 @@ def perform_backup():
     file_name = "backup_" + datetime.now().strftime("%d-%m-%Y") + ".sql"
     subprocess.Popen("C:/xampp/mysql/bin/mysqldump.exe -h localhost -P 3306 -u root sportsaccounting --routines > "
                      "../Backup/" + file_name, shell=True)
-    return json_response("Backup performed")
+    return generate_response("Backup performed")
 
 
 @app.route('/api/uploadFile', methods=["POST"])
@@ -53,14 +62,14 @@ def save_file_to_database():
     if file.filename != '':
         file = parse_mt940_file(file)
         if json_schema_validate(file) is False:  # & xml_schema_validate(file) is False:
-            return json_response("Unsupported file format")
+            return generate_response("Unsupported file format")
         if is_duplicate(file):
-            return json_response("File already exists")
+            return generate_response("File already exists")
         balances = list(key for key in file if "balance" in key)
         insert_file_info(file, collect_detailed_ids(file, balances))
         insert_transaction_info(file)
         collection.insert_one(file)
-    return json_response("File uploaded")
+    return generate_response("File uploaded")
 
 
 @app.route('/api/getTransactions/<request_type>', methods=["GET"])
@@ -82,7 +91,7 @@ def update_transaction_description():
     val = (custom_details, bank_reference)
     mycursor.execute(update_desc, val)
     mydb.commit()
-    return json_response("Transaction description updated")
+    return generate_response("Transaction description updated")
 
 
 @app.route('/api/getTransactionDescription/<bank_ref>', methods=["GET"])
@@ -100,7 +109,7 @@ def get_balance():
     myresult = mycursor.fetchall()
     print(myresult)
     if len(myresult) == 0:
-        return json_response("No balance")
+        return generate_response("No balance")
     return myresult
 
 
@@ -111,7 +120,7 @@ def get_balance_for_chart():
     myresult = mycursor.fetchall()
     print(myresult)
     if len(myresult) == 0:
-        return json_response("No transactions")
+        return generate_response("No transactions")
     return myresult
 
 
@@ -130,7 +139,7 @@ def update_transaction_category():
     val = (category, bank_reference)
     mycursor.execute(update_category, val)
     mydb.commit()
-    return json_response("Transaction category updated")
+    return generate_response("Transaction category updated")
 
 
 @app.route('/api/ModuleInfo/<module>', methods=["GET"])
@@ -155,49 +164,77 @@ def get_tables():
 
 @app.route('/api/user/register', methods=["POST"])
 def register():
-    user_info = request.get_json()
-    username = user_info.get('username')
-    password = user_info.get('password')
-    first_name = user_info.get('firstName')
-    last_name = user_info.get('lastName')
-    email = user_info.get('email')
-    role = user_info.get('role')
-    date_of_join = datetime.now().strftime("%Y-%m-%d")
+    context_type = request.content_type
+    if context_type == 'application/json':
+        user_info = request.get_json()
+        username = user_info.get('username')
+        password = user_info.get('password')
+        first_name = user_info.get('firstName')
+        last_name = user_info.get('lastName')
+        email = user_info.get('email')
+        role = user_info.get('role')
+        date_of_join = user_info.get('dateOfJoin')
+    elif context_type == 'application/xml':
+        user_info = xmltodict.parse(request.data)
+        username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        first_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
+        last_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][2]['Value']
+        email = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][3]['Value']
+        password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][4]['Value']
+        date_of_join = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][5]['Value']
+        role = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][6]['Value']
+    else:
+        return generate_response("Invalid format")
 
     try:
         sql = "INSERT INTO user (username, firstName, lastName, password, email, joinDate, userType) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         val = (username, first_name, last_name, password, email, date_of_join, role)
         mycursor.execute(sql, val)
         mydb.commit()
-        return json_response("Registration successful")
+        return generate_response("Registration successful", context_type)
     except mysql.connector.Error as err:
-        return json_response(err.msg)
+        return generate_response(err.msg)
 
 
 @app.route('/api/user/login', methods=["POST"])
 def login():
-    user_info = request.get_json()
-    username = user_info.get('username')
-    password = user_info.get('password')
-
+    context_type = request.content_type
+    if context_type == 'application/json':
+        user_info = request.get_json()
+        username = user_info.get('username')
+        password = user_info.get('password')
+    elif context_type == 'application/xml':
+        user_info = xmltodict.parse(request.data)
+        username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
+    else:
+        return "Invalid content type"
     if check_if_exist(username) == password:
-        return json_response("Login successful")
-    return json_response("Login failed")
+        return generate_response("Login successful", context_type)
+    return generate_response("Login failed", context_type)
 
 
 @app.route('/api/addMember', methods=["POST"])
 def add_member():
-    member_info = request.get_json()
-    name = member_info.get('name')
-    email = member_info.get('email')
+    context_type = request.content_type
+    if context_type == 'application/json':
+        member_info = request.get_json()
+        name = member_info.get('name')
+        email = member_info.get('email')
+    elif context_type == 'application/xml':
+        member_info = xmltodict.parse(request.data)
+        name = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        email = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
+    else:
+        return generate_response("Invalid format", context_type, 400)
     try:
         insert_member = "INSERT INTO member (name, email) VALUES (%s, %s)"
         val = (name, email)
         mycursor.execute(insert_member, val)
         mydb.commit()
-        return json_response("Member added")
+        return generate_response("Member added", context_type)
     except mysql.connector.Error as err:
-        return json_response("User already exists")
+        return generate_response(err.msg, context_type, 400)
 
 
 def check_if_exist(username):
@@ -314,7 +351,7 @@ def make_summary():
         outfile.write(json_summary)
     with open("../Summaries/summary.xml", "wb") as outfile:
         outfile.write(xml_summary)
-    return json_response("Summary created successfully")
+    return generate_response("Summary created successfully")
 
 
 @app.route('/api/getCustomDetails', methods=["GET"])

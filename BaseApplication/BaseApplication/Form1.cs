@@ -18,6 +18,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Globalization;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
+using System.Runtime.Serialization;
+using System.Data.SqlTypes;
 
 namespace BaseApplication
 {
@@ -29,6 +34,7 @@ namespace BaseApplication
         }
 
         string userRole = "";
+        string commType = "xml";
         List<Tuple<TextBox, ComboBox, ComboBox>> assignCategoryHelper = new();
         private List<User> users = new();
         JObject modulesInformation = new();
@@ -63,12 +69,14 @@ namespace BaseApplication
             string url = "http://127.0.0.1:122/api/uploadFile";
             using var client = new WebClient();
             var response = client.UploadFile(url, fileToUpload);
-            return GetResponse(Encoding.Default.GetString(response));
+            return GetJSONResponse(Encoding.Default.GetString(response));
             
         }
         void UpdateCategories(NameValueCollection categories)
         {
             var dictionary = categories.AllKeys.ToDictionary(key => key, key => categories[key]);
+            
+            
             string json = JsonConvert.SerializeObject(dictionary);
             string url = "http://127.0.0.1:122/api/updateCategory";
             using var client = new WebClient();
@@ -80,11 +88,32 @@ namespace BaseApplication
         void ConnectToApp(NameValueCollection userInfo, string type)
         {
             var dictionary = userInfo.AllKeys.ToDictionary(key => key, key => userInfo[key]);
-            string json = JsonConvert.SerializeObject(dictionary);
             string url = "http://127.0.0.1:122/api/user/" + type;
             using var client = new WebClient();
-            client.Headers[HttpRequestHeader.ContentType] = "application/json";
-            string responseString = GetResponse(client.UploadString(url, "POST", json));
+            string message = "";
+            string responseString = "";
+            if (commType == "json") 
+            {
+                message = JsonConvert.SerializeObject(dictionary);
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+            }
+            else if (commType == "xml")
+            {
+                message = SerializeDict(dictionary);
+                client.Headers[HttpRequestHeader.ContentType] = "application/xml";
+            }
+            
+            responseString = client.UploadString(url, "POST", message);
+            string contentType = client.ResponseHeaders["Content-Type"];
+            if (contentType == "application/json")
+            {
+                responseString = GetJSONResponse(responseString);
+            }
+            else if (contentType == "application/xml")
+            {
+                responseString = GetXMLResponse(responseString);
+            }
+            
             MessageBox.Show(responseString);
             if (responseString.Contains("successful"))
             {
@@ -407,7 +436,7 @@ namespace BaseApplication
             using var client = new HttpClient();
 
             string response = await client.GetStringAsync(url);
-            MessageBox.Show(GetResponse(response));
+            MessageBox.Show(GetJSONResponse(response));
 
             navigation.TabPages.Remove(editDescription);
             navigation.SelectTab(mainPage);
@@ -487,10 +516,30 @@ namespace BaseApplication
                     {"name", name},
                     {"email", email}
                 };
-                string json = JsonConvert.SerializeObject(memberInfo);
-                client.Headers[HttpRequestHeader.ContentType] = "application/json";
-                string response = client.UploadString(url, "POST", json);
-                MessageBox.Show(GetResponse(response));
+                
+                string response = "";
+                string message = "";
+                if (commType == "json")
+                {
+                    message = JsonConvert.SerializeObject(memberInfo);
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                }
+                else if(commType == "xml")
+                {
+                    message = SerializeDict(memberInfo);
+                    client.Headers[HttpRequestHeader.ContentType] = "application/xml";
+                }
+                
+                response = client.UploadString(url, "POST", message);
+                string contentType = client.ResponseHeaders["Content-Type"];
+                if (contentType == "application/json")
+                {
+                    MessageBox.Show(GetJSONResponse(response));
+                }
+                else if(contentType == "application/xml")
+                {
+                    MessageBox.Show(GetXMLResponse(response));
+                }
             }
             else
             {
@@ -592,7 +641,7 @@ namespace BaseApplication
                 //chart1.Series[0].Name = "Money, EUR";
         }
 
-        public static string GetResponse(string jsonResponse)
+        public static string GetJSONResponse(string jsonResponse)
         {
             JObject responseJson = JObject.Parse(jsonResponse);
             JToken responseToken = responseJson["response"];
@@ -604,6 +653,49 @@ namespace BaseApplication
             }
 
             return jsonResponse;
+        }
+
+        public static string GetXMLResponse(string xmlResponse)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.LoadXml(xmlResponse);
+
+            // Find the 'response' element
+            XmlNode responseNode = xmlDoc.SelectSingleNode("/root/response");
+
+            // Get the text content of the 'response' element
+            return responseNode.InnerText;
+        }
+
+        public static string SerializeDict(Dictionary<string, string> dict)
+        {
+            // serialize the dictionary
+            DataContractSerializer serializer = new DataContractSerializer(dict.GetType());
+
+            using (StringWriter sw = new StringWriter())
+            {
+                using (XmlTextWriter writer = new XmlTextWriter(sw))
+                {
+                    // add formatting so the XML is easy to read in the log
+                    writer.Formatting = Formatting.Indented;
+
+                    serializer.WriteObject(writer, dict);
+
+                    writer.Flush();
+
+                    return sw.ToString();
+                }
+            }
+        }
+
+        private void xmlResponseSlct_CheckedChanged(object sender, EventArgs e)
+        {
+            commType = "xml";
+        }
+
+        private void jsonResponseSlct_CheckedChanged(object sender, EventArgs e)
+        {
+            commType = "json";
         }
     }
 }
