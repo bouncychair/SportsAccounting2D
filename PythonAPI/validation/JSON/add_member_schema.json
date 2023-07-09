@@ -4,29 +4,19 @@
   "title": "Root",
   "type": "object",
   "required": [
-    "member_info"
+    "name",
+    "email"
   ],
   "properties": {
-    "member_info": {
-      "title": "Member_info",
-      "type": "object",
-      "required": [
-        "email",
-        "name"
-      ],
-      "properties": {
-        "email": {
-          "title": "Email",
-          "type": "string",
-          "pattern": "^.*$"
-        },
-        "name": {
-          "title": "Name",
-          "type": "string",
-          "pattern": "^.*$"
-        }
-      }
+    "name": {
+      "title": "Name",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "email": {
+      "title": "Email",
+      "type": "string",
+      "pattern": "^.*$"
     }
-
   }
 }

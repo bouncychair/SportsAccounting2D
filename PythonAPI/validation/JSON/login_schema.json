@@ -4,29 +4,19 @@
   "title": "Root",
   "type": "object",
   "required": [
-    "user_info"
+    "username",
+    "password"
   ],
   "properties": {
-    "user_info": {
-      "title": "User_info",
-      "type": "object",
-      "required": [
-        "username",
-        "password"
-      ],
-      "properties": {
-        "username": {
-          "title": "Username",
-          "type": "string",
-          "pattern": "^.*$"
-        },
-        "password": {
-          "title": "Password",
-          "type": "string",
-          "pattern": "^.*$"
-        }
-      }
+    "username": {
+      "title": "Username",
+      "type": "string",
+      "pattern": "^.*$"
+    },
+    "password": {
+      "title": "Password",
+      "type": "string",
+      "pattern": "^.*$"
     }
-
   }
 }
