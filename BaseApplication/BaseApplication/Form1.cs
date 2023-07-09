@@ -309,8 +309,7 @@ namespace BaseApplication
             OpenFileDialog openFileDialog1 = new()
             {
                 Title = "Select MT940 Files",
-                Multiselect = true,
-                Filter = "MT940 Files|*.sta; *.txt"
+                Multiselect = true
             };
 
             DialogResult result = openFileDialog1.ShowDialog();
