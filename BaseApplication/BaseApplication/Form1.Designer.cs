@@ -30,9 +30,9 @@ namespace BaseApplication
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
             this.responseTypeBox = new System.Windows.Forms.GroupBox();
@@ -93,7 +93,6 @@ namespace BaseApplication
             this.bankRefEditLbl = new System.Windows.Forms.Label();
             this.bRefCBox = new System.Windows.Forms.ComboBox();
             this.searchKeyword = new System.Windows.Forms.TabPage();
-            this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.searchKeywordBtn = new System.Windows.Forms.Button();
             this.searchKeywordLbl = new System.Windows.Forms.Label();
             this.searchColumnLbl = new System.Windows.Forms.Label();
@@ -111,6 +110,7 @@ namespace BaseApplication
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.searchTable = new System.Windows.Forms.DataGridView();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
             this.responseTypeBox.SuspendLayout();
@@ -123,6 +123,7 @@ namespace BaseApplication
             this.addMember.SuspendLayout();
             this.chartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).BeginInit();
             this.SuspendLayout();
             // 
             // navigation
@@ -725,7 +726,7 @@ namespace BaseApplication
             // 
             // searchKeyword
             // 
-            this.searchKeyword.Controls.Add(this.richTextBox3);
+            this.searchKeyword.Controls.Add(this.searchTable);
             this.searchKeyword.Controls.Add(this.searchKeywordBtn);
             this.searchKeyword.Controls.Add(this.searchKeywordLbl);
             this.searchKeyword.Controls.Add(this.searchColumnLbl);
@@ -740,14 +741,6 @@ namespace BaseApplication
             this.searchKeyword.TabIndex = 6;
             this.searchKeyword.Text = "Search Keyword";
             this.searchKeyword.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox3
-            // 
-            this.richTextBox3.Location = new System.Drawing.Point(91, 199);
-            this.richTextBox3.Name = "richTextBox3";
-            this.richTextBox3.Size = new System.Drawing.Size(613, 96);
-            this.richTextBox3.TabIndex = 7;
-            this.richTextBox3.Text = "";
             // 
             // searchKeywordBtn
             // 
@@ -879,19 +872,29 @@ namespace BaseApplication
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(8, 4);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(785, 414);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
+            // 
+            // searchTable
+            // 
+            this.searchTable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.searchTable.Location = new System.Drawing.Point(7, 135);
+            this.searchTable.Name = "searchTable";
+            this.searchTable.RowHeadersWidth = 51;
+            this.searchTable.RowTemplate.Height = 24;
+            this.searchTable.Size = new System.Drawing.Size(776, 262);
+            this.searchTable.TabIndex = 7;
             // 
             // Form1
             // 
@@ -923,6 +926,7 @@ namespace BaseApplication
             this.addMember.PerformLayout();
             this.chartPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.searchTable)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -979,7 +983,6 @@ namespace BaseApplication
         private System.Windows.Forms.Label bankRefEditLbl;
         private System.Windows.Forms.Button modulesInfoBtn;
         private System.Windows.Forms.TabPage searchKeyword;
-        private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.Button searchKeywordBtn;
         private System.Windows.Forms.Label searchKeywordLbl;
         private System.Windows.Forms.Label searchColumnLbl;
@@ -1007,6 +1010,7 @@ namespace BaseApplication
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
         private RadioButton xmlResponseSlct;
         private RadioButton jsonResponseSlct;
+        private DataGridView searchTable;
     }
 }
 
