@@ -10,7 +10,7 @@ import mysql.connector
 import dicttoxml2
 import xmltodict
 from xml.dom.minidom import parseString
-from validation.Validator import *
+from validation.Validator import json_schema_validate, xml_schema_validate
 
 # MySql connection
 mydb = mysql.connector.connect(
@@ -61,7 +61,7 @@ def save_file_to_database():
     file = request.files['file']
     if file.filename != '':
         file = parse_mt940_file(file)
-        if json_schema_validate(file, json_file_path_upload) is False:
+        if json_schema_validate(file) is False:  # & xml_schema_validate(file) is False:
             return generate_response("Unsupported file format")
         if is_duplicate(file):
             return generate_response("Duplicate file")
@@ -167,28 +167,22 @@ def register():
     context_type = request.content_type
     if context_type == 'application/json':
         user_info = request.get_json()
-        if json_schema_validate(user_info, json_file_path_register):
-            username = user_info.get('username')
-            password = user_info.get('password')
-            first_name = user_info.get('firstName')
-            last_name = user_info.get('lastName')
-            email = user_info.get('email')
-            role = user_info.get('role')
-            date_of_join = user_info.get('dateOfJoin')
-        else:
-            return generate_response("JSON does not match the schema")
+        username = user_info.get('username')
+        password = user_info.get('password')
+        first_name = user_info.get('firstName')
+        last_name = user_info.get('lastName')
+        email = user_info.get('email')
+        role = user_info.get('role')
+        date_of_join = user_info.get('dateOfJoin')
     elif context_type == 'application/xml':
-        if xml_schema_validate(request.data, xsd_file_path_register):
-            user_info = xmltodict.parse(request.data)
-            username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
-            first_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
-            last_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][2]['Value']
-            email = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][3]['Value']
-            password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][4]['Value']
-            date_of_join = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][5]['Value']
-            role = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][6]['Value']
-        else:
-            return generate_response("XML does not match the schema")
+        user_info = xmltodict.parse(request.data)
+        username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        first_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
+        last_name = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][2]['Value']
+        email = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][3]['Value']
+        password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][4]['Value']
+        date_of_join = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][5]['Value']
+        role = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][6]['Value']
     else:
         return generate_response("Invalid format")
 
@@ -207,18 +201,12 @@ def login():
     context_type = request.content_type
     if context_type == 'application/json':
         user_info = request.get_json()
-        if json_schema_validate(user_info, json_file_path_login):
-            username = user_info.get('username')
-            password = user_info.get('password')
-        else:
-            return generate_response("JSON does not match the schema")
+        username = user_info.get('username')
+        password = user_info.get('password')
     elif context_type == 'application/xml':
-        if xml_schema_validate(request.data, xsd_file_path_login):
-            user_info = xmltodict.parse(request.data)
-            username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
-            password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
-        else:
-            return generate_response("XML does not match the schema")
+        user_info = xmltodict.parse(request.data)
+        username = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        password = user_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
     else:
         return "Invalid content type"
     if check_if_exist(username) == password:
@@ -231,18 +219,12 @@ def add_member():
     context_type = request.content_type
     if context_type == 'application/json':
         member_info = request.get_json()
-        if json_schema_validate(member_info, json_file_path_add_member):
-            name = member_info.get('name')
-            email = member_info.get('email')
-        else:
-            return generate_response("JSON does not match the schema")
+        name = member_info.get('name')
+        email = member_info.get('email')
     elif context_type == 'application/xml':
         member_info = xmltodict.parse(request.data)
-        if xml_schema_validate(request.data, xsd_file_path_add_member):
-            name = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
-            email = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
-        else:
-            return generate_response("XML does not match the schema")
+        name = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][0]['Value']
+        email = member_info['ArrayOfKeyValueOfstringstring']['KeyValueOfstringstring'][1]['Value']
     else:
         return generate_response("Invalid format", context_type, 400)
     try:
@@ -293,15 +275,12 @@ def make_modules_summary():
     summary = {"modules_information": modules_information}
     # convert dict to json
     json_summary = json.dumps(summary, indent=4)
-    json_obj = json.loads(json_summary)
     # convert dict to xml and make it look nice
     xml_summary = parseString(dicttoxml2.dicttoxml(summary)).toprettyxml(indent="\t", encoding="utf-8")
-    if json_schema_validate(json_obj, json_file_path_modules):
-        with open("../Summaries/modules_summary.json", "w") as outfile:
-            outfile.write(json_summary)
-    if xml_schema_validate(xml_summary, xsd_file_path_modules):
-        with open("../Summaries/modules_summary.xml", "wb") as outfile:
-            outfile.write(xml_summary)
+    with open("../Summaries/modules_summary.json", "w") as outfile:
+        outfile.write(json_summary)
+    with open("../Summaries/modules_summary.xml", "wb") as outfile:
+        outfile.write(xml_summary)
     return json_summary
 
 
