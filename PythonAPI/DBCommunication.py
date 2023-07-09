@@ -64,7 +64,7 @@ def save_file_to_database():
         if json_schema_validate(file) is False:  # & xml_schema_validate(file) is False:
             return generate_response("Unsupported file format")
         if is_duplicate(file):
-            return generate_response("File already exists")
+            return generate_response("Duplicate file")
         balances = list(key for key in file if "balance" in key)
         insert_file_info(file, collect_detailed_ids(file, balances))
         insert_transaction_info(file)

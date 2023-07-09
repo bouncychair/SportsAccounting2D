@@ -30,11 +30,14 @@ namespace BaseApplication
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.navigation = new System.Windows.Forms.TabControl();
             this.mainPage = new System.Windows.Forms.TabPage();
+            this.responseTypeBox = new System.Windows.Forms.GroupBox();
+            this.xmlResponseSlct = new System.Windows.Forms.RadioButton();
+            this.jsonResponseSlct = new System.Windows.Forms.RadioButton();
             this.summaryBtn = new System.Windows.Forms.Button();
             this.availableBalanceLbl = new System.Windows.Forms.Label();
             this.addMemberBtnMain = new System.Windows.Forms.Button();
@@ -107,12 +110,10 @@ namespace BaseApplication
             this.chartPage = new System.Windows.Forms.TabPage();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.responseTypeBox = new System.Windows.Forms.GroupBox();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
-            this.jsonResponseSlct = new System.Windows.Forms.RadioButton();
-            this.xmlResponseSlct = new System.Windows.Forms.RadioButton();
             this.navigation.SuspendLayout();
             this.mainPage.SuspendLayout();
+            this.responseTypeBox.SuspendLayout();
             this.loginPage.SuspendLayout();
             this.registerPage.SuspendLayout();
             this.editTransaction.SuspendLayout();
@@ -122,7 +123,6 @@ namespace BaseApplication
             this.addMember.SuspendLayout();
             this.chartPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            this.responseTypeBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // navigation
@@ -159,6 +159,41 @@ namespace BaseApplication
             this.mainPage.TabIndex = 0;
             this.mainPage.Text = "Main";
             this.mainPage.UseVisualStyleBackColor = true;
+            // 
+            // responseTypeBox
+            // 
+            this.responseTypeBox.Controls.Add(this.xmlResponseSlct);
+            this.responseTypeBox.Controls.Add(this.jsonResponseSlct);
+            this.responseTypeBox.Location = new System.Drawing.Point(547, 28);
+            this.responseTypeBox.Name = "responseTypeBox";
+            this.responseTypeBox.Size = new System.Drawing.Size(200, 100);
+            this.responseTypeBox.TabIndex = 21;
+            this.responseTypeBox.TabStop = false;
+            this.responseTypeBox.Text = "Select Communication Type";
+            // 
+            // xmlResponseSlct
+            // 
+            this.xmlResponseSlct.AutoSize = true;
+            this.xmlResponseSlct.Location = new System.Drawing.Point(6, 63);
+            this.xmlResponseSlct.Name = "xmlResponseSlct";
+            this.xmlResponseSlct.Size = new System.Drawing.Size(54, 20);
+            this.xmlResponseSlct.TabIndex = 1;
+            this.xmlResponseSlct.Text = "XML";
+            this.xmlResponseSlct.UseVisualStyleBackColor = true;
+            this.xmlResponseSlct.CheckedChanged += new System.EventHandler(this.xmlResponseSlct_CheckedChanged);
+            // 
+            // jsonResponseSlct
+            // 
+            this.jsonResponseSlct.AutoSize = true;
+            this.jsonResponseSlct.Checked = true;
+            this.jsonResponseSlct.Location = new System.Drawing.Point(6, 30);
+            this.jsonResponseSlct.Name = "jsonResponseSlct";
+            this.jsonResponseSlct.Size = new System.Drawing.Size(64, 20);
+            this.jsonResponseSlct.TabIndex = 0;
+            this.jsonResponseSlct.TabStop = true;
+            this.jsonResponseSlct.Text = "JSON";
+            this.jsonResponseSlct.UseVisualStyleBackColor = true;
+            this.jsonResponseSlct.CheckedChanged += new System.EventHandler(this.jsonResponseSlct_CheckedChanged);
             // 
             // summaryBtn
             // 
@@ -708,7 +743,7 @@ namespace BaseApplication
             // 
             // richTextBox3
             // 
-            this.richTextBox3.Location = new System.Drawing.Point(105, 269);
+            this.richTextBox3.Location = new System.Drawing.Point(91, 199);
             this.richTextBox3.Name = "richTextBox3";
             this.richTextBox3.Size = new System.Drawing.Size(613, 96);
             this.richTextBox3.TabIndex = 7;
@@ -844,54 +879,19 @@ namespace BaseApplication
             // 
             // chart1
             // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(8, 4);
             this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart1.Series.Add(series2);
             this.chart1.Size = new System.Drawing.Size(785, 414);
             this.chart1.TabIndex = 0;
             this.chart1.Text = "chart1";
-            // 
-            // responseTypeBox
-            // 
-            this.responseTypeBox.Controls.Add(this.xmlResponseSlct);
-            this.responseTypeBox.Controls.Add(this.jsonResponseSlct);
-            this.responseTypeBox.Location = new System.Drawing.Point(547, 28);
-            this.responseTypeBox.Name = "responseTypeBox";
-            this.responseTypeBox.Size = new System.Drawing.Size(200, 100);
-            this.responseTypeBox.TabIndex = 21;
-            this.responseTypeBox.TabStop = false;
-            this.responseTypeBox.Text = "Select Communication Type";
-            // 
-            // jsonResponseSlct
-            // 
-            this.jsonResponseSlct.AutoSize = true;
-            this.jsonResponseSlct.Checked = true;
-            this.jsonResponseSlct.Location = new System.Drawing.Point(6, 30);
-            this.jsonResponseSlct.Name = "jsonResponseSlct";
-            this.jsonResponseSlct.Size = new System.Drawing.Size(64, 20);
-            this.jsonResponseSlct.TabIndex = 0;
-            this.jsonResponseSlct.TabStop = true;
-            this.jsonResponseSlct.Text = "JSON";
-            this.jsonResponseSlct.UseVisualStyleBackColor = true;
-            this.jsonResponseSlct.CheckedChanged += new System.EventHandler(this.jsonResponseSlct_CheckedChanged);
-            // 
-            // xmlResponseSlct
-            // 
-            this.xmlResponseSlct.AutoSize = true;
-            this.xmlResponseSlct.Location = new System.Drawing.Point(6, 63);
-            this.xmlResponseSlct.Name = "xmlResponseSlct";
-            this.xmlResponseSlct.Size = new System.Drawing.Size(54, 20);
-            this.xmlResponseSlct.TabIndex = 1;
-            this.xmlResponseSlct.Text = "XML";
-            this.xmlResponseSlct.UseVisualStyleBackColor = true;
-            this.xmlResponseSlct.CheckedChanged += new System.EventHandler(this.xmlResponseSlct_CheckedChanged);
             // 
             // Form1
             // 
@@ -905,6 +905,8 @@ namespace BaseApplication
             this.navigation.ResumeLayout(false);
             this.mainPage.ResumeLayout(false);
             this.mainPage.PerformLayout();
+            this.responseTypeBox.ResumeLayout(false);
+            this.responseTypeBox.PerformLayout();
             this.loginPage.ResumeLayout(false);
             this.loginPage.PerformLayout();
             this.registerPage.ResumeLayout(false);
@@ -921,8 +923,6 @@ namespace BaseApplication
             this.addMember.PerformLayout();
             this.chartPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            this.responseTypeBox.ResumeLayout(false);
-            this.responseTypeBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
