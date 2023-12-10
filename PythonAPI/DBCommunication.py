@@ -1,15 +1,15 @@
 import subprocess
 from datetime import datetime
-
-import mt940
-from flask import Flask, request, jsonify, Response, make_response
-from pymongo import MongoClient
-from connectionString import connection_string
-import json
-import mysql.connector
-import dicttoxml2
-import xmltodict
 from xml.dom.minidom import parseString
+
+import dicttoxml2
+import mt940
+import mysql.connector
+import xmltodict
+from flask import Flask, request, jsonify, make_response
+from pymongo import MongoClient
+
+from connectionString import connection_string
 from validation.Validator import *
 
 # MySql connection
@@ -252,7 +252,7 @@ def add_member():
         mydb.commit()
         return generate_response("Member added", context_type)
     except mysql.connector.Error as err:
-        return generate_response(err.msg, context_type, 400)
+        return generate_response(err.msg, context_type)
 
 
 def check_if_exist(username):
