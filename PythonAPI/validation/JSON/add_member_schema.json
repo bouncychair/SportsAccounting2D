@@ -18,7 +18,7 @@
     "email": {
       "title": "Email",
       "type": "string",
-      "pattern": "^[A-Za-z]+$",
+      "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
       "minLength": 2,
       "maxLength": 50
     }
